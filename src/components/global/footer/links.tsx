@@ -13,11 +13,13 @@ function Links() {
       <article className="grid grid-cols-2 gap-y-12">
         {footerList.map(({ title, items }) => (
           <div key={title}>
-            <h4 className="text-background mb-2 pb-2 font-semibold">{title}</h4>
+            <h4 className="text-background mb-2 pb-2 font-semibold lg:text-base">
+              {title}
+            </h4>
             <ul className="space-y-1">
               {items.map((item) => (
                 <li
-                  className="hover:text-background cursor-pointer text-xs transition-colors"
+                  className="hover:text-background cursor-pointer text-xs transition-colors lg:text-sm"
                   key={item}
                 >
                   {item}

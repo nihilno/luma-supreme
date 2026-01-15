@@ -13,7 +13,7 @@ function Footer() {
         </div>
         <div className="h-full space-y-4 lg:grid lg:grid-cols-2 lg:gap-8">
           <Links />
-          <div className="border-muted-foreground/50 flex flex-col gap-8 rounded-xl border border-dashed px-8 py-12">
+          <div className="border-muted-foreground/75 flex flex-col gap-8 rounded-xl border border-dashed px-8 py-12">
             <Newsletter />
             <div className="lg:mt-auto">
               <Badges />

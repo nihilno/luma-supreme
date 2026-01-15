@@ -14,7 +14,6 @@ import {
   IconLogin2,
   IconMenu4,
   IconShoppingBagSearch,
-  IconX,
 } from "@tabler/icons-react";
 import Link from "next/link";
 import Copyright from "../footer/copyright";
@@ -35,10 +34,7 @@ export function Mobile() {
             Navigate through categories, support options, and brand details
             effortlessly.
           </SheetDescription>
-        </SheetHeader>
-
-        <div className="flex h-full flex-col justify-center gap-16">
-          <nav className="flex flex-col items-center gap-2.5">
+          <nav className="mt-16 flex flex-col items-center gap-2.5">
             <Button asChild className="w-full">
               <Link href={"/cart"}>
                 <IconShoppingBagSearch />
@@ -52,20 +48,21 @@ export function Mobile() {
               </Link>
             </Button>
           </nav>
+        </SheetHeader>
 
+        <div className="flex h-full flex-col justify-center">
           <nav className="border-foreground/50 border-t border-b py-6">
             <Navigation className="flex-col" />
           </nav>
         </div>
 
         <SheetFooter className="flex flex-col items-center">
+          <ModeToggle className="w-full" />
           <Button className="w-full" asChild>
             <SheetClose>
-              <IconX className="translate-y-px" />
               <span>Close</span>
             </SheetClose>
           </Button>
-          <ModeToggle className="w-full" />
           <Copyright />
         </SheetFooter>
       </SheetContent>
