@@ -5,11 +5,12 @@ function Navigation() {
   return (
     <ul className="hidden items-center gap-8 sm:flex">
       {headerNav.map(({ label, href }) => (
-        <Link key={label} href={href}>
-          <li className="hover:text-primary/80 cursor-pointer text-sm font-medium capitalize transition-colors">
-            {label}
-          </li>
-        </Link>
+        <li
+          key={label}
+          className="hover:text-primary/80 text-sm font-medium capitalize transition-colors"
+        >
+          <Link href={href}>{label}</Link>
+        </li>
       ))}
     </ul>
   );

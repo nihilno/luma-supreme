@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/app/components/buttons/mode-toggle";
+import { ModeToggle } from "@/components/buttons/mode-toggle";
 import { Button } from "@/components/ui/button";
 import {
   IconLogin2,
@@ -25,8 +25,10 @@ function Buttons() {
           </Link>
         </Button>
       </nav>
-      <nav className="cursor-pointer lg:hidden">
-        <IconMenu2 />
+      <nav className="flex items-center lg:hidden">
+        <button aria-label="Menu">
+          <IconMenu2 />
+        </button>
       </nav>
     </>
   );

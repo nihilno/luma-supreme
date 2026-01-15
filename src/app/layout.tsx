@@ -1,6 +1,6 @@
-import Footer from "@/app/components/global/footer";
-import Header from "@/app/components/global/header";
-import Providers from "@/app/components/global/providers";
+import Footer from "@/components/global/footer";
+import Header from "@/components/global/header";
+import Providers from "@/components/global/providers";
 import { manrope } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
