@@ -125,6 +125,20 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
+  }
+
+  html {
+    scrollbar-gutter: stable both-edges;
+  }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -144,5 +158,8 @@
   }
   .centered {
     @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+  .transition {
+    @apply transition-all duration-300 ease-in-out;
   }
 }

@@ -1,11 +1,9 @@
-export default function HomePage() {
-  // const products = sampleData.products;
+import ProductsContainer from "@/components/homepage/products-container";
 
+export default function HomePage() {
   return (
     <section className="py-16">
-      {/* {products.map(({ name }) => (
-        <div key={name}>{name}</div>
-      ))} */}
+      <ProductsContainer title="Featured Products" />
     </section>
   );
 }

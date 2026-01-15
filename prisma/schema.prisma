@@ -11,7 +11,7 @@ model Product {
   id String @id @default(uuid())
 
   name String
-  slug String @unique @map("product_slug_idx")
+  slug String @unique 
   category String
   description String
   images String[]
@@ -26,4 +26,5 @@ model Product {
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("products")
+  @@index([isFeatured, createdAt])
 }
