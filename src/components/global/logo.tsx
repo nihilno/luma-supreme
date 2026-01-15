@@ -3,7 +3,11 @@ import Link from "next/link";
 
 function Logo({ withTitle = false }: { withTitle?: boolean }) {
   return (
-    <Link href={"/"} className="flex items-center gap-1" aria-label="Home">
+    <Link
+      href={"/"}
+      className="flex shrink-0 items-center gap-1"
+      aria-label="Home"
+    >
       <Image
         src={"/logo.svg"}
         alt="Luma"

@@ -20,3 +20,7 @@ export function decimalToNumber(value: Decimal | number | string) {
   if (value instanceof Decimal) return Number(value.toString());
   return Number(value);
 }
+
+export function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

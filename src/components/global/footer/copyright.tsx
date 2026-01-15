@@ -10,7 +10,7 @@ function Copyright() {
       </h6>
       <p className="text-foreground/60 text-center text-xs leading-5">
         &copy; {currentYear} Luma &bull; All rights reserved. <br /> Created by{" "}
-        <Link href={"https://maciejpolowy.space"} className="text-foreground">
+        <Link href={"https://maciejpolowy.space"} className="text-distinct">
           Maciej Polowy
         </Link>
         .

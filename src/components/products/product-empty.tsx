@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,8 +13,11 @@ import {
   IconRotate2,
 } from "@tabler/icons-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function ProductEmpty() {
+  const { refresh } = useRouter();
+
   return (
     <Card>
       <CardHeader>
@@ -34,7 +39,7 @@ function ProductEmpty() {
             <IconChevronsLeft className="translate-y-px" /> Back to Luma
           </Link>
         </Button>
-        <Button>
+        <Button onClick={() => refresh()}>
           <IconRotate2 />
           Refresh
         </Button>
