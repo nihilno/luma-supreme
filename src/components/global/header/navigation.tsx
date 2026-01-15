@@ -1,9 +1,10 @@
 import { headerNav } from "@/lib/constants/navigations";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-function Navigation() {
+function Navigation({ className }: { className?: string }) {
   return (
-    <ul className="hidden items-center gap-8 sm:flex">
+    <ul className={cn("flex items-center gap-8", className)}>
       {headerNav.map(({ label, href }) => (
         <li
           key={label}
