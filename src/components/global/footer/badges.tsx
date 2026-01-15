@@ -8,10 +8,10 @@ function Badges() {
         <IconCircleCheck /> SSL encryption
       </Badge>
       <Badge className="h-6 border-0">
-        <IconCircleCheck /> PCI‑DSS compliance{" "}
+        <IconCircleCheck /> PCI‑DSS compliance
       </Badge>
       <Badge className="h-6 border-0">
-        <IconCircleCheck /> Secure payment processing{" "}
+        <IconCircleCheck /> Secure payment processing
       </Badge>
     </div>
   );

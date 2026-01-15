@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { IconArrowRightCircle } from "@tabler/icons-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import Title from "./title";
 
 function Newsletter() {
   const form = useForm({
@@ -29,13 +30,10 @@ function Newsletter() {
 
   return (
     <div className="space-y-6">
-      <div className="border-muted-foreground/75 space-y-1">
-        <h6 className="font-medium">Shop with Confidence </h6>
-        <p className="text-[10px]">
-          Join <span className="cursor-pointer underline">our newsletter</span>{" "}
-          to learn more.
-        </p>
-      </div>
+      <Title
+        title="Stay informed"
+        subtitle=" Join our newsletter to learn more."
+      />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)}>
           <FormField

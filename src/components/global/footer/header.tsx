@@ -3,7 +3,7 @@ import { socials } from "@/lib/constants/navigations";
 
 function Header() {
   return (
-    <div className="border-muted-foreground/25 flex items-center justify-between rounded-full border p-4">
+    <div className="border-muted-foreground/25 flex w-full items-center justify-between rounded-full border p-4 shadow-sm">
       <Logo />
       <div className="flex items-center gap-3">
         {socials.map(({ label, icon: Icon }) => (
