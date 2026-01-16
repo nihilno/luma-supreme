@@ -1,3 +1,5 @@
+"use client";
+
 import { ModeToggle } from "@/components/buttons/mode-toggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,18 +12,25 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import {
-  IconLogin2,
-  IconMenu4,
-  IconShoppingBagSearch,
-} from "@tabler/icons-react";
+import { mobileNav } from "@/lib/constants/navigations";
+import { IconMenu4 } from "@tabler/icons-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import Copyright from "../footer/copyright";
 import Navigation from "./navigation";
 
 export function Mobile() {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    //eslint-disable-next-line
+    setOpen(false);
+  }, [pathname]);
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variant="outline">
           <IconMenu4 />
@@ -35,18 +44,14 @@ export function Mobile() {
             effortlessly.
           </SheetDescription>
           <nav className="mt-16 flex flex-col items-center gap-2.5">
-            <Button asChild className="w-full">
-              <Link href={"/cart"}>
-                <IconShoppingBagSearch />
-                <span>Cart</span>
-              </Link>
-            </Button>
-            <Button asChild className="w-full">
-              <Link href={"/sign-in"}>
-                <IconLogin2 />
-                <span>Sign In</span>
-              </Link>
-            </Button>
+            {mobileNav.map(({ label, href, icon: Icon }) => (
+              <Button key={label} className="w-full" asChild>
+                <Link href={href}>
+                  <Icon />
+                  <span>{label}</span>
+                </Link>
+              </Button>
+            ))}
           </nav>
         </SheetHeader>
 

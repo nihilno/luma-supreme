@@ -3,7 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { newsletterSchema } from "@/lib/schemas/newsletter";
+import {
+  newsletterSchema,
+  newsletterSchemaType,
+} from "@/lib/schemas/newsletter";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IconArrowRightCircle } from "@tabler/icons-react";
 import { useForm } from "react-hook-form";
@@ -11,7 +14,7 @@ import { toast } from "sonner";
 import Title from "./title";
 
 function Newsletter() {
-  const form = useForm({
+  const form = useForm<newsletterSchemaType>({
     defaultValues: {
       email: "",
     },

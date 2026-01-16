@@ -1,4 +1,5 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import { compareSync } from "bcrypt-ts-edge";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "./lib/prisma";
@@ -26,8 +27,7 @@ const authConfig = {
         });
         if (!user || !user.password) return null;
 
-        const isVerified = true;
-        // here we will crete function that accepts cred.password and user.password and compares the hashes
+        const isVerified = compareSync(creds.password, user.password);
         if (!isVerified) return null;
         if (!user.emailVerified) {
           throw new Error("Email not verified. Please check your inbox.");
