@@ -8,7 +8,7 @@ function Cta({ price, stock }: CtaProps) {
   return (
     <Card
       className={cn(
-        stock === 0 ? "cursor-not-allowed opacity-50" : "cursor-pointer",
+        stock === 0 ? "cursor-not-allowed opacity-50" : "cursor-default",
         "group hover:bg-muted/60 mx-auto max-w-lg transition sm:mx-0",
       )}
     >
@@ -19,13 +19,16 @@ function Cta({ price, stock }: CtaProps) {
         </div>
         <div className="flex items-center justify-between">
           <h4>Status</h4>
-          <Badge variant={stock === 0 ? "destructive" : "default"}>
+          <Badge
+            className="animate-pulse"
+            variant={stock === 0 ? "destructive" : "default"}
+          >
             {stock === 0 ? "Out of Stock" : "In Stock"}
           </Badge>
         </div>
       </CardContent>
       <CardFooter className="mt-4 border-t border-dashed">
-        <Button className={cn("w-full", stock === 0 && "cursor-not-allowed!")}>
+        <Button className="w-full" disabled={stock === 0}>
           <IconCirclePlusFilled className="translate-y-px" /> Add to Cart
         </Button>
       </CardFooter>

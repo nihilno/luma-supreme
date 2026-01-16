@@ -1,3 +1,4 @@
+import ProductEmpty from "@/components/products/product-empty";
 import Cta from "@/components/products/single-product/cta";
 import ProductCard from "@/components/products/single-product/product-card";
 import Reviews from "@/components/products/single-product/reviews";
@@ -13,15 +14,20 @@ export default async function ProductPage({
   const { slug } = await params;
   const product = await fetchProductBySlug(slug);
 
-  if (!product) return <h1>no whole card product lol</h1>;
+  if (!product)
+    return (
+      <section className="-mt-32 grid min-h-dvh place-items-center">
+        <ProductEmpty />
+      </section>
+    );
   const { stock, price, description, numReviews } = product;
 
   return (
-    <section className="grid min-h-dvh grid-cols-1 space-y-16 md:grid-cols-2">
+    <section className="mx-auto mt-16 grid grid-cols-1 space-y-16 gap-x-8 md:grid-cols-2">
       <IconBrandLinktree className="text-distinct mx-auto size-12 animate-pulse md:col-span-2" />
       <ProductCard product={product} />
 
-      <div className="mt-24 space-y-12 md:mt-0">
+      <div className="mt-24 space-y-12 md:mt-12">
         <Stars numReviews={numReviews} />
 
         <div className="space-y-1">

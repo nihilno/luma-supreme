@@ -1,10 +1,10 @@
+import "@/app/globals.css";
 import Footer from "@/components/global/footer";
 import Header from "@/components/global/header";
 import Providers from "@/components/global/providers";
 import { manrope } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
@@ -27,7 +27,7 @@ export default function RootLayout({
       >
         <Providers>
           <Header />
-          <main className="wrapper flex-1 py-16">{children}</main>
+          <main className="wrapper flex-1 pb-8">{children}</main>
           <Footer />
         </Providers>
       </body>

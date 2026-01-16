@@ -19,20 +19,32 @@ function ProductEmpty() {
   const { refresh } = useRouter();
 
   return (
-    <Card>
-      <CardHeader>
+    <Card className="mx-auto max-w-3xl">
+      <CardHeader className="mb-4">
         <div className="flex items-center gap-2.5">
-          <IconAlertOctagon className="size-8" />
-          <h1 className="text-2xl font-semibold">Product/s not found.</h1>
+          <IconAlertOctagon className="size-8 md:size-10" />
+          <h1 className="text-2xl font-semibold md:text-3xl">
+            Product not found.
+          </h1>
         </div>
       </CardHeader>
-      <CardContent>
-        <p>
-          The item you&apos;re looking for doesn&apos;t exist or is no longer
-          available. You may want to adjust your filters or refine your search
-          to find what you need.
+      <CardContent className="space-y-4">
+        <p className="text-muted-foreground">
+          We couldn&apos;t find a product matching your request. This may happen
+          when:
+        </p>
+
+        <ul className="text-muted-foreground list-disc space-y-1 pl-6">
+          <li>Incorrect spelling or typos</li>
+          <li>Filters excluding available items</li>
+          <li>The product was removed or discontinued</li>
+        </ul>
+
+        <p className="text-muted-foreground">
+          Try adjusting your search or explore similar items below.
         </p>
       </CardContent>
+
       <CardFooter className="mt-8 space-x-2">
         <Button asChild>
           <Link href="/" className="flex items-center">

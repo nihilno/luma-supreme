@@ -20,10 +20,15 @@ import ProductEmpty from "./product-empty";
 async function ProductsContainer({ title }: { title?: string }) {
   const featured = await getFeaturedProducts();
 
-  if (!featured || featured.length === 0) return <ProductEmpty />;
+  if (!featured || featured.length === 0)
+    return (
+      <div className="-mt-32 grid min-h-dvh place-items-center">
+        <ProductEmpty />
+      </div>
+    );
 
   return (
-    <div className="mx-auto max-w-sm sm:max-w-none">
+    <div className="mx-auto mt-16 max-w-sm sm:max-w-none">
       <h2 className="mb-6 flex items-center gap-3 text-center text-3xl font-bold sm:text-left sm:text-4xl">
         <IconNorthStar className="text-distinct size-12" />
         {title}
@@ -34,9 +39,7 @@ async function ProductsContainer({ title }: { title?: string }) {
             <Link key={id} href={`/product/${slug}`}>
               <Card
                 className={cn(
-                  stock === 0
-                    ? "cursor-not-allowed opacity-50"
-                    : "cursor-pointer",
+                  stock === 0 && "opacity-50",
                   "group hover:bg-muted/60 transition",
                 )}
               >
@@ -56,7 +59,7 @@ async function ProductsContainer({ title }: { title?: string }) {
                         fill
                         className="overflow-hidden object-contain transition group-hover:scale-110"
                         priority={true}
-                        quality={50}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       />
                     )}
                   </div>

@@ -13,8 +13,9 @@ function Logo({ withTitle = false }: { withTitle?: boolean }) {
         alt="Luma"
         width={32}
         height={32}
-        priority={true}
-        unoptimized={true}
+        sizes="32px"
+        priority
+        unoptimized
         className="dark:bg-primary rounded-xl p-0.5 opacity-90"
       />
       {withTitle && (

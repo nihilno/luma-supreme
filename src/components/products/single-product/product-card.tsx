@@ -24,11 +24,11 @@ function ProductCard({ product }: { product: Product }) {
   const { name, stock, images, brand, rating, price } = product;
 
   return (
-    <div className="space-y-12">
+    <div className="flex w-full flex-col items-center space-y-12">
       <Card
         className={cn(
           stock === 0 ? "cursor-not-allowed opacity-50" : "cursor-pointer",
-          "group hover:bg-muted/60 mx-auto max-w-lg transition sm:mx-0 md:max-w-xl",
+          "group hover:bg-muted/60 mx-auto w-full max-w-lg transition sm:mx-0 md:max-w-xl",
         )}
       >
         <CardHeader>
@@ -45,9 +45,9 @@ function ProductCard({ product }: { product: Product }) {
                 src={images[image]}
                 alt={name}
                 fill
+                sizes="(max-width: 768px) 100vw, 576px"
                 className="overflow-hidden object-contain"
                 priority={true}
-                quality={50}
               />
             )}
           </div>
