@@ -7,16 +7,10 @@ export const metadata: Metadata = {
   title: "Sign In",
 };
 
-export default async function SignInPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ callbackUrl: string }>;
-}) {
-  const { callbackUrl } = await searchParams;
-
+export default async function SignInPage() {
   const session = await auth();
   if (session) {
-    redirect(callbackUrl || "/");
+    redirect("/");
   }
 
   return <SignInForm />;

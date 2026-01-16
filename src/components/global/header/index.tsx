@@ -1,3 +1,4 @@
+import { ModeToggle } from "@/components/buttons/mode-toggle";
 import Logo from "@/components/global/logo";
 import Buttons from "./buttons";
 import { Mobile } from "./mobile";
@@ -12,7 +13,8 @@ function Header() {
         <div className="hidden sm:block">
           <Navigation />
         </div>
-        <div className="hidden lg:block">
+        <div className="hidden lg:flex lg:items-center lg:gap-2.5">
+          <ModeToggle />
           <Buttons />
         </div>
         <nav className="flex items-center lg:hidden">

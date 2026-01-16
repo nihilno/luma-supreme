@@ -27,4 +27,10 @@ declare global {
     price: number;
     stock: number;
   };
+
+  type ButtonsProps = {
+    className?: string;
+    col?: boolean;
+    names?: boolean;
+  };
 }

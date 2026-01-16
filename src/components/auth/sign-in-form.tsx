@@ -28,8 +28,6 @@ import { toast } from "sonner";
 
 function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
-  // const searchParams = useSearchParams() || "/";
-  // const callbackUrl = searchParams.get("callbackUrl");
 
   const form = useForm<signInType>({
     defaultValues: {
@@ -42,12 +40,18 @@ function SignInForm() {
   const disabled = form.formState.isSubmitting;
 
   async function handleSubmit(formData: signInType) {
-    const result = await SignIn(formData);
-    if (!result.success) {
-      toast.warning(result.message);
-      return;
+    try {
+      const result = await SignIn(formData);
+      if (!result.success) {
+        toast.warning(result.message);
+        return;
+      }
+      toast.success(result.message);
+      form.reset();
+    } catch (error) {
+      console.error(error);
+      toast.error("An unexpected error occurred. Please try again.");
     }
-    toast.success(result.message);
   }
 
   return (
@@ -77,8 +81,6 @@ function SignInForm() {
               </div>
 
               <div className="w-full space-y-4">
-                {/* <input type="hidden" value={callbackUrl ?? ""} /> */}
-
                 <FormField
                   name="email"
                   control={form.control}
@@ -88,7 +90,7 @@ function SignInForm() {
                         <Input
                           type="email"
                           placeholder="Your email"
-                          className="hover:border-foreground/35 h-12 rounded-xl transition-colors"
+                          className="hover:border-foreground/35 h-12 rounded-xl text-sm transition-colors"
                           autoComplete="email"
                           {...field}
                         />
@@ -108,12 +110,12 @@ function SignInForm() {
                         <Input
                           type={showPassword ? "text" : "password"}
                           placeholder="Strong password"
-                          className="hover:border-foreground/35 h-12 rounded-xl transition-colors"
-                          autoComplete="password"
+                          className="hover:border-foreground/35 h-12 rounded-xl text-sm transition-colors"
+                          autoComplete="current-password"
                           {...field}
                         />
                       </FormControl>
-                      <div className="absolute top-1/2 right-3 -translate-y-1/2">
+                      <div className="absolute top-6 right-3 -translate-y-1/2">
                         <Button
                           type="button"
                           variant={"ghost"}

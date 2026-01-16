@@ -12,7 +12,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { signInSchema, signInType } from "@/lib/schemas/auth";
+import { signUpUser } from "@/lib/actions/user";
+import { signInType, signUpSchema, signUpType } from "@/lib/schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   IconEyeClosed,
@@ -23,22 +24,36 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
 
-  const form = useForm<signInType>({
+  const form = useForm<signUpType>({
     defaultValues: {
+      name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
-    resolver: zodResolver(signInSchema),
+    resolver: zodResolver(signUpSchema),
   });
 
   const disabled = form.formState.isSubmitting;
 
   async function handleSubmit(formData: signInType) {
-    console.log(formData);
+    try {
+      const result = await signUpUser(formData);
+      if (!result.success) {
+        toast.warning(result.message);
+        return;
+      }
+      toast.success(result.message);
+      form.reset();
+    } catch (error) {
+      console.error(error);
+      toast.error("An unexpected error occurred. Please try again.");
+    }
   }
 
   return (
@@ -69,6 +84,25 @@ function SignUpForm() {
 
               <div className="w-full space-y-4">
                 <FormField
+                  name="name"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          placeholder="Your Name"
+                          className="hover:border-foreground/35 h-12 rounded-xl text-sm transition-colors"
+                          autoComplete="off"
+                          {...field}
+                        />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
                   name="email"
                   control={form.control}
                   render={({ field }) => (
@@ -77,7 +111,7 @@ function SignUpForm() {
                         <Input
                           type="email"
                           placeholder="Your email"
-                          className="hover:border-foreground/35 h-12 rounded-xl transition-colors"
+                          className="hover:border-foreground/35 h-12 rounded-xl text-sm transition-colors"
                           autoComplete="email"
                           {...field}
                         />
@@ -97,24 +131,62 @@ function SignUpForm() {
                         <Input
                           type={showPassword ? "text" : "password"}
                           placeholder="Strong password"
-                          className="hover:border-foreground/35 h-12 rounded-xl transition-colors"
-                          autoComplete="password"
+                          className="hover:border-foreground/35 h-12 rounded-xl text-sm transition-colors"
+                          autoComplete="new-password"
                           {...field}
                         />
                       </FormControl>
-                      <div className="absolute top-1/2 right-3 -translate-y-1/2">
+                      <div className="absolute top-6 right-3 -translate-y-1/2">
                         <Button
                           type="button"
                           variant={"ghost"}
                           size="icon"
                           onClick={() => setShowPassword((prev) => !prev)}
+                          aria-label={
+                            showPassword ? "Hide password" : "Show password"
+                          }
                         >
                           {showPassword ? (
                             <IconEyeClosed className="size-6 cursor-pointer" />
                           ) : (
                             <IconEyeExclamation className="size-6 cursor-pointer" />
                           )}
-                        </Button>
+                        </Button>{" "}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  name="confirmPassword"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem className="relative">
+                      <FormControl>
+                        <Input
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Confirm password"
+                          className="hover:border-foreground/35 h-12 rounded-xl text-sm transition-colors"
+                          autoComplete="new-password"
+                          {...field}
+                        />
+                      </FormControl>
+                      <div className="absolute top-6 right-3 -translate-y-1/2">
+                        <Button
+                          type="button"
+                          variant={"ghost"}
+                          size="icon"
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          aria-label={
+                            showPassword ? "Hide password" : "Show password"
+                          }
+                        >
+                          {showPassword ? (
+                            <IconEyeClosed className="size-6 cursor-pointer" />
+                          ) : (
+                            <IconEyeExclamation className="size-6 cursor-pointer" />
+                          )}
+                        </Button>{" "}
                       </div>
                       <FormMessage />
                     </FormItem>
