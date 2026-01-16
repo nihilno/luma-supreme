@@ -29,9 +29,6 @@ const authConfig = {
 
         const isVerified = compareSync(creds.password, user.password);
         if (!isVerified) return null;
-        if (!user.emailVerified) {
-          throw new Error("Email not verified. Please check your inbox.");
-        }
 
         return {
           id: user.id,

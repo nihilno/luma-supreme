@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { signUpUser } from "@/lib/actions/user";
-import { signInType, signUpSchema, signUpType } from "@/lib/schemas/auth";
+import { signUpSchema, signUpType } from "@/lib/schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   IconEyeClosed,
@@ -22,12 +22,14 @@ import {
   IconUserPlus,
 } from "@tabler/icons-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const { replace } = useRouter();
 
   const form = useForm<signUpType>({
     defaultValues: {
@@ -41,7 +43,7 @@ function SignUpForm() {
 
   const disabled = form.formState.isSubmitting;
 
-  async function handleSubmit(formData: signInType) {
+  async function handleSubmit(formData: signUpType) {
     try {
       const result = await signUpUser(formData);
       if (!result.success) {
@@ -49,7 +51,7 @@ function SignUpForm() {
         return;
       }
       toast.success(result.message);
-      form.reset();
+      replace("/");
     } catch (error) {
       console.error(error);
       toast.error("An unexpected error occurred. Please try again.");

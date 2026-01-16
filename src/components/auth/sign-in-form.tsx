@@ -22,12 +22,14 @@ import {
   IconUserPlus,
 } from "@tabler/icons-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const { replace } = useRouter();
 
   const form = useForm<signInType>({
     defaultValues: {
@@ -47,7 +49,7 @@ function SignInForm() {
         return;
       }
       toast.success(result.message);
-      form.reset();
+      replace("/");
     } catch (error) {
       console.error(error);
       toast.error("An unexpected error occurred. Please try again.");

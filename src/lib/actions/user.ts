@@ -15,10 +15,22 @@ export async function SignIn(formData: unknown) {
     };
   }
 
-  const user = validated.data;
+  const { email, password } = validated.data;
 
   try {
-    await signIn("credentials", user);
+    const result = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+
+    if (result?.error) {
+      return {
+        success: false,
+        message: "Invalid credentials. Please try again.",
+      };
+    }
+
     return {
       success: true,
       message: "Signed in successfully.",
@@ -38,7 +50,27 @@ export async function SignIn(formData: unknown) {
 }
 
 export async function SignOutUser() {
-  await signOut();
+  try {
+    const result = await signOut({ redirect: false });
+
+    if (result?.error) {
+      return {
+        success: false,
+        message: "Cannot logout at the moment.",
+      };
+    }
+
+    return {
+      success: true,
+      message: "You are now logged out.",
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      success: false,
+      message: "Cannot logout at the moment.",
+    };
+  }
 }
 
 export async function signUpUser(formData: unknown) {
@@ -63,7 +95,18 @@ export async function signUpUser(formData: unknown) {
       },
     });
 
-    await signIn("credentials", { email, password });
+    const result = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+
+    if (result?.error) {
+      return {
+        success: false,
+        message: "Invalid credentials. Please try again.",
+      };
+    }
 
     return {
       success: true,
@@ -78,7 +121,7 @@ export async function signUpUser(formData: unknown) {
 
     return {
       success: false,
-      message: "User was not registered.",
+      message: "Invalid credentials. Please try again.",
     };
   }
 }
