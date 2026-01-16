@@ -33,15 +33,14 @@ function ProductEmpty() {
           We couldn&apos;t find a product matching your request. This may happen
           when:
         </p>
-
         <ul className="text-muted-foreground list-disc space-y-1 pl-6">
           <li>Incorrect spelling or typos</li>
           <li>Filters excluding available items</li>
           <li>The product was removed or discontinued</li>
         </ul>
-
         <p className="text-muted-foreground">
-          Try adjusting your search or explore similar items below.
+          Try adjusting your search or return to the homepage to browse
+          products.
         </p>
       </CardContent>
 
