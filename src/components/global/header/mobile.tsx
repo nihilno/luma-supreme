@@ -1,4 +1,5 @@
 import { ModeToggle } from "@/components/buttons/mode-toggle";
+import Copyright from "@/components/global/footer/copyright";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -12,7 +13,6 @@ import {
 } from "@/components/ui/sheet";
 import { IconMenu4 } from "@tabler/icons-react";
 import { Session } from "next-auth";
-import Copyright from "../footer/copyright";
 import Buttons from "./buttons";
 import Navigation from "./navigation";
 import UserProfile from "./user-profile";

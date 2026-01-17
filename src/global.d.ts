@@ -1,3 +1,5 @@
+import { cartItemType } from "./lib/schemas/cart";
+
 export {};
 
 declare global {
@@ -23,9 +25,10 @@ declare global {
     createdAt: Date;
   } | null;
 
-  type CtaProps = {
+  type AddToCartProps = {
     price: number;
     stock: number;
+    cartItem: cartItemType;
   };
 
   type ButtonsProps = {
@@ -36,7 +39,7 @@ declare global {
 
   type UserProfileProps = {
     dropdown?: boolean;
-    name: string;
-    email: string | null;
+    name?: string;
+    email?: string | null;
   };
 }

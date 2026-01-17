@@ -168,4 +168,7 @@
   .transition {
     @apply transition-all duration-300 ease-in-out;
   }
+  .distinct {
+    @apply text-distinct/80 hover:text-distinct transition-colors;
+  }
 }

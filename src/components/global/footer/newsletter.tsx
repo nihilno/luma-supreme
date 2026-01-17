@@ -53,7 +53,7 @@ function Newsletter() {
                   type="submit"
                   size="icon"
                 >
-                  <IconArrowRightCircle />
+                  <IconArrowRightCircle className="size-5" />
                 </Button>
               </FormItem>
             )}

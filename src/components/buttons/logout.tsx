@@ -38,7 +38,11 @@ function Logout() {
       onClick={onLogout}
       disabled={isLoading}
     >
-      {isLoading ? <IconLoader2 className="animate-spin" /> : <IconLogout2 />}
+      {isLoading ? (
+        <IconLoader2 className="size-5 animate-spin" />
+      ) : (
+        <IconLogout2 className="size-5" />
+      )}
     </Button>
   );
 }

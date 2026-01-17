@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { SignIn } from "@/lib/actions/user";
+import { SignInUser } from "@/lib/actions/user";
 import { signInSchema, signInType } from "@/lib/schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -43,7 +43,7 @@ function SignInForm() {
 
   async function handleSubmit(formData: signInType) {
     try {
-      const result = await SignIn(formData);
+      const result = await SignInUser(formData);
       if (!result.success) {
         toast.warning(result.message);
         return;
@@ -144,9 +144,9 @@ function SignInForm() {
                     disabled={disabled}
                   >
                     {disabled ? (
-                      <IconLoader2 className="animate-spin" />
+                      <IconLoader2 className="size-5 animate-spin" />
                     ) : (
-                      <IconUserPlus />
+                      <IconUserPlus className="size-5" />
                     )}
                     Sign In!
                   </Button>

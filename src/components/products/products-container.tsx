@@ -58,7 +58,6 @@ async function ProductsContainer({ title }: { title?: string }) {
                         alt={name}
                         fill
                         className="overflow-hidden object-contain transition group-hover:scale-110"
-                        priority={true}
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       />
                     )}
@@ -66,13 +65,13 @@ async function ProductsContainer({ title }: { title?: string }) {
                 </CardHeader>
                 <CardContent className="space-y-2 border-t border-dashed pt-4">
                   <Badge className="font-semibold">
-                    <IconTagStarred /> {brand}
+                    <IconTagStarred className="size-5" /> {brand}
                   </Badge>
                   <h3 className="line-clamp-1">{name}</h3>
                 </CardContent>
                 <CardFooter className="flex items-center justify-between">
                   <div className="flex items-center gap-1 rounded-full border px-2 py-1">
-                    <IconStarFilled className="group-hover:text-distinct size-4 transition" />
+                    <IconStarFilled className="group-hover:text-distinct size-5 transition" />
                     <h4>{rating}</h4>
                   </div>
                   <h4

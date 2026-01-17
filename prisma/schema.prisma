@@ -23,12 +23,12 @@ model Product {
   isFeatured Boolean  @default(false)  @map("is_featured")
   banner String?
 
-  createdAt DateTime @default(now()) @map("created_at")
+  createdAt DateTime @default(now())  @map("created_at")
 
   @@map("products")
   @@index([isFeatured, createdAt])
 }
-
+ 
 model User {
   id            String          @id @default(uuid())
   name          String          @default("NO_NAME")
@@ -41,6 +41,7 @@ model User {
   paymentMethod String?
   accounts      Account[]
   sessions      Session[]
+  carts         Cart[]
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -94,4 +95,20 @@ model VerificationToken {
  
   @@id([identifier, token])
   @@map("verification_tokens")
+}
+
+model Cart {
+  id  String  @id @default(uuid())
+  userId  String?   @map("user_id")
+  sessionCartId String  @map("session_cart_id")
+  items Json[]  @default([])  @db.Json
+  itemsPrice  Decimal @db.Decimal(10,2) 
+  totalPrice  Decimal @db.Decimal(10,2) 
+  shippingPrice  Decimal @db.Decimal(10,2) 
+  taxPrice  Decimal @db.Decimal(10,2)
+
+  createdAt DateTime @default(now())  
+  user  User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("carts")
 }

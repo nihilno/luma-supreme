@@ -1,12 +1,13 @@
 "use server";
 
 import { signIn, signOut } from "@/auth";
+import { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { signInSchema, signUpSchema } from "@/lib/schemas/auth";
 import { hashSync } from "bcrypt-ts-edge";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 
-export async function SignIn(formData: unknown) {
+export async function SignInUser(formData: unknown) {
   const validated = signInSchema.safeParse(formData);
   if (!validated.success) {
     return {
@@ -73,7 +74,7 @@ export async function SignOutUser() {
   }
 }
 
-export async function signUpUser(formData: unknown) {
+export async function SignUpUser(formData: unknown) {
   const validated = signUpSchema.safeParse(formData);
   if (!validated.success) {
     return {
@@ -117,6 +118,15 @@ export async function signUpUser(formData: unknown) {
 
     if (isRedirectError(error)) {
       throw error;
+    }
+
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === "P2002") {
+        return {
+          success: false,
+          message: "This email is already registered.",
+        };
+      }
     }
 
     return {

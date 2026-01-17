@@ -47,11 +47,11 @@ function ProductEmpty() {
       <CardFooter className="mt-8 space-x-2">
         <Button asChild>
           <Link href="/" className="flex items-center">
-            <IconChevronsLeft className="translate-y-px" /> Back to Luma
+            <IconChevronsLeft className="size-5 translate-y-px" /> Back to Luma
           </Link>
         </Button>
         <Button onClick={() => refresh()}>
-          <IconRotate2 />
+          <IconRotate2 className="size-5" />
           Refresh
         </Button>
       </CardFooter>

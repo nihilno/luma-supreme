@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { IconKey } from "@tabler/icons-react";
 import Link from "next/link";
 
-function Signin() {
+function SignIn() {
   return (
     <Button variant={"outline"} size={"icon"} title="Sign In" asChild>
       <Link href={"/sign-in"}>
@@ -12,4 +12,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default SignIn;

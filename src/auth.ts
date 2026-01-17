@@ -2,6 +2,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { compareSync } from "bcrypt-ts-edge";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { NextResponse } from "next/server";
 import { prisma } from "./lib/prisma";
 
 const authConfig = {
@@ -42,14 +43,46 @@ const authConfig = {
   ],
 
   callbacks: {
-    async session({ session, user, trigger, token }: any) {
+    async session({ session, token }: any) {
       session.user.id = token.sub;
-
-      if (trigger === "update") {
-        session.user.name = user.name;
-      }
+      session.user.role = token.role;
+      session.user.name = token.name;
 
       return session;
+    },
+    async jwt({ token, user }: any) {
+      if (user) {
+        token.role = user.role;
+        if (user.name === "NO_NAME") {
+          token.name = user.email!.split("@")[0];
+          await prisma.user.update({
+            data: {
+              name: token.name,
+            },
+            where: {
+              id: user.id,
+            },
+          });
+        }
+      }
+      return token;
+    },
+    async authorized({ request }: any) {
+      const cookie = request.cookies.get("sessionCartId");
+      if (!cookie) {
+        const sessionCartId = crypto.randomUUID();
+        const response = NextResponse.next();
+        response.cookies.set("sessionCartId", sessionCartId, {
+          path: "/",
+          httpOnly: true,
+          sameSite: "lax",
+          secure: process.env.NODE_ENV === "production",
+          maxAge: 60 * 60 * 24 * 30, // 30 days
+        });
+
+        return response;
+      }
+      return true;
     },
   },
 

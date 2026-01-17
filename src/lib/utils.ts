@@ -24,3 +24,13 @@ export function decimalToNumber(value: Decimal | number | string) {
 export function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export function numberToDecimal(value: number | string) {
+  if (typeof value === "number") {
+    return Math.round((value + Number.EPSILON) * 100) / 100;
+  } else if (typeof value === "string") {
+    return Math.round(Number(value + Number.EPSILON) * 100) / 100;
+  } else {
+    throw new Error("Value is not a number or string.");
+  }
+}

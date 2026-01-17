@@ -10,7 +10,7 @@ function Header() {
         {socials.map(({ label, icon: Icon }) => (
           <Icon
             key={label}
-            className="cursor-pointer opacity-80 transition-all duration-200 ease-in-out hover:opacity-100"
+            className="size-5 cursor-pointer opacity-80 transition hover:opacity-100"
           />
         ))}
       </div>

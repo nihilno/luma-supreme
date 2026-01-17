@@ -27,8 +27,8 @@ function ProductCard({ product }: { product: Product }) {
     <div className="flex w-full flex-col items-center space-y-12">
       <Card
         className={cn(
-          stock === 0 ? "cursor-not-allowed opacity-50" : "cursor-pointer",
-          "group hover:bg-muted/60 mx-auto w-full max-w-lg transition sm:mx-0 md:max-w-xl",
+          stock === 0 ? "cursor-not-allowed opacity-50" : "cursor-default",
+          "group mx-auto w-full max-w-lg transition sm:mx-0 md:max-w-xl",
         )}
       >
         <CardHeader>
@@ -47,25 +47,25 @@ function ProductCard({ product }: { product: Product }) {
                 fill
                 sizes="(max-width: 768px) 100vw, 576px"
                 className="overflow-hidden object-contain"
-                priority={true}
+                priority
               />
             )}
           </div>
         </CardHeader>
         <CardContent className="space-y-6 border-t border-dashed pt-6">
           <Badge className="font-semibold">
-            <IconTagStarred /> {brand}
+            <IconTagStarred className="size-5" /> {brand}
           </Badge>
           <h3 className="line-clamp-1">{name}</h3>
         </CardContent>
         <CardFooter className="flex items-center justify-between">
           <div className="flex items-center gap-1 rounded-full border px-2 py-1">
-            <IconStarFilled className="size-4 transition" />
+            <IconStarFilled className="size-5 transition" />
             <h4>{rating}</h4>
           </div>
           <h4
             className={cn(
-              "text-2xl font-semibold",
+              "group-hover:text-distinct text-2xl font-semibold transition",
               stock === 0 && "text-destructive text-xl",
             )}
           >

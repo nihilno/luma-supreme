@@ -14,11 +14,8 @@ function Reviews() {
       <div className="space-y-1">
         <h5 className="text-lg font-semibold">Customer Reviews</h5>
         <p>
-          Please{" "}
-          <span className="text-distinct/75 hover:text-distinct cursor-pointer transition">
-            sign in
-          </span>{" "}
-          to write a review.
+          Please <span className="distinct cursor-pointer">sign in</span> to
+          write a review.
         </p>
       </div>
       <Card>
@@ -32,9 +29,9 @@ function Reviews() {
         <CardFooter className="flex items-center gap-1.5">
           <div className="flex items-center gap-1">
             {Array.from({ length: 4 }).map((_, index) => (
-              <IconStarFilled key={index} className="size-4" />
+              <IconStarFilled key={index} className="size-5" />
             ))}
-            <IconStarHalfFilled className="size-4" />
+            <IconStarHalfFilled className="size-5" />
           </div>
           &bull;
           <div className="text-sm">John Doe</div>
@@ -53,9 +50,9 @@ function Reviews() {
         <CardFooter className="flex items-center gap-1.5">
           <div className="flex items-center gap-1">
             {Array.from({ length: 4 }).map((_, index) => (
-              <IconStarFilled key={index} className="size-4" />
+              <IconStarFilled key={index} className="size-5" />
             ))}
-            <IconStarHalfFilled className="size-4" />
+            <IconStarHalfFilled className="size-5" />
           </div>
           &bull;
           <div className="text-sm">John Doe</div>
@@ -74,9 +71,9 @@ function Reviews() {
         <CardFooter className="flex items-center gap-1.5">
           <div className="flex items-center gap-1">
             {Array.from({ length: 4 }).map((_, index) => (
-              <IconStarFilled key={index} className="size-4" />
+              <IconStarFilled key={index} className="size-5" />
             ))}
-            <IconStarHalfFilled className="size-4" />
+            <IconStarHalfFilled className="size-5" />
           </div>
           &bull;
           <div className="text-sm">John Doe</div>

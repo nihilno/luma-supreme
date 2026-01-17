@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import Logout from "@/components/buttons/logout";
 import { ModeToggle } from "@/components/buttons/mode-toggle";
-import Signin from "@/components/buttons/signin";
+import SignIn from "@/components/buttons/signin";
 import Logo from "@/components/global/logo";
 import Buttons from "./buttons";
 import { Mobile } from "./mobile";
@@ -31,7 +31,7 @@ async function Header() {
           <nav className="flex items-center lg:hidden">
             <Mobile session={session} />
           </nav>
-          {session ? <Logout /> : <Signin />}
+          {session ? <Logout /> : <SignIn />}
         </div>
       </div>
     </header>

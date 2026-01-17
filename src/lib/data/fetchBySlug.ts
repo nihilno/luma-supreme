@@ -1,7 +1,7 @@
 import "server-only";
 
 import { prisma } from "@/lib/prisma";
-import { decimalToNumber } from "../utils";
+import { decimalToNumber } from "@/lib/utils";
 
 export async function fetchProductBySlug(slug: string) {
   try {
