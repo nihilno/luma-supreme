@@ -5,7 +5,7 @@ import {
   IconCircleCheck,
   IconExclamationCircle,
   IconInfoCircle,
-  IconLoader,
+  IconLoader2,
 } from "@tabler/icons-react";
 import { useTheme } from "next-themes";
 import { Toaster as Sonner, type ToasterProps } from "sonner";
@@ -22,7 +22,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
         info: <IconInfoCircle className="size-4" />,
         warning: <IconAlertCircle className="size-4" />,
         error: <IconExclamationCircle className="size-4" />,
-        loading: <IconLoader className="size-4 animate-spin" />,
+        loading: <IconLoader2 className="size-4 animate-spin" />,
       }}
       style={
         {

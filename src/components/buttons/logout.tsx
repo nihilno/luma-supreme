@@ -2,21 +2,32 @@
 
 import { Button } from "@/components/ui/button";
 import { SignOutUser } from "@/lib/actions/user";
-import { IconLogout2 } from "@tabler/icons-react";
+import { IconLoader2, IconLogout2 } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "sonner";
 
 function Logout() {
+  const [isLoading, setIsLoading] = useState(false);
   const { refresh } = useRouter();
 
   async function onLogout() {
-    const result = await SignOutUser();
-    if (!result.success) {
-      toast.warning(result.message);
-      return;
+    setIsLoading(true);
+
+    try {
+      const result = await SignOutUser();
+      if (!result.success) {
+        toast.warning(result.message);
+        return;
+      }
+      refresh();
+      toast.success(result.message);
+    } catch (error) {
+      console.error(error);
+      toast.error("External error occurred. Try again later.");
+    } finally {
+      setIsLoading(false);
     }
-    refresh();
-    toast.success(result.message);
   }
 
   return (
@@ -25,8 +36,9 @@ function Logout() {
       size={"icon"}
       title="Logout"
       onClick={onLogout}
+      disabled={isLoading}
     >
-      <IconLogout2 />
+      {isLoading ? <IconLoader2 className="animate-spin" /> : <IconLogout2 />}
     </Button>
   );
 }
