@@ -30,7 +30,7 @@ export function numberToDecimal(value: number | string) {
   if (typeof value === "number") {
     return Math.round((value + Number.EPSILON) * 100) / 100;
   } else if (typeof value === "string") {
-    return Math.round((Number(value) + Number.EPSILON) * 100) / 100;
+    return Math.round(Number(value + Number.EPSILON) * 100) / 100;
   } else {
     throw new Error("Value is not a number or string.");
   }
@@ -46,9 +46,9 @@ export function calcCartPrices(items: cartItemType[]) {
   const totalPrice = numberToDecimal(itemsPrice + shippingPrice + taxPrice);
 
   return {
-    itemsPrice: itemsPrice.toFixed(2),
-    shippingPrice: shippingPrice.toFixed(2),
-    taxPrice: taxPrice.toFixed(2),
-    totalPrice: totalPrice.toFixed(2),
+    itemsPrice: Number(itemsPrice.toFixed(2)),
+    shippingPrice: Number(shippingPrice.toFixed(2)),
+    taxPrice: Number(taxPrice.toFixed(2)),
+    totalPrice: Number(totalPrice.toFixed(2)),
   };
 }

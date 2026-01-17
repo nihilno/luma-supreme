@@ -21,7 +21,7 @@ function AddToCartButton({ price, stock, cartItem }: AddToCartProps) {
       return;
     }
 
-    toast.success(`${cartItem.name} added to Cart.`, {
+    toast.success(result.message, {
       description: (
         <Link href={"/cart"} className="distinct flex items-center gap-1">
           Go to Cart.
