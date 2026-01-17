@@ -33,4 +33,10 @@ declare global {
     col?: boolean;
     names?: boolean;
   };
+
+  type UserProfileProps = {
+    dropdown?: boolean;
+    name: string;
+    email: string | null;
+  };
 }

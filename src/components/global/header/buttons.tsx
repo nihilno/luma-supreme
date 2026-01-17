@@ -1,46 +1,19 @@
-import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
+import { publicButtons } from "@/lib/constants/navigations";
 import { cn } from "@/lib/utils";
-import { IconLogin2, IconShoppingBagSearch } from "@tabler/icons-react";
 import Link from "next/link";
-import UserProfile from "./user-profile";
 
-async function Buttons({
-  className,
-  col = false,
-  names = false,
-}: ButtonsProps) {
-  const session = await auth();
-
-  if (session)
-    return (
-      <nav
-        className={cn("flex items-center gap-2.5", col && "w-full flex-col")}
-      >
-        <Button asChild className={className}>
-          <Link href={"/cart"}>
-            <IconShoppingBagSearch />
-            {names && <span>Cart</span>}
-          </Link>
-        </Button>
-        <UserProfile dropdown={true} />
-      </nav>
-    );
-
+function Buttons({ className, col = false, names = false }: ButtonsProps) {
   return (
     <nav className={cn("flex items-center gap-2.5", col && "w-full flex-col")}>
-      <Button asChild className={className}>
-        <Link href={"/cart"}>
-          <IconShoppingBagSearch />
-          {names && <span>Cart</span>}
-        </Link>
-      </Button>
-      <Button asChild className={className}>
-        <Link href={"/sign-in"}>
-          <IconLogin2 />
-          {names && <span>Sign In</span>}
-        </Link>
-      </Button>
+      {publicButtons.map(({ label, href, icon: Icon }) => (
+        <Button key={label} asChild className={className} title={label}>
+          <Link href={href}>
+            <Icon className="size-5" />
+            {names && <span>{label}</span>}
+          </Link>
+        </Button>
+      ))}
     </nav>
   );
 }

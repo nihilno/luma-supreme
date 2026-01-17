@@ -11,27 +11,40 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { IconMenu4 } from "@tabler/icons-react";
+import { Session } from "next-auth";
 import Copyright from "../footer/copyright";
 import Buttons from "./buttons";
 import Navigation from "./navigation";
+import UserProfile from "./user-profile";
 
-export function Mobile() {
+export function Mobile({ session }: { session: Session | null }) {
+  const name = session?.user?.name;
+
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="outline">
-          <IconMenu4 />
+          <IconMenu4 className="size-5" />
         </Button>
       </SheetTrigger>
       <SheetContent className="bg-background/65 p-4 backdrop-blur-md">
-        <SheetHeader>
-          <SheetTitle>Explore Our Sections </SheetTitle>
+        <SheetHeader className="text-center">
+          <SheetTitle className="text-xl">
+            {name ? (
+              <>
+                Welcome, <span className="text-distinct">{name}</span>.
+              </>
+            ) : (
+              "Welcome."
+            )}
+          </SheetTitle>
           <SheetDescription>
-            Navigate through categories, support options, and brand details
-            effortlessly.
+            Access your essentials—shopping tools, account options, and quick
+            links—all in one place.
           </SheetDescription>
           <nav className="mt-16 flex flex-col items-center gap-2.5">
             <Buttons className="w-full" col={true} names={true} />
+            {session && <UserProfile />}
           </nav>
         </SheetHeader>
 
