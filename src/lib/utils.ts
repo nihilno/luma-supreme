@@ -1,6 +1,7 @@
 import { Decimal } from "@prisma/client/runtime/client";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { cartItemType } from "./schemas/cart";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -29,8 +30,25 @@ export function numberToDecimal(value: number | string) {
   if (typeof value === "number") {
     return Math.round((value + Number.EPSILON) * 100) / 100;
   } else if (typeof value === "string") {
-    return Math.round(Number(value + Number.EPSILON) * 100) / 100;
+    return Math.round((Number(value) + Number.EPSILON) * 100) / 100;
   } else {
     throw new Error("Value is not a number or string.");
   }
+}
+
+export function calcCartPrices(items: cartItemType[]) {
+  const itemsPrice = items.reduce(
+    (prev, item) => prev + numberToDecimal(item.price * item.qty),
+    0,
+  );
+  const shippingPrice = numberToDecimal(itemsPrice < 100 ? 0 : 10);
+  const taxPrice = numberToDecimal(0.15 * itemsPrice);
+  const totalPrice = numberToDecimal(itemsPrice + shippingPrice + taxPrice);
+
+  return {
+    itemsPrice: itemsPrice.toFixed(2),
+    shippingPrice: shippingPrice.toFixed(2),
+    taxPrice: taxPrice.toFixed(2),
+    totalPrice: totalPrice.toFixed(2),
+  };
 }

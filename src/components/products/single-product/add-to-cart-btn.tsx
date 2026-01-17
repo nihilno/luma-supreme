@@ -16,8 +16,8 @@ function AddToCartButton({ price, stock, cartItem }: AddToCartProps) {
   async function handleAddToCart() {
     const result = await AddToCart(cartItem);
 
-    if (!result.success) {
-      toast.warning(result.message);
+    if (!result?.success) {
+      toast.warning("Cannot add to Cart. Try again later.");
       return;
     }
 

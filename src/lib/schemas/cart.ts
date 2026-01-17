@@ -4,20 +4,17 @@ const cartItemSchema = z.object({
   productId: z.string().min(1, "Product is required."),
   name: z.string().min(1, "Name is required."),
   slug: z.string().min(1, "Slug is required."),
-  qty: z.number().int().positive("Quantity must be positive number."),
+  qty: z.number().positive("Quantity must be positive number."),
   image: z.string().min(1, "Image is required."),
-  price: z.number().int().positive("Price must be positive number."),
+  price: z.number().positive("Price must be positive number."),
 });
 
 const insertCartSchema = z.object({
-  items: z.array(cartItemSchema),
-  itemsPrice: z.number().int().positive("Items price must be positive number."),
-  totalPrice: z.number().int().positive("Total price be positive number."),
-  shippingPrice: z
-    .number()
-    .int()
-    .positive("Shipping price must be positive number."),
-  taxPrice: z.number().int().positive("Tax price must be positive number."),
+  items: z.array(cartItemSchema).min(1, "Cart must have at least one item."),
+  itemsPrice: z.number().nonnegative("Items price must be non-negative."),
+  totalPrice: z.number().positive("Total price must be positive number."),
+  shippingPrice: z.number().nonnegative("Shipping price must be non-negative."),
+  taxPrice: z.number().nonnegative("Tax price must be non-negative."),
   sessionCartId: z.string().min(1, "Session Cart ID is required."),
 });
 

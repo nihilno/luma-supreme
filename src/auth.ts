@@ -54,15 +54,20 @@ const authConfig = {
       if (user) {
         token.role = user.role;
         if (user.name === "NO_NAME") {
-          token.name = user.email!.split("@")[0];
-          await prisma.user.update({
-            data: {
-              name: token.name,
-            },
-            where: {
-              id: user.id,
-            },
-          });
+          token.name = user.email?.split("@")[0] ?? "User";
+          try {
+            await prisma.user.update({
+              data: {
+                name: token.name,
+              },
+              where: {
+                id: user.id,
+              },
+            });
+          } catch (error) {
+            console.error("Failed to update user name:", error);
+            // Continue with authentication even if name update fails
+          }
         }
       }
       return token;

@@ -2,8 +2,13 @@
 
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { cartItemSchema, cartItemType } from "@/lib/schemas/cart";
-import { decimalToNumber } from "@/lib/utils";
+import {
+  cartItemSchema,
+  cartItemType,
+  insertCartSchema,
+} from "@/lib/schemas/cart";
+import { calcCartPrices, decimalToNumber } from "@/lib/utils";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export async function AddToCart(data: cartItemType) {
@@ -17,16 +22,33 @@ export async function AddToCart(data: cartItemType) {
       : undefined;
 
     const cart = await getMyCart();
+    const item = cartItemSchema.parse(data);
 
-    const validated = cartItemSchema.safeParse(data);
     const product = await prisma.product.findFirst({
-      where: { id: validated.data?.productId },
+      where: { id: item.productId },
     });
 
-    return {
-      success: true,
-      message: "Item added to Cart.",
-    };
+    if (!product) throw new Error("Product not found.");
+
+    if (!cart) {
+      const newCart = insertCartSchema.parse({
+        userId,
+        items: [item],
+        sessionCartId,
+        ...calcCartPrices([item]),
+      });
+
+      await prisma.cart.create({
+        data: newCart,
+      });
+
+      revalidatePath(`/product/${product.slug}`);
+
+      return {
+        success: true,
+        message: "Item added to Cart.",
+      };
+    }
   } catch (error) {
     console.error(error);
     return {

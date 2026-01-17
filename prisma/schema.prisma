@@ -20,10 +20,10 @@ model Product {
   rating Decimal  @default(0) @db.Decimal(3,2)
   numReviews Int  @default(0) 
   stock Int
-  isFeatured Boolean  @default(false)  @map("is_featured")
+  isFeatured Boolean  @default(false)  
   banner String?
 
-  createdAt DateTime @default(now())  @map("created_at")
+  createdAt DateTime @default(now()) 
 
   @@map("products")
   @@index([isFeatured, createdAt])
@@ -99,8 +99,8 @@ model VerificationToken {
 
 model Cart {
   id  String  @id @default(uuid())
-  userId  String?   @map("user_id")
-  sessionCartId String  @map("session_cart_id")
+  userId  String?   
+  sessionCartId String  
   items Json[]  @default([])  @db.Json
   itemsPrice  Decimal @db.Decimal(10,2) 
   totalPrice  Decimal @db.Decimal(10,2) 

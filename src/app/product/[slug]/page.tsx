@@ -29,12 +29,10 @@ export default async function ProductPage({
 
       <div className="mt-24 space-y-12 md:mt-12">
         <Stars numReviews={numReviews} />
-
         <div className="space-y-1">
           <h5 className="text-lg font-semibold">Description</h5>
           <p>{description}.</p>
         </div>
-
         <AddToCartButton
           price={price}
           stock={stock}
@@ -44,7 +42,7 @@ export default async function ProductPage({
             slug,
             price,
             qty: 1,
-            image: images[0],
+            image: images?.[0] ?? null,
           }}
         />
       </div>

@@ -24,13 +24,7 @@ function Images({
             index === image && "outline-distinct outline-3",
           )}
         >
-          <Image
-            src={img}
-            alt={`product-image-${index}`}
-            fill
-            sizes="50vw"
-            priority
-          />
+          <Image src={img} alt={`product-image-${index}`} fill sizes="50vw" />
         </div>
       ))}
     </div>
