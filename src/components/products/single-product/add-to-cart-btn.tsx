@@ -3,33 +3,55 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { AddToCart } from "@/lib/actions/cart";
+import { AddToCart, removeItemFromCart } from "@/lib/actions/cart";
 import { cn, toGBP } from "@/lib/utils";
 import {
+  IconCircleMinus,
+  IconCirclePlus,
   IconCirclePlusFilled,
+  IconLoader2,
   IconShoppingCartShare,
 } from "@tabler/icons-react";
 import Link from "next/link";
+import { useTransition } from "react";
 import { toast } from "sonner";
 
-function AddToCartButton({ price, stock, cartItem }: AddToCartProps) {
-  async function handleAddToCart() {
-    const result = await AddToCart(cartItem);
+function AddToCartButton({ cart, price, stock, cartItem }: AddToCartProps) {
+  const [isPending, startTransition] = useTransition();
 
-    if (!result?.success) {
-      toast.warning("Cannot add to Cart. Try again later.");
-      return;
-    }
+  function handleAddToCart() {
+    startTransition(async () => {
+      const result = await AddToCart(cartItem);
 
-    toast.success(result.message, {
-      description: (
-        <Link href={"/cart"} className="distinct flex items-center gap-1">
-          Go to Cart.
-          <IconShoppingCartShare className="size-4" />
-        </Link>
-      ),
+      if (!result?.success) {
+        toast.warning("Cannot add to Cart. Try again later.");
+        return;
+      }
+
+      toast.success(result.message, {
+        description: (
+          <Link href={"/cart"} className="distinct flex items-center gap-1">
+            Go to Cart.
+            <IconShoppingCartShare className="size-4" />
+          </Link>
+        ),
+      });
     });
   }
+
+  function handleRemoveFromCart() {
+    startTransition(async () => {
+      const result = await removeItemFromCart(cartItem.productId);
+
+      if (!result?.success) {
+        toast.warning("Cannot remove from Cart. Try again later.");
+        return;
+      }
+    });
+  }
+
+  const existsItem =
+    cart && cart.items.find((i) => i.productId === cartItem.productId);
 
   return (
     <Card
@@ -38,15 +60,15 @@ function AddToCartButton({ price, stock, cartItem }: AddToCartProps) {
         "mx-auto max-w-lg transition sm:mx-0",
       )}
     >
-      <CardContent className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h4>Price</h4>
+      <CardContent className="space-y-4 lg:space-y-6">
+        <div className="flex items-center justify-between lg:text-xl">
+          <h4 className="font-semibold">Price</h4>
           {toGBP(price)}
         </div>
-        <div className="flex items-center justify-between">
-          <h4>Status</h4>
+        <div className="flex items-center justify-between lg:text-xl">
+          <h4 className="font-semibold">Status</h4>
           <Badge
-            className="animate-pulse"
+            className="animate-pulse lg:text-lg"
             variant={stock === 0 ? "destructive" : "default"}
           >
             {stock === 0 ? "Out of Stock" : "In Stock"}
@@ -54,14 +76,46 @@ function AddToCartButton({ price, stock, cartItem }: AddToCartProps) {
         </div>
       </CardContent>
       <CardFooter className="mt-4 border-t border-dashed">
-        <Button
-          className="hover:bg-distinct h-12 w-full"
-          disabled={stock === 0}
-          onClick={handleAddToCart}
-        >
-          <IconCirclePlusFilled className="size-7 translate-y-px" />
-          <span className="text-lg"> Add to Cart</span>
-        </Button>
+        {existsItem ? (
+          <div className="flex w-full items-center justify-between gap-4">
+            <Button
+              className="hover:bg-distinct h-12 w-30"
+              disabled={stock === 0 || isPending}
+              onClick={handleRemoveFromCart}
+            >
+              <IconCircleMinus className="size-7 translate-y-px" />
+            </Button>
+            <div className="border-muted-foreground grid h-12 w-full place-items-center rounded-xl border border-dashed">
+              {isPending ? (
+                <IconLoader2 className="distinct size-6 animate-spin" />
+              ) : (
+                <h3 className="distinct text-2xl font-bold transition">
+                  {existsItem.qty}
+                </h3>
+              )}
+            </div>
+            <Button
+              className="hover:bg-distinct h-12 w-30"
+              disabled={stock === 0 || isPending}
+              onClick={handleAddToCart}
+            >
+              <IconCirclePlus className="size-7 translate-y-px" />
+            </Button>
+          </div>
+        ) : (
+          <Button
+            className="hover:bg-distinct h-12 w-full"
+            disabled={stock === 0 || isPending}
+            onClick={handleAddToCart}
+          >
+            {isPending ? (
+              <IconLoader2 className="size-6 animate-spin" />
+            ) : (
+              <IconCirclePlusFilled className="size-7 translate-y-px" />
+            )}
+            <span className="text-lg"> Add to Cart</span>
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );

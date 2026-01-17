@@ -28,7 +28,20 @@ declare global {
   type AddToCartProps = {
     price: number;
     stock: number;
+    cart?: Cart;
     cartItem: cartItemType;
+  };
+
+  type Cart = {
+    items: cartItemType[];
+    itemsPrice: number;
+    totalPrice: number;
+    shippingPrice: number;
+    taxPrice: number;
+    sessionCartId: string;
+    id: string;
+    userId: string | null;
+    createdAt: Date;
   };
 
   type ButtonsProps = {

@@ -3,6 +3,7 @@ import AddToCartButton from "@/components/products/single-product/add-to-cart-bt
 import ProductCard from "@/components/products/single-product/product-card";
 import Reviews from "@/components/products/single-product/reviews";
 import Stars from "@/components/products/single-product/stars";
+import { getMyCart } from "@/lib/actions/cart";
 import { fetchProductBySlug } from "@/lib/data/fetchBySlug";
 import { IconBrandLinktree } from "@tabler/icons-react";
 
@@ -13,6 +14,7 @@ export default async function ProductPage({
 }) {
   const { slug } = await params;
   const product = await fetchProductBySlug(slug);
+  const cart = await getMyCart();
 
   if (!product)
     return (
@@ -30,10 +32,11 @@ export default async function ProductPage({
       <div className="mt-24 space-y-12 md:mt-12">
         <Stars numReviews={numReviews} />
         <div className="space-y-1">
-          <h5 className="text-lg font-semibold">Description</h5>
+          <h5 className="text-lg font-semibold lg:text-xl">Description</h5>
           <p>{description}.</p>
         </div>
         <AddToCartButton
+          cart={cart}
           price={price}
           stock={stock}
           cartItem={{

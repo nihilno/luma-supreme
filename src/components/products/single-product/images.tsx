@@ -14,7 +14,7 @@ function Images({
   setImage: Dispatch<SetStateAction<number>>;
 }) {
   return (
-    <div className="grid w-50 grid-cols-2 gap-2">
+    <div className="grid w-50 grid-cols-2 gap-2 lg:w-80 lg:gap-4">
       {images.map((img, index) => (
         <div
           key={index}

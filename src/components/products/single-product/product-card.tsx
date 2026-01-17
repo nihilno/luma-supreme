@@ -53,19 +53,19 @@ function ProductCard({ product }: { product: Product }) {
           </div>
         </CardHeader>
         <CardContent className="space-y-6 border-t border-dashed pt-6">
-          <Badge className="font-semibold">
-            <IconTagStarred className="size-5" /> {brand}
+          <Badge className="font-semibold lg:h-8 lg:text-lg">
+            <IconTagStarred className="size-5 lg:size-6!" /> {brand}
           </Badge>
-          <h3 className="line-clamp-1">{name}</h3>
+          <h3 className="line-clamp-1 lg:text-2xl">{name}</h3>
         </CardContent>
-        <CardFooter className="flex items-center justify-between">
-          <div className="flex items-center gap-1 rounded-full border px-2 py-1">
-            <IconStarFilled className="size-5 transition" />
-            <h4>{rating}</h4>
+        <CardFooter className="flex items-center justify-between lg:mt-6">
+          <div className="flex items-center gap-1 rounded-full border px-2 py-1 lg:px-3">
+            <IconStarFilled className="size-5 transition lg:size-6" />
+            <h4 className="lg:text-xl">{rating}</h4>
           </div>
           <h4
             className={cn(
-              "group-hover:text-distinct text-2xl font-semibold transition",
+              "group-hover:text-distinct text-2xl font-semibold transition lg:text-3xl",
               stock === 0 && "text-destructive text-xl",
             )}
           >

@@ -12,7 +12,7 @@ function Reviews() {
   return (
     <div className="space-y-6">
       <div className="space-y-1">
-        <h5 className="text-lg font-semibold">Customer Reviews</h5>
+        <h5 className="text-lg font-semibold lg:text-xl">Customer Reviews</h5>
         <p>
           Please <span className="distinct cursor-pointer">sign in</span> to
           write a review.
