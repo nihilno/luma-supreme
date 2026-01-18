@@ -24,12 +24,12 @@ type orderType = z.infer<typeof orderSchema> & {
 };
 
 const orderItemSchema = z.object({
-  productId: z.string().min(1, "User is required."),
+  productId: z.string().min(1, "Product is required."),
   slug: z.string(),
   image: z.string(),
   name: z.string(),
   price: z.number().positive("Price must be positive number."),
-  qty: z.number(),
+  qty: z.number().positive("Quantity must be positive number."),
 });
 
 type orderItemType = z.infer<typeof orderItemSchema>;

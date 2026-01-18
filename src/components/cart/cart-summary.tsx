@@ -21,7 +21,7 @@ function CartSummary({ prices, compact = false }: CartSummaryProps) {
             compact ? "sm:text-base" : "sm:text-lg",
           )}
         >
-          {itemsPrice}
+          {toGBP(itemsPrice)}
         </span>
       </div>
       <div className="flex justify-between py-3">
