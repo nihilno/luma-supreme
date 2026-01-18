@@ -16,10 +16,10 @@ function CartHover() {
         >
           <IconHelpHexagon className="size-6 sm:size-7" />
         </button>
-      </HoverCardTrigger>{" "}
+      </HoverCardTrigger>
       <HoverCardContent className="text-sm">
-        <strong>Free delivery</strong> on orders up to <strong>$100</strong>,
-        and only <strong>$10</strong> for anything beyond!
+        <strong>Free delivery</strong> on orders over <strong>$100</strong>, and
+        only <strong>$10</strong> for anything below!
       </HoverCardContent>
     </HoverCard>
   );

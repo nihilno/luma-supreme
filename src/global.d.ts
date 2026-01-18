@@ -33,12 +33,8 @@ declare global {
     cartItem: cartItemType;
   };
 
-  type Cart = {
+  type Cart = CartTotal & {
     items: cartItemType[];
-    itemsPrice: number;
-    totalPrice: number;
-    shippingPrice: number;
-    taxPrice: number;
     sessionCartId: string;
     id: string;
     userId: string | null;
@@ -62,5 +58,10 @@ declare global {
     shippingPrice: number;
     taxPrice: number;
     totalPrice: number;
+  };
+
+  type CartSummaryProps = {
+    prices: CartTotal;
+    compact?: boolean;
   };
 }

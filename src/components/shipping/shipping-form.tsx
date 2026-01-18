@@ -179,7 +179,7 @@ function ShippingForm({ address }: { address: JsonValue }) {
       </Form>
 
       {disabled && (
-        <div className="absolute inset-0 cursor-default">
+        <div className="absolute inset-0 z-10 cursor-default">
           <Spinner />
         </div>
       )}

@@ -8,17 +8,15 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { toGBP } from "@/lib/utils";
 import { IconChecks, IconLoader2 } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import CartHover from "./cart-hover";
+import CartSummary from "./cart-summary";
 
 function CartTotal({ prices, cartDontExist, session }: CartTotalProps) {
   const [isPending, startTransition] = useTransition();
   const { push } = useRouter();
 
-  const { taxPrice, shippingPrice, totalPrice, itemsPrice } = prices;
   return (
     <Card>
       <CardHeader>
@@ -31,27 +29,7 @@ function CartTotal({ prices, cartDontExist, session }: CartTotalProps) {
         </CardDescription>
       </CardHeader>
       <CardContent className="border-t border-b border-dashed py-6">
-        <div className="flex items-center justify-between py-3">
-          <h3 className="text-distinct font-bold sm:text-lg">Subtotal</h3>
-          <span className="font-semibold sm:text-lg">{toGBP(itemsPrice)}</span>
-        </div>
-        <div className="flex justify-between py-3">
-          <div className="flex items-center gap-1">
-            <h3 className="text-distinct font-bold sm:text-lg">Shipping</h3>
-            <CartHover />
-          </div>
-          <span className="font-semibold sm:text-lg">
-            {toGBP(shippingPrice)}
-          </span>
-        </div>
-        <div className="flex items-center justify-between py-3">
-          <h3 className="text-distinct font-bold sm:text-lg">Tax</h3>
-          <span className="font-semibold sm:text-lg">{toGBP(taxPrice)}</span>
-        </div>
-        <div className="flex items-center justify-between py-3">
-          <h3 className="text-distinct font-bold sm:text-lg">Total</h3>
-          <span className="font-semibold sm:text-lg">{toGBP(totalPrice)}</span>
-        </div>
+        <CartSummary prices={prices} />
       </CardContent>
       <CardFooter>
         <Button

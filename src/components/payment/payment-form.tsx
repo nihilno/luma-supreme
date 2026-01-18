@@ -49,10 +49,7 @@ function PaymentForm() {
   return (
     <div className="relative">
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(handleSubmit)}
-          className="mx-auto w-full max-w-2xl"
-        >
+        <form onSubmit={form.handleSubmit(handleSubmit)}>
           <FormField
             control={form.control}
             name="type"
@@ -73,7 +70,7 @@ function PaymentForm() {
                           value={method}
                           checked={field.value === method}
                           onChange={field.onChange}
-                          className="hidden"
+                          className="sr-only"
                           disabled={disabled}
                         />
                         {method}
@@ -114,7 +111,7 @@ function PaymentForm() {
       </Form>
 
       {disabled && (
-        <div className="absolute inset-0 cursor-default">
+        <div className="absolute inset-0 z-10 cursor-default">
           <Spinner />
         </div>
       )}

@@ -23,7 +23,13 @@ import Link from "next/link";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
 
-function CartTable({ items }: { items: cartItemType[] }) {
+function CartTable({
+  items,
+  control = true,
+}: {
+  items: cartItemType[];
+  control?: boolean;
+}) {
   const [pendingId, setPendingId] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
@@ -73,63 +79,71 @@ function CartTable({ items }: { items: cartItemType[] }) {
                   </h3>
                 </Link>
               </TableCell>
-              <TableCell className="mt-4 flex w-fit gap-1.5 sm:mt-6">
-                <Button
-                  size="sm"
-                  disabled={isPending}
-                  type="button"
-                  variant={qty === 1 ? "destructive" : "outline"}
-                  onClick={() => {
-                    setPendingId(productId);
-                    startTransition(async () => {
-                      const result = await removeItemFromCart(productId);
+              <TableCell>
+                {control ? (
+                  <div className="flex items-center gap-1 sm:gap-2.5">
+                    <Button
+                      size="sm"
+                      disabled={isPending}
+                      type="button"
+                      variant={qty === 1 ? "destructive" : "outline"}
+                      onClick={() => {
+                        setPendingId(productId);
+                        startTransition(async () => {
+                          const result = await removeItemFromCart(productId);
 
-                      if (!result?.success) {
-                        toast.warning(
-                          "Cannot remove from Cart. Try again later.",
-                        );
-                        setPendingId(null);
-                        return;
-                      }
-                      setPendingId(null);
-                    });
-                  }}
-                >
-                  <IconMinus className="size-3 sm:size-4" />
-                </Button>
-                <div className="border-muted-foreground grid h-8 w-8 place-items-center rounded-xl border border-dashed sm:w-10">
-                  <h5 className="font-semibold">
-                    {pendingId === productId ? (
-                      <IconLoader2 className="size-4 animate-spin" />
-                    ) : (
-                      qty
-                    )}
-                  </h5>
-                </div>
-                <Button
-                  size="sm"
-                  disabled={isPending}
-                  type="button"
-                  variant={"outline"}
-                  onClick={() => {
-                    setPendingId(productId);
-                    startTransition(async () => {
-                      const result = await AddToCart(item);
+                          if (!result?.success) {
+                            toast.warning(
+                              "Cannot remove from Cart. Try again later.",
+                            );
+                            setPendingId(null);
+                            return;
+                          }
+                          setPendingId(null);
+                        });
+                      }}
+                    >
+                      <IconMinus className="size-3 sm:size-4" />
+                    </Button>
+                    <div className="border-muted-foreground grid h-8 w-8 place-items-center rounded-xl border border-dashed sm:w-10">
+                      <h5 className="font-semibold">
+                        {pendingId === productId ? (
+                          <IconLoader2 className="size-4 animate-spin" />
+                        ) : (
+                          qty
+                        )}
+                      </h5>
+                    </div>
+                    <Button
+                      size="sm"
+                      disabled={isPending}
+                      type="button"
+                      variant={"outline"}
+                      onClick={() => {
+                        setPendingId(productId);
+                        startTransition(async () => {
+                          const result = await AddToCart(item);
 
-                      if (!result?.success) {
-                        toast.warning(
-                          "Cannot change quantity. Try again later.",
-                        );
-                        setPendingId(null);
-                        return;
-                      }
+                          if (!result?.success) {
+                            toast.warning(
+                              "Cannot change quantity. Try again later.",
+                            );
+                            setPendingId(null);
+                            return;
+                          }
 
-                      setPendingId(null);
-                    });
-                  }}
-                >
-                  <IconPlus className="size-3 sm:size-4" />
-                </Button>
+                          setPendingId(null);
+                        });
+                      }}
+                    >
+                      <IconPlus className="size-3 sm:size-4" />
+                    </Button>
+                  </div>
+                ) : (
+                  <span className="font-semibold sm:text-base md:text-lg">
+                    x{qty}
+                  </span>
+                )}
               </TableCell>
               <TableCell className="font-semibold sm:text-base md:text-lg">
                 {toGBP(price)}

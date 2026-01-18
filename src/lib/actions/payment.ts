@@ -42,7 +42,7 @@ export async function updatePaymentMethod(formData: unknown) {
     return {
       success: false,
       message:
-        "An error occurder while getting payment method. Try again later.",
+        "An error occurred while updating payment method. Try again later.",
     };
   }
 }

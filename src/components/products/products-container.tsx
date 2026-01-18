@@ -22,7 +22,7 @@ async function ProductsContainer({ title }: { title?: string }) {
 
   if (!featured || featured.length === 0)
     return (
-      <div className="-mt-32 grid min-h-dvh place-items-center">
+      <div className="-mt-32 grid min-h-dvh place-items-center bg-red-500">
         <ProductEmpty />
       </div>
     );

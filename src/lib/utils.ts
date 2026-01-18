@@ -41,7 +41,7 @@ export function calcCartPrices(items: cartItemType[]) {
     (prev, item) => prev + numberToDecimal(item.price * item.qty),
     0,
   );
-  const shippingPrice = numberToDecimal(itemsPrice < 100 ? 0 : 10);
+  const shippingPrice = numberToDecimal(itemsPrice > 100 ? 0 : 10);
   const taxPrice = numberToDecimal(0.15 * itemsPrice);
   const totalPrice = numberToDecimal(itemsPrice + shippingPrice + taxPrice);
 
