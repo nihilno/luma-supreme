@@ -10,19 +10,10 @@ import {
 } from "@/components/ui/card";
 import { toGBP } from "@/lib/utils";
 import { IconChecks, IconHelpHexagon, IconLoader2 } from "@tabler/icons-react";
-import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 
-function CartTotal({
-  prices,
-  cartDontExist,
-  session,
-}: {
-  prices: CartTotalProps;
-  cartDontExist: boolean;
-  session: Session | null;
-}) {
+function CartTotal({ prices, cartDontExist, session }: CartTotalProps) {
   const [isPending, startTransition] = useTransition();
   const { push } = useRouter();
 
@@ -72,7 +63,8 @@ function CartTotal({
                 push("/");
                 return;
               } else if (!session) {
-                push("/sign-in");
+                push("/sign-up");
+                return;
               }
               push("/shipping-address");
             })

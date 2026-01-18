@@ -100,7 +100,7 @@ model VerificationToken {
 model Cart {
   id  String  @id @default(uuid())
   userId  String? @unique 
-  sessionCartId String   @unique
+  sessionCartId String   
   items Json[]  @default([])  @db.Json
   itemsPrice  Decimal @db.Decimal(10,2) 
   totalPrice  Decimal @db.Decimal(10,2) 
@@ -110,5 +110,6 @@ model Cart {
   createdAt DateTime @default(now())  
   user  User? @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@index([sessionCartId])
   @@map("carts")
 }

@@ -51,6 +51,12 @@ declare global {
   };
 
   type CartTotalProps = {
+    prices: CartTotal;
+    cartDontExist: boolean;
+    session: Session | null;
+  };
+
+  type CartTotal = {
     itemsPrice: number;
     shippingPrice: number;
     taxPrice: number;

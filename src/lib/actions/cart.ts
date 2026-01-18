@@ -102,7 +102,7 @@ export async function getMyCart() {
   const session = await auth();
   const userId = session?.user?.id ? (session?.user?.id as string) : undefined;
 
-  const cart = await prisma.cart.findUnique({
+  const cart = await prisma.cart.findFirst({
     where: userId ? { userId } : { sessionCartId },
   });
 
