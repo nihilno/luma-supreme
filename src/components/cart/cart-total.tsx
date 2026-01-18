@@ -9,9 +9,10 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { toGBP } from "@/lib/utils";
-import { IconChecks, IconHelpHexagon, IconLoader2 } from "@tabler/icons-react";
+import { IconChecks, IconLoader2 } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
+import CartHover from "./cart-hover";
 
 function CartTotal({ prices, cartDontExist, session }: CartTotalProps) {
   const [isPending, startTransition] = useTransition();
@@ -37,7 +38,7 @@ function CartTotal({ prices, cartDontExist, session }: CartTotalProps) {
         <div className="flex justify-between py-3">
           <div className="flex items-center gap-1">
             <h3 className="text-distinct font-bold sm:text-lg">Shipping</h3>
-            <IconHelpHexagon className="size-6 cursor-pointer sm:size-7" />
+            <CartHover />
           </div>
           <span className="font-semibold sm:text-lg">
             {toGBP(shippingPrice)}

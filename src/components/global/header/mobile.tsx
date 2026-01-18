@@ -22,7 +22,7 @@ export function Mobile({ session }: { session: Session | null }) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" className="w-20">
           <IconMenu4 className="size-5" />
         </Button>
       </SheetTrigger>

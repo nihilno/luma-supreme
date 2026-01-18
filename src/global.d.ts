@@ -1,3 +1,4 @@
+import { Session } from "next-auth";
 import { cartItemType } from "./lib/schemas/cart";
 
 export {};

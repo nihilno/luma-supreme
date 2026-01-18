@@ -29,8 +29,8 @@ async function Header() {
             )}
           </div>
           <nav className="flex items-center gap-2.5 lg:hidden">
-            <Mobile session={session} />
             <Buttons />
+            <Mobile session={session} />
           </nav>
           {session ? <Logout /> : <SignIn />}
         </div>

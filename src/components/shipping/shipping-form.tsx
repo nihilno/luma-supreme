@@ -10,11 +10,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { updateAddress } from "@/lib/actions/user";
 import {
   shippingSchema,
   type shippingType,
 } from "@/lib/schemas/shipping-address";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { JsonValue } from "@prisma/client/runtime/client";
 import {
   IconArrowBarLeft,
   IconArrowBarRight,
@@ -25,10 +27,15 @@ import {
   IconSignature,
 } from "@tabler/icons-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import Spinner from "../products/product-suspense";
 
-function ShippingForm() {
+function ShippingForm({ address }: { address: JsonValue }) {
+  const { push } = useRouter();
+  console.log(address);
+
   const form = useForm<shippingType>({
     defaultValues: {
       fullName: "",
@@ -36,18 +43,34 @@ function ShippingForm() {
       city: "",
       postalCode: "",
       country: "",
+      ...(address as any),
     },
     resolver: zodResolver(shippingSchema),
+    mode: "onBlur",
   });
 
-  function handleSubmit(formData: shippingType) {
-    console.log(formData);
+  async function handleSubmit(formData: shippingType) {
+    try {
+      const result = await updateAddress(formData);
+      if (!result.success) {
+        toast.warning(result.message);
+        return;
+      }
+
+      form.reset();
+      push("/payment");
+
+      toast.success("git");
+    } catch (error) {
+      console.error(error);
+      toast.error("An internal error has occurred. Try again later.");
+    }
   }
 
   const disabled = form.formState.isSubmitting;
 
   return (
-    <div>
+    <div className="relative">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
           <FormField

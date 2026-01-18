@@ -104,6 +104,7 @@ export async function getMyCart() {
 
   const cart = await prisma.cart.findFirst({
     where: userId ? { userId } : { sessionCartId },
+    orderBy: { createdAt: "desc" },
   });
 
   if (!cart) return undefined;

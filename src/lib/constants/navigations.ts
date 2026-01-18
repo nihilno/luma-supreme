@@ -64,3 +64,10 @@ export const socials = [
     icon: IconBrandDiscord,
   },
 ];
+
+export const checkoutSteps = [
+  "User Login",
+  "Shipping Address",
+  "Payment Method",
+  "Place Order",
+];

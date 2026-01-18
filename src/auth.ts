@@ -2,6 +2,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { compareSync } from "bcrypt-ts-edge";
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { prisma } from "./lib/prisma";
 
@@ -50,8 +51,9 @@ const authConfig = {
 
       return session;
     },
-    async jwt({ token, user }: any) {
+    async jwt({ token, user, trigger }: any) {
       if (user) {
+        token.id = user.id;
         token.role = user.role;
         if (user.name === "NO_NAME") {
           token.name = user.email?.split("@")[0] ?? "User";
@@ -66,7 +68,33 @@ const authConfig = {
             });
           } catch (error) {
             console.error("Failed to update user name:", error);
-            // Continue with authentication even if name update fails
+          }
+        }
+        // preserving carts if created when not logged in.
+        if (trigger === "signIn" || trigger === "signUp") {
+          const cookiesObject = await cookies();
+          const sessionCartId = cookiesObject.get("sessionCartId")?.value;
+
+          if (sessionCartId) {
+            const sessionCart = await prisma.cart.findFirst({
+              where: { sessionCartId },
+            });
+
+            if (sessionCart) {
+              await prisma.cart.deleteMany({
+                where: {
+                  userId: user.id,
+                },
+              });
+              await prisma.cart.update({
+                where: {
+                  id: sessionCart.id,
+                },
+                data: {
+                  userId: user.id,
+                },
+              });
+            }
           }
         }
       }
