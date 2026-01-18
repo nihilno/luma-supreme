@@ -58,18 +58,18 @@ function AddToCartButton({ cart, price, stock, cartItem }: AddToCartProps) {
     <Card
       className={cn(
         stock === 0 ? "cursor-not-allowed opacity-50" : "cursor-default",
-        "mx-auto max-w-lg transition sm:mx-0",
+        ":mx-0 mx-auto max-w-lg transition",
       )}
     >
       <CardContent className="space-y-4 lg:space-y-6">
         <div className="flex items-center justify-between lg:text-xl">
-          <h4 className="font-semibold">Price</h4>
-          {toGBP(price)}
+          <h4 className="text-distinct text-lg font-semibold">Price</h4>
+          <span className="text-lg font-semibold">{toGBP(price)}</span>
         </div>
         <div className="flex items-center justify-between lg:text-xl">
-          <h4 className="font-semibold">Status</h4>
+          <h4 className="text-distinct text-lg font-semibold">Status</h4>
           <Badge
-            className="animate-pulse lg:text-lg"
+            className="animate-pulse text-base"
             variant={stock === 0 ? "destructive" : "default"}
           >
             {stock === 0 ? "Out of Stock" : "In Stock"}

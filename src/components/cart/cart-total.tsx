@@ -10,10 +10,19 @@ import {
 } from "@/components/ui/card";
 import { toGBP } from "@/lib/utils";
 import { IconChecks, IconHelpHexagon, IconLoader2 } from "@tabler/icons-react";
+import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 
-function CartTotal({ prices }: { prices: CartTotalProps }) {
+function CartTotal({
+  prices,
+  cartDontExist,
+  session,
+}: {
+  prices: CartTotalProps;
+  cartDontExist: boolean;
+  session: Session | null;
+}) {
   const [isPending, startTransition] = useTransition();
   const { push } = useRouter();
 
@@ -55,10 +64,16 @@ function CartTotal({ prices }: { prices: CartTotalProps }) {
       <CardFooter>
         <Button
           size="lg"
-          disabled={isPending}
+          disabled={isPending || cartDontExist}
           className="hover:bg-distinct h-12 w-full text-lg transition"
           onClick={() =>
             startTransition(() => {
+              if (cartDontExist) {
+                push("/");
+                return;
+              } else if (!session) {
+                push("/sign-in");
+              }
               push("/shipping-address");
             })
           }
