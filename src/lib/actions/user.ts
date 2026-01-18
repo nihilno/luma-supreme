@@ -152,11 +152,7 @@ export async function updateAddress(formData: unknown) {
     const userId = session?.user?.id;
     const address = validated.data;
 
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-    });
-
-    if (!user)
+    if (!userId)
       return {
         success: false,
         message: "You must be logged in to finish your order!",

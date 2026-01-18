@@ -34,7 +34,6 @@ import Spinner from "../products/product-suspense";
 
 function ShippingForm({ address }: { address: JsonValue }) {
   const { push } = useRouter();
-  console.log(address);
 
   const form = useForm<shippingType>({
     defaultValues: {
@@ -59,8 +58,6 @@ function ShippingForm({ address }: { address: JsonValue }) {
 
       form.reset();
       push("/payment");
-
-      toast.success("git");
     } catch (error) {
       console.error(error);
       toast.error("An internal error has occurred. Try again later.");

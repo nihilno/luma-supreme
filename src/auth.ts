@@ -81,18 +81,20 @@ const authConfig = {
             });
 
             if (sessionCart) {
-              await prisma.cart.deleteMany({
-                where: {
-                  userId: user.id,
-                },
-              });
-              await prisma.cart.update({
-                where: {
-                  id: sessionCart.id,
-                },
-                data: {
-                  userId: user.id,
-                },
+              await prisma.$transaction(async (tx) => {
+                await tx.cart.deleteMany({
+                  where: {
+                    userId: user.id,
+                  },
+                });
+                await tx.cart.update({
+                  where: {
+                    id: sessionCart.id,
+                  },
+                  data: {
+                    userId: user.id,
+                  },
+                });
               });
             }
           }
@@ -100,7 +102,20 @@ const authConfig = {
       }
       return token;
     },
-    async authorized({ request }: any) {
+    async authorized({ request, auth }: any) {
+      const protectedPaths = [
+        /\/shipping-address/,
+        /\/payment-method/,
+        /\/place-order/,
+        /\/profile/,
+        /\/user\/(.*)/,
+        /\/order\/(.*)/,
+        /\/admin\/(.*)/,
+      ];
+
+      const { pathname } = request.nextUrl;
+      if (!auth && protectedPaths.some((p) => p.test(pathname))) return false;
+
       const cookie = request.cookies.get("sessionCartId");
       if (!cookie) {
         const sessionCartId = crypto.randomUUID();

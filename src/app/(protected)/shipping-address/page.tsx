@@ -14,8 +14,6 @@ export default async function ShippingAddressPage() {
   const session = await auth();
   const userId = session?.user?.id;
 
-  if (!session) redirect("/sign-in");
-
   const cart = await getMyCart();
   if (!cart || cart.items.length === 0) redirect("/");
 
