@@ -28,8 +28,9 @@ async function Header() {
               <UserProfile dropdown={true} name={name} email={email} />
             )}
           </div>
-          <nav className="flex items-center lg:hidden">
+          <nav className="flex items-center gap-2.5 lg:hidden">
             <Mobile session={session} />
+            <Buttons />
           </nav>
           {session ? <Logout /> : <SignIn />}
         </div>

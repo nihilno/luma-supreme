@@ -9,13 +9,13 @@ import {
 } from "@/components/ui/card";
 import {
   IconAlertOctagon,
-  IconChevronsLeft,
+  IconListSearch,
   IconRotate2,
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-function ProductEmpty() {
+function CartEmpty() {
   const { refresh } = useRouter();
 
   return (
@@ -24,33 +24,37 @@ function ProductEmpty() {
         <div className="flex items-center gap-2.5">
           <IconAlertOctagon className="size-10 md:size-12" />
           <h1 className="text-3xl font-semibold md:text-4xl">
-            Product not found.
+            Your cart is empty.
           </h1>
         </div>
       </CardHeader>
+
       <CardContent className="space-y-4">
         <p className="text-muted-foreground">
-          We couldn&apos;t find a product matching your request. This may happen
-          when:
+          Looks like you haven&apos;t added anything to your cart yet. This may
+          happen when:
         </p>
+
         <ul className="text-muted-foreground list-disc space-y-1 pl-6">
-          <li>Incorrect spelling or typos</li>
-          <li>Filters excluding available items</li>
-          <li>The product was removed or discontinued</li>
+          <li>You haven&apos;t selected any products</li>
+          <li>Your previous cart session expired</li>
+          <li>Items were removed or became unavailable</li>
         </ul>
+
         <p className="text-muted-foreground">
-          Try adjusting your search or return to the homepage to browse
-          products.
+          Browse our catalog and add items to your cart to continue.
         </p>
       </CardContent>
 
       <CardFooter className="mt-8 space-x-3">
-        <Button asChild size={"lg"}>
+        <Button asChild size="lg">
           <Link href="/" className="flex items-center">
-            <IconChevronsLeft className="size-6 translate-y-px" /> Back to Luma
+            <IconListSearch className="size-6 translate-y-px" />
+            Start browsing
           </Link>
         </Button>
-        <Button onClick={() => refresh()} size={"lg"} variant={"outline"}>
+
+        <Button onClick={() => refresh()} size="lg" variant={"outline"}>
           <IconRotate2 className="size-6" />
           Refresh
         </Button>
@@ -59,4 +63,4 @@ function ProductEmpty() {
   );
 }
 
-export default ProductEmpty;
+export default CartEmpty;

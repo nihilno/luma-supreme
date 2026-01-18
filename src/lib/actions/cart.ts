@@ -102,7 +102,7 @@ export async function getMyCart() {
   const session = await auth();
   const userId = session?.user?.id ? (session?.user?.id as string) : undefined;
 
-  const cart = await prisma.cart.findFirst({
+  const cart = await prisma.cart.findUnique({
     where: userId ? { userId } : { sessionCartId },
   });
 
@@ -123,7 +123,7 @@ export async function removeItemFromCart(productId: string) {
     const sessionCartId = (await cookies()).get("sessionCartId")?.value;
     if (!sessionCartId) throw new Error("Cart session not found.");
 
-    const product = await prisma.product.findFirst({
+    const product = await prisma.product.findUnique({
       where: {
         id: productId,
       },
@@ -160,13 +160,12 @@ export async function removeItemFromCart(productId: string) {
 
     return {
       success: true,
-      message: `${product.name} was removed from Cart.`,
     };
   } catch (error) {
     console.error(error);
     return {
       success: false,
-      message: "Cannot remove from this product. Try again later.",
+      message: "Cannot remove product from Cart. Try again later.",
     };
   }
 }

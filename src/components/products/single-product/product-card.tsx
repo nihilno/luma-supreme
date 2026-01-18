@@ -27,7 +27,7 @@ function ProductCard({ product }: { product: Product }) {
     <div className="flex w-full flex-col items-center space-y-12">
       <Card
         className={cn(
-          stock === 0 ? "cursor-not-allowed opacity-50" : "cursor-default",
+          stock === 0 ? "cursor-not-allowed! opacity-50" : "cursor-default",
           "group mx-auto w-full max-w-lg transition sm:mx-0 md:max-w-xl",
         )}
       >
@@ -35,8 +35,8 @@ function ProductCard({ product }: { product: Product }) {
           <div className="relative aspect-square overflow-hidden rounded-xl">
             {!images || images.length === 0 ? (
               <div className="bg-muted/50 flex aspect-square flex-col items-center justify-center gap-4">
-                <IconFileUnknown className="size-12 opacity-50" />
-                <h4 className="text-center opacity-50">
+                <IconFileUnknown className="size-12 opacity-50 sm:size-16" />
+                <h4 className="text-center opacity-50 sm:text-xl">
                   There is no image present <br /> for this product.
                 </h4>
               </div>

@@ -6,6 +6,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { AddToCart, removeItemFromCart } from "@/lib/actions/cart";
 import { cn, toGBP } from "@/lib/utils";
 import {
+  IconChevronRightPipe,
   IconCircleMinus,
   IconCirclePlus,
   IconCirclePlusFilled,
@@ -77,29 +78,40 @@ function AddToCartButton({ cart, price, stock, cartItem }: AddToCartProps) {
       </CardContent>
       <CardFooter className="mt-4 border-t border-dashed">
         {existsItem ? (
-          <div className="flex w-full items-center justify-between gap-4">
-            <Button
-              className="hover:bg-distinct h-12 w-30"
-              disabled={stock === 0 || isPending}
-              onClick={handleRemoveFromCart}
-            >
-              <IconCircleMinus className="size-7 translate-y-px" />
-            </Button>
-            <div className="border-muted-foreground grid h-12 w-full place-items-center rounded-xl border border-dashed">
-              {isPending ? (
-                <IconLoader2 className="distinct size-6 animate-spin" />
-              ) : (
-                <h3 className="distinct text-2xl font-bold transition">
-                  {existsItem.qty}
-                </h3>
-              )}
+          <div className="w-full space-y-4">
+            <div className="flex w-full items-center justify-between gap-4">
+              <Button
+                className="hover:bg-distinct h-12 w-30"
+                disabled={isPending}
+                onClick={handleRemoveFromCart}
+              >
+                <IconCircleMinus className="size-7 translate-y-px" />
+              </Button>
+              <div className="border-muted-foreground grid h-12 w-full place-items-center rounded-xl border border-dashed">
+                {isPending ? (
+                  <IconLoader2 className="distinct size-6 animate-spin" />
+                ) : (
+                  <h3 className="distinct text-2xl font-bold transition">
+                    {existsItem.qty}
+                  </h3>
+                )}
+              </div>
+              <Button
+                className="hover:bg-distinct h-12 w-30"
+                disabled={stock === 0 || isPending}
+                onClick={handleAddToCart}
+              >
+                <IconCirclePlus className="size-7 translate-y-px" />
+              </Button>
             </div>
             <Button
-              className="hover:bg-distinct h-12 w-30"
-              disabled={stock === 0 || isPending}
-              onClick={handleAddToCart}
+              className="hover:bg-distinct h-12 w-full"
+              disabled={isPending}
             >
-              <IconCirclePlus className="size-7 translate-y-px" />
+              <Link href={"/cart"} className="flex items-center gap-2">
+                <h5 className="text-lg font-bold">Go to Cart</h5>
+                <IconChevronRightPipe className="size-7 translate-y-px" />
+              </Link>
             </Button>
           </div>
         ) : (

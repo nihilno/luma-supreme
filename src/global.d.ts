@@ -44,12 +44,6 @@ declare global {
     createdAt: Date;
   };
 
-  type ButtonsProps = {
-    className?: string;
-    col?: boolean;
-    names?: boolean;
-  };
-
   type UserProfileProps = {
     dropdown?: boolean;
     name?: string;

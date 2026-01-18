@@ -99,8 +99,8 @@ model VerificationToken {
 
 model Cart {
   id  String  @id @default(uuid())
-  userId  String?   
-  sessionCartId String  
+  userId  String? @unique 
+  sessionCartId String   @unique
   items Json[]  @default([])  @db.Json
   itemsPrice  Decimal @db.Decimal(10,2) 
   totalPrice  Decimal @db.Decimal(10,2) 

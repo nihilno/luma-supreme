@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/sheet";
 import { IconMenu4 } from "@tabler/icons-react";
 import { Session } from "next-auth";
-import Buttons from "./buttons";
 import Navigation from "./navigation";
 import UserProfile from "./user-profile";
 
@@ -43,7 +42,6 @@ export function Mobile({ session }: { session: Session | null }) {
             links—all in one place.
           </SheetDescription>
           <nav className="mt-16 flex flex-col items-center gap-2.5">
-            <Buttons className="w-full" col={true} names={true} />
             {session && <UserProfile />}
           </nav>
         </SheetHeader>

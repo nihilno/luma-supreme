@@ -3,14 +3,13 @@ import { publicButtons } from "@/lib/constants/navigations";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-function Buttons({ className, col = false, names = false }: ButtonsProps) {
+function Buttons() {
   return (
-    <nav className={cn("flex items-center gap-2.5", col && "w-full flex-col")}>
+    <nav className={cn("flex items-center gap-2.5")}>
       {publicButtons.map(({ label, href, icon: Icon }) => (
-        <Button key={label} asChild className={className} title={label}>
+        <Button key={label} asChild title={label} size="icon">
           <Link href={href}>
             <Icon className="size-5" />
-            {names && <span>{label}</span>}
           </Link>
         </Button>
       ))}

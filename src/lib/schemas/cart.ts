@@ -5,7 +5,7 @@ const cartItemSchema = z.object({
   name: z.string().min(1, "Name is required."),
   slug: z.string().min(1, "Slug is required."),
   qty: z.number().int().positive("Quantity must be positive number."),
-  image: z.string().min(1, "Image is required."),
+  image: z.union([z.null(), z.string()]),
   price: z.number().positive("Price must be positive number."),
 });
 
