@@ -21,18 +21,20 @@ export default async function ShippingAddressPage() {
   const user = await getUserById(userId);
 
   return (
-    <section className="mt-8 space-y-16 pb-32">
+    <section className="mt-8 pb-32">
       <Steps current={1} />
-      <div className="mt-12 flex items-center gap-3">
-        <IconMapPins className="text-distinct size-12" />
-        <div>
-          <h2 className="text-3xl font-bold">Shipping Address</h2>
-          <p className="text-muted-foreground text-sm">
-            Please enter an address to ship to.
-          </p>
+      <div className="mx-auto mt-8 max-w-4xl space-y-16">
+        <div className="flex items-center gap-3">
+          <IconMapPins className="text-distinct size-12" />
+          <div>
+            <h2 className="text-3xl font-bold">Shipping Address</h2>
+            <p className="text-muted-foreground text-sm">
+              Please enter an address to ship to.
+            </p>
+          </div>
         </div>
+        <ShippingForm address={user.address} />
       </div>
-      <ShippingForm address={user.address} />
     </section>
   );
 }

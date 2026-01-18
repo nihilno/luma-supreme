@@ -11,7 +11,8 @@ function Steps({ current = 0 }: { current: number }) {
           <div
             className={cn(
               "border-muted-foreground/50 rounded-full border border-dashed px-8 py-2 text-center text-sm",
-              index === current && "bg-distinct border-0 text-white",
+              index === current &&
+                "bg-distinct animate-pulse border-0 text-white",
             )}
           >
             <span className="font-semibold">{step}</span>

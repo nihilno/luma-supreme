@@ -1,5 +1,6 @@
 "use client";
 
+import Spinner from "@/components/global/spinner";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -30,7 +31,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import Spinner from "../products/product-suspense";
 
 function ShippingForm({ address }: { address: JsonValue }) {
   const { push } = useRouter();
@@ -56,8 +56,7 @@ function ShippingForm({ address }: { address: JsonValue }) {
         return;
       }
 
-      form.reset();
-      push("/payment");
+      push("/payment-method");
     } catch (error) {
       console.error(error);
       toast.error("An internal error has occurred. Try again later.");

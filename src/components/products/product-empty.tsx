@@ -2,13 +2,16 @@
 
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
 import {
-  IconAlertOctagon,
+  IconArrowUpRight,
+  IconBasketCancel,
   IconChevronsLeft,
   IconRotate2,
 } from "@tabler/icons-react";
@@ -19,43 +22,42 @@ function ProductEmpty() {
   const { refresh } = useRouter();
 
   return (
-    <Card className="mx-auto max-w-3xl">
-      <CardHeader className="mb-4">
-        <div className="flex items-center gap-2.5">
-          <IconAlertOctagon className="size-10 md:size-12" />
-          <h1 className="text-3xl font-semibold md:text-4xl">
-            Product not found.
-          </h1>
+    <Empty>
+      <EmptyHeader>
+        <EmptyMedia variant="icon" className="size-14">
+          <IconBasketCancel className="size-12 opacity-75" />
+        </EmptyMedia>
+        <EmptyTitle className="mb-2 text-2xl">Product not found</EmptyTitle>
+        <EmptyDescription className="text-base">
+          We couldn&apos;t find any products. You may want to update your
+          filters.
+        </EmptyDescription>
+      </EmptyHeader>
+      <EmptyContent>
+        <div className="flex items-center gap-3">
+          <Button asChild>
+            <Link href="/" className="flex items-center">
+              <IconChevronsLeft className="size-6 translate-y-px" /> Back to
+              Luma
+            </Link>
+          </Button>
+          <Button onClick={() => refresh()} variant={"outline"}>
+            <IconRotate2 className="size-6" />
+            Refresh
+          </Button>
         </div>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <p className="text-muted-foreground">
-          We couldn&apos;t find a product matching your request. This may happen
-          when:
-        </p>
-        <ul className="text-muted-foreground list-disc space-y-1 pl-6">
-          <li>Incorrect spelling or typos</li>
-          <li>Filters excluding available items</li>
-          <li>The product was removed or discontinued</li>
-        </ul>
-        <p className="text-muted-foreground">
-          Try adjusting your search or return to the homepage to browse
-          products.
-        </p>
-      </CardContent>
-
-      <CardFooter className="mt-8 space-x-3">
-        <Button asChild size={"lg"}>
-          <Link href="/" className="flex items-center">
-            <IconChevronsLeft className="size-6 translate-y-px" /> Back to Luma
-          </Link>
-        </Button>
-        <Button onClick={() => refresh()} size={"lg"} variant={"outline"}>
-          <IconRotate2 className="size-6" />
-          Refresh
-        </Button>
-      </CardFooter>
-    </Card>
+      </EmptyContent>
+      <Button
+        variant="link"
+        asChild
+        className="text-muted-foreground"
+        size="sm"
+      >
+        <span className="cursor-pointer">
+          Learn More <IconArrowUpRight />
+        </span>
+      </Button>
+    </Empty>
   );
 }
 

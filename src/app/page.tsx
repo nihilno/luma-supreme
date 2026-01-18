@@ -1,4 +1,4 @@
-import Spinner from "@/components/products/product-suspense";
+import Spinner from "@/components/global/spinner";
 import ProductsContainer from "@/components/products/products-container";
 import { Suspense } from "react";
 

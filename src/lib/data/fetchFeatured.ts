@@ -1,7 +1,8 @@
+import "server-only";
+
 import { FEATURED_LIMIT } from "@/lib/constants/consts";
 import { prisma } from "@/lib/prisma";
 import { decimalToNumber } from "@/lib/utils";
-import "server-only";
 
 export async function getFeaturedProducts() {
   try {
