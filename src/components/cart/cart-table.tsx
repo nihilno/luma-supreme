@@ -86,7 +86,7 @@ function CartTable({
                       size="sm"
                       disabled={isPending}
                       type="button"
-                      variant={qty === 1 ? "destructive" : "outline"}
+                      variant={"outline"}
                       onClick={() => {
                         setPendingId(productId);
                         startTransition(async () => {

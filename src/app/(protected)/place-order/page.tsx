@@ -40,7 +40,7 @@ export default async function PlaceOrderPage() {
   return (
     <section className="mt-8 pb-32">
       <Steps current={3} />
-      <div className="mx-auto mt-8 max-w-4xl space-y-16">
+      <div className="space-y-16">
         <div className="flex items-center gap-3">
           <IconTruckDelivery className="text-distinct size-12" />
           <div>

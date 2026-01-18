@@ -27,7 +27,7 @@ function ProductEmpty() {
         <EmptyMedia variant="icon" className="size-14">
           <IconBasketCancel className="size-12 opacity-75" />
         </EmptyMedia>
-        <EmptyTitle className="mb-2 text-2xl">Product not found</EmptyTitle>
+        <EmptyTitle className="mb-2 text-2xl">Product/s not found</EmptyTitle>
         <EmptyDescription className="text-base">
           We couldn&apos;t find any products. You may want to update your
           filters.
