@@ -7,7 +7,13 @@ function Buttons() {
   return (
     <nav className={cn("flex items-center gap-2.5")}>
       {publicButtons.map(({ label, href, icon: Icon }) => (
-        <Button key={label} asChild title={label} size="icon">
+        <Button
+          key={label}
+          asChild
+          title={label}
+          aria-label={label}
+          size="icon"
+        >
           <Link href={href}>
             <Icon className="size-5" />
           </Link>

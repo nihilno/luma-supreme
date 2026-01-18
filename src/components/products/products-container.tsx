@@ -29,7 +29,7 @@ async function ProductsContainer({ title }: { title?: string }) {
 
   return (
     <div className="mx-auto mt-16 max-w-sm sm:max-w-none">
-      <div className="flex items-center justify-center sm:justify-baseline">
+      <div className="flex items-center justify-center sm:justify-start">
         <h2 className="mb-6 flex items-center gap-3 text-3xl font-bold sm:text-left sm:text-4xl">
           <IconNorthStar className="text-distinct size-12" />
           {title}
@@ -48,7 +48,7 @@ async function ProductsContainer({ title }: { title?: string }) {
                 <CardHeader>
                   <div className="relative aspect-square overflow-hidden rounded-xl">
                     {!images || images.length === 0 ? (
-                      <div className="bg-muted/50 flex aspect-square flex-col items-center justify-center gap-4">
+                      <div className="bg-muted/90 flex aspect-square flex-col items-center justify-center gap-4">
                         <IconFileUnknown className="size-12 opacity-50" />
                         <h4 className="text-center opacity-50">
                           There is no image present <br /> for this product.

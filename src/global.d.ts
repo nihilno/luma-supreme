@@ -49,4 +49,11 @@ declare global {
     name?: string;
     email?: string | null;
   };
+
+  type CartTotalProps = {
+    itemsPrice: number;
+    shippingPrice: number;
+    taxPrice: number;
+    totalPrice: number;
+  };
 }

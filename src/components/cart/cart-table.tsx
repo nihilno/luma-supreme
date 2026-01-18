@@ -1,6 +1,8 @@
 "use client";
 
 import CartEmpty from "@/components/cart/cart-empty";
+import CartTotal from "@/components/cart/cart-total";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -22,7 +24,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
-import { Button } from "../ui/button";
 
 function CartTable({ cart }: { cart?: Cart }) {
   const [pendingId, setPendingId] = useState<string | null>(null);
@@ -35,14 +36,21 @@ function CartTable({ cart }: { cart?: Cart }) {
       </div>
     );
 
-  const { items } = cart;
+  const { items, itemsPrice, shippingPrice, taxPrice, totalPrice } = cart;
+  const prices = {
+    itemsPrice,
+    shippingPrice,
+    taxPrice,
+    totalPrice,
+  };
 
   return (
-    <div className="space-y-12 pb-32">
-      <div className="flex items-center gap-3">
+    <div className="grid grid-cols-1 gap-x-8 gap-y-16 pb-32 lg:grid-cols-[2.5fr_1fr]">
+      <div className="flex items-center gap-3 lg:col-span-2">
         <IconShoppingCartSearch className="text-distinct size-10" />
         <h2 className="text-3xl font-bold">Shopping Cart</h2>
       </div>
+
       <Table>
         <TableHeader>
           <TableRow>
@@ -80,7 +88,7 @@ function CartTable({ cart }: { cart?: Cart }) {
                         width={80}
                         height={80}
                         quality={25}
-                        className="shrink-0 overflow-hidden rounded-xl sm:size-20"
+                        className="size-15 shrink-0 overflow-hidden rounded-xl sm:size-20"
                       />
                     )}
                     <h3 className="line-clamp-1 text-wrap sm:text-base md:text-lg">
@@ -103,13 +111,14 @@ function CartTable({ cart }: { cart?: Cart }) {
                           toast.warning(
                             "Cannot remove from Cart. Try again later.",
                           );
+                          setPendingId(null);
                           return;
                         }
                         setPendingId(null);
                       });
                     }}
                   >
-                    <IconMinus className="size-2 sm:size-4" />
+                    <IconMinus className="size-3 sm:size-4" />
                   </Button>
                   <div className="border-muted-foreground grid h-8 w-8 place-items-center rounded-xl border border-dashed sm:w-10">
                     <h5 className="font-semibold">
@@ -134,6 +143,7 @@ function CartTable({ cart }: { cart?: Cart }) {
                           toast.warning(
                             "Cannot change quantity. Try again later.",
                           );
+                          setPendingId(null);
                           return;
                         }
 
@@ -141,7 +151,7 @@ function CartTable({ cart }: { cart?: Cart }) {
                       });
                     }}
                   >
-                    <IconPlus className="size-2 sm:size-4" />
+                    <IconPlus className="size-3 sm:size-4" />
                   </Button>
                 </TableCell>
                 <TableCell className="font-semibold sm:text-base md:text-lg">
@@ -152,6 +162,8 @@ function CartTable({ cart }: { cart?: Cart }) {
           })}
         </TableBody>
       </Table>
+
+      <CartTotal prices={prices} />
     </div>
   );
 }

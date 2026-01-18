@@ -107,8 +107,14 @@ function AddToCartButton({ cart, price, stock, cartItem }: AddToCartProps) {
             <Button
               className="hover:bg-distinct h-12 w-full"
               disabled={isPending}
+              asChild
             >
-              <Link href={"/cart"} className="flex items-center gap-2">
+              <Link
+                href={"/cart"}
+                className="flex items-center justify-center gap-2"
+                aria-disabled={isPending}
+                onClick={(e) => isPending && e.preventDefault()}
+              >
                 <h5 className="text-lg font-bold">Go to Cart</h5>
                 <IconChevronRightPipe className="size-7 translate-y-px" />
               </Link>
