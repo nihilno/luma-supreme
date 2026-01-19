@@ -15,6 +15,7 @@ export async function createOrder() {
 
   const cart = await getMyCart();
   const user = await getUserById(userId);
+  if (!user) throw new Error("User not found.");
 
   if (!cart || cart.items.length === 0)
     return {
@@ -29,7 +30,6 @@ export async function createOrder() {
       message: "No shipping address was provided.",
       redirectTo: "/shipping-address",
     };
-
   if (!user.paymentMethod)
     return {
       success: false,

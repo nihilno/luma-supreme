@@ -1,4 +1,5 @@
 import EditButton from "@/components/buttons/edit";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -8,7 +9,13 @@ import {
 import { shippingType } from "@/lib/schemas/shipping-address";
 import { IconMapPins } from "@tabler/icons-react";
 
-function AddressEdit({ address }: { address: shippingType }) {
+function AddressEdit({
+  address,
+  readOnly = false,
+}: {
+  address: shippingType;
+  readOnly?: boolean;
+}) {
   const { fullName, streetAddress, city, postalCode, country } = address;
 
   return (
@@ -21,8 +28,14 @@ function AddressEdit({ address }: { address: shippingType }) {
         <span>{postalCode}, </span>
         <span>{country}</span>
       </CardContent>
-      <CardFooter>
-        <EditButton href="/shipping-address" />
+      <CardFooter className="mt-auto">
+        {readOnly ? (
+          <Badge variant={"destructive"} className="text-sm">
+            Not Delivered
+          </Badge>
+        ) : (
+          <EditButton href="/shipping-address" />
+        )}
       </CardFooter>
       <IconMapPins className="absolute right-0 bottom-0 size-96 overflow-hidden opacity-4" />
     </Card>

@@ -7,8 +7,7 @@ import {
 import { IconStarFilled, IconStarHalfFilled } from "@tabler/icons-react";
 
 function Reviews() {
-  const randoDate = new Date(643543).toLocaleDateString();
-
+  const randoDate = new Date("2024-11-15").toLocaleDateString();
   return (
     <div className="space-y-6">
       <div className="space-y-1">

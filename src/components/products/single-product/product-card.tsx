@@ -1,5 +1,6 @@
 "use client";
 
+import ProductEmpty from "@/components/products/product-empty";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -20,8 +21,9 @@ import Images from "./images";
 function ProductCard({ product }: { product: Product }) {
   const [image, setImage] = useState(0);
 
-  if (!product) return <h1>no product lol</h1>;
+  if (!product) return <ProductEmpty />;
   const { name, stock, images, brand, rating, price } = product;
+  const currentImage = images?.[image] ?? images?.[0];
 
   return (
     <div className="flex w-full flex-col items-center space-y-12">
@@ -42,7 +44,7 @@ function ProductCard({ product }: { product: Product }) {
               </div>
             ) : (
               <Image
-                src={images[image]}
+                src={currentImage}
                 alt={name}
                 fill
                 sizes="(max-width: 768px) 100vw, 576px"

@@ -5,6 +5,7 @@ import { createOrder } from "@/lib/actions/order";
 import { IconChevronRightPipe, IconLoader2 } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 function CompleteOrder() {
   const [isLoading, setIsLoading] = useState(false);
@@ -16,12 +17,19 @@ function CompleteOrder() {
 
     try {
       const result = await createOrder();
+      if (!result.success) {
+        toast.warning(result.message);
+        return;
+      }
 
       if (result.redirectTo) {
         push(result.redirectTo);
+      } else {
+        toast.error("Something went wrong. Please try again.");
       }
     } catch (error) {
       console.error(error);
+      toast.error("Failed to place order. Please try again.");
     } finally {
       setIsLoading(false);
     }

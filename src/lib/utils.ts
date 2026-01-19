@@ -52,3 +52,7 @@ export function calcCartPrices(items: cartItemType[]) {
     totalPrice: Number(totalPrice.toFixed(2)),
   };
 }
+
+export function formatId(id: string) {
+  return `..${id.substring(id.length - 6)}`;
+}
