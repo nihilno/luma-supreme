@@ -10,12 +10,12 @@ export function LenisProvider() {
   useEffect(() => {
     const lenis = new Lenis({
       autoRaf: true,
-      lerp: 0.065,
+      lerp: 0.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      wheelMultiplier: 0.8,
-      touchMultiplier: 2.5,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
       syncTouch: true,
-      syncTouchLerp: 0.075,
+      syncTouchLerp: 0.1,
       anchors: true,
     });
 

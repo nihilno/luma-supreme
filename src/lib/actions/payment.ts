@@ -21,11 +21,7 @@ export async function updatePaymentMethod(formData: unknown) {
       },
     });
 
-    if (!user)
-      return {
-        success: false,
-        message: "You must be logged in to perform this action.",
-      };
+    if (!user) throw new Error("You must be logged in to perform this action.");
 
     const paymentMethod = validated.data;
     await prisma.user.update({

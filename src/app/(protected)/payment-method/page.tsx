@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import Steps from "@/components/global/steps";
-import PaymentForm from "@/components/payment/payment-form";
+import PaymentForm from "@/components/orders/payment/payment-form";
 import { getMyCart } from "@/lib/actions/cart";
 import { IconCreditCardPay } from "@tabler/icons-react";
 import { Metadata } from "next";

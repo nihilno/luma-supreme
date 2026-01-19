@@ -133,6 +133,8 @@ model Order {
    orderItems OrderItem[] 
    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
    createdAt DateTime @default(now()) 
+
+   @@map("orders")
 }
 
 model OrderItem {
@@ -142,10 +144,11 @@ model OrderItem {
   price Decimal @db.Decimal(10, 2)
   name String
   slug String
-  image String
+  image String?
 
   order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@id([orderId, productId], map: "orderId_productId")
+  @@map("order_items")
 }

@@ -1,5 +1,5 @@
 import Spinner from "@/components/global/spinner";
-import ProductsContainer from "@/components/products/products-container";
+import ProductsContainer from "@/components/orders/products/products-container";
 import { Suspense } from "react";
 
 export default function HomePage() {

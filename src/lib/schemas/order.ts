@@ -26,7 +26,7 @@ type orderType = z.infer<typeof orderSchema> & {
 const orderItemSchema = z.object({
   productId: z.string().min(1, "Product is required."),
   slug: z.string(),
-  image: z.string(),
+  image: z.string().optional(),
   name: z.string(),
   price: z.number().positive("Price must be positive number."),
   qty: z.number().positive("Quantity must be positive number."),

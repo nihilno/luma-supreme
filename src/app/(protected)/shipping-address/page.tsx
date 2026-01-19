@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import Steps from "@/components/global/steps";
-import ShippingForm from "@/components/shipping/shipping-form";
+import ShippingForm from "@/components/orders/shipping/shipping-form";
 import { getMyCart } from "@/lib/actions/cart";
 import { getUserById } from "@/lib/data/getUserById";
 import { IconMapPins } from "@tabler/icons-react";

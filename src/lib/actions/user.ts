@@ -153,10 +153,7 @@ export async function updateAddress(formData: unknown) {
     const address = validated.data;
 
     if (!userId)
-      return {
-        success: false,
-        message: "You must be logged in to finish your order!",
-      };
+      throw new Error("You must be logged in to perform this action.");
 
     await prisma.user.update({ data: { address }, where: { id: userId } });
 

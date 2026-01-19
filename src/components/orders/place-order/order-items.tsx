@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { cartItemType } from "@/lib/schemas/cart";
 import { IconShoppingCartSearch } from "@tabler/icons-react";
-import CartTable from "../cart/cart-table";
+import CartTable from "../../cart/cart-table";
 
 function OrderItems({ items }: { items: cartItemType[] }) {
   return (

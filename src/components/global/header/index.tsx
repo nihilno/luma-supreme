@@ -14,7 +14,7 @@ async function Header() {
   const email = session?.user?.email || null;
 
   return (
-    <header className="wrapper sticky top-0 z-50 grid h-25 place-items-center">
+    <header className="wrapper sticky top-0 z-50 grid h-25 max-w-6xl place-items-center">
       <div className="bg-background/30 flex w-full items-center justify-between rounded-full border p-4 backdrop-blur-sm lg:px-24">
         <Logo withTitle={true} />
         <div className="hidden sm:block">

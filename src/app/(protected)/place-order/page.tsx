@@ -1,9 +1,10 @@
 import { auth } from "@/auth";
 import CartSummary from "@/components/cart/cart-summary";
 import Steps from "@/components/global/steps";
-import AddressEdit from "@/components/place-order/address-edit";
-import OrderItems from "@/components/place-order/order-items";
-import PaymentEdit from "@/components/place-order/payment-edit";
+import AddressEdit from "@/components/orders/place-order/address-edit";
+import CompleteOrder from "@/components/orders/place-order/complete-order";
+import OrderItems from "@/components/orders/place-order/order-items";
+import PaymentEdit from "@/components/orders/place-order/payment-edit";
 import { Card, CardContent } from "@/components/ui/card";
 import { getMyCart } from "@/lib/actions/cart";
 import { getUserById } from "@/lib/data/getUserById";
@@ -60,13 +61,16 @@ export default async function PlaceOrderPage() {
           <div className="lg:col-span-3">
             <OrderItems items={cart.items} />
           </div>
-          <div className="self-start lg:col-span-1">
-            <Card className="relative h-auto overflow-hidden">
+          <div className="flex flex-col gap-4 lg:col-span-1">
+            <Card className="relative h-fit overflow-hidden">
               <CardContent>
                 <CartSummary prices={prices} compact={true} />
               </CardContent>
               <IconCashEdit className="absolute right-0 bottom-0 size-72 overflow-hidden opacity-4 lg:size-32" />
             </Card>
+            <div className="flex flex-1 flex-col justify-center">
+              <CompleteOrder />
+            </div>
           </div>
         </div>
       </div>

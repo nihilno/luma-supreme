@@ -1,8 +1,8 @@
-import ProductEmpty from "@/components/products/product-empty";
-import AddToCartButton from "@/components/products/single-product/add-to-cart-btn";
-import ProductCard from "@/components/products/single-product/product-card";
-import Reviews from "@/components/products/single-product/reviews";
-import Stars from "@/components/products/single-product/stars";
+import ProductEmpty from "@/components/orders/products/product-empty";
+import AddToCartButton from "@/components/orders/products/single-product/add-to-cart-btn";
+import ProductCard from "@/components/orders/products/single-product/product-card";
+import Reviews from "@/components/orders/products/single-product/reviews";
+import Stars from "@/components/orders/products/single-product/stars";
 import { getMyCart } from "@/lib/actions/cart";
 import { fetchProductBySlug } from "@/lib/data/fetchBySlug";
 import { IconBrandLinktree } from "@tabler/icons-react";
