@@ -15,7 +15,7 @@ function Logo({ withTitle = false }: { withTitle?: boolean }) {
         height={32}
         sizes="32px"
         priority
-        unoptimized
+        quality={25}
         className="dark:bg-primary rounded-xl p-0.5 opacity-90"
       />
       {withTitle && (

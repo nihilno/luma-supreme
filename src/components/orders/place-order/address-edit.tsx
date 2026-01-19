@@ -6,16 +6,9 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { shippingType } from "@/lib/schemas/shipping-address";
 import { IconMapPins } from "@tabler/icons-react";
 
-function AddressEdit({
-  address,
-  readOnly = false,
-}: {
-  address: shippingType;
-  readOnly?: boolean;
-}) {
+function AddressEdit({ address, readOnly = false }: AddressEditProps) {
   const { fullName, streetAddress, city, postalCode, country } = address;
 
   return (

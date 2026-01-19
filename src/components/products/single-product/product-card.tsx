@@ -18,7 +18,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Images from "./images";
 
-function ProductCard({ product }: { product: Product }) {
+function ProductCard({ product }: { product: Product | null }) {
   const [image, setImage] = useState(0);
 
   if (!product) return <ProductEmpty />;

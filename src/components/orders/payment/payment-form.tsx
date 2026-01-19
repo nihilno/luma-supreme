@@ -21,7 +21,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 function PaymentForm() {
-  const { push } = useRouter();
+  const { replace } = useRouter();
   const form = useForm<paymentType>({
     defaultValues: {
       type: "PayPal",
@@ -37,7 +37,7 @@ function PaymentForm() {
         return;
       }
 
-      push("/place-order");
+      replace("/place-order");
     } catch (error) {
       console.error(error);
       toast.error("An internal error has occurred. Try again later.");

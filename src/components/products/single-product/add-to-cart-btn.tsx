@@ -98,7 +98,7 @@ function AddToCartButton({ cart, price, stock, cartItem }: AddToCartProps) {
               </div>
               <Button
                 className="hover:bg-distinct h-12 w-30"
-                disabled={stock === 0 || isPending}
+                disabled={stock === 0 || isPending || existsItem.qty >= stock}
                 onClick={handleAddToCart}
               >
                 <IconCirclePlus className="size-7 translate-y-px" />

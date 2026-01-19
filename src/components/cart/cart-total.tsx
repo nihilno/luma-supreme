@@ -15,7 +15,7 @@ import CartSummary from "./cart-summary";
 
 function CartTotal({ prices, cartDontExist, session }: CartTotalProps) {
   const [isPending, startTransition] = useTransition();
-  const { push } = useRouter();
+  const { push, replace } = useRouter();
 
   return (
     <Card>
@@ -45,7 +45,7 @@ function CartTotal({ prices, cartDontExist, session }: CartTotalProps) {
                 push("/sign-up");
                 return;
               }
-              push("/shipping-address");
+              replace("/shipping-address");
             })
           }
         >

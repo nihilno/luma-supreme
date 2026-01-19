@@ -62,7 +62,7 @@ export default async function PlaceOrderPage() {
             <OrderItems items={cart.items} />
           </div>
           <div className="flex flex-col gap-4 lg:col-span-1">
-            <Card className="relative h-fit overflow-hidden">
+            <Card className="relative h-full overflow-hidden">
               <CardContent>
                 <CartSummary prices={prices} compact={true} />
               </CardContent>

@@ -58,7 +58,7 @@ function CartTable({
                 <Link
                   href={`/product/${slug}`}
                   target="_blank"
-                  className="hover:bg-foreground/5 flex cursor-pointer items-center gap-3 rounded-xl p-1 transition"
+                  className="flex cursor-pointer items-center gap-3 rounded-xl p-1"
                 >
                   {!image ? (
                     <div className="bg-muted grid size-15 shrink-0 place-items-center rounded-xl sm:size-20">

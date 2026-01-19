@@ -6,15 +6,18 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { IconCreditCardPay } from "@tabler/icons-react";
+import {
+  IconCheckbox,
+  IconCreditCardPay,
+  IconLoader,
+} from "@tabler/icons-react";
 
 function PaymentEdit({
   paymentMethod,
+  paidAt,
+  isPaid,
   readOnly = false,
-}: {
-  paymentMethod: string;
-  readOnly?: boolean;
-}) {
+}: PaymentEditProps) {
   return (
     <Card className="relative h-full overflow-hidden">
       <CardHeader className="text-xl font-bold">Payment Method</CardHeader>
@@ -23,8 +26,16 @@ function PaymentEdit({
       </CardContent>
       <CardFooter className="mt-auto">
         {readOnly ? (
-          <Badge variant={"destructive"} className="text-sm">
-            Not Paid
+          <Badge
+            variant={isPaid ? "outline" : "destructive"}
+            className="text-base"
+          >
+            {isPaid ? (
+              <IconCheckbox className="size-5!" />
+            ) : (
+              <IconLoader className="size-5!" />
+            )}
+            {isPaid ? `Paid at ${paidAt?.toLocaleDateString()}` : "Not Paid"}
           </Badge>
         ) : (
           <EditButton href="/payment-method" />

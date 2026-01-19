@@ -64,4 +64,21 @@ declare global {
     prices: CartTotal;
     compact?: boolean;
   };
+
+  type PaymentEditProps = {
+    paymentMethod: string;
+    paidAt?: Date | null;
+    isPaid?: boolean;
+    readOnly?: boolean;
+  };
+
+  type AddressEditProps = {
+    address: shippingType;
+    readOnly?: boolean;
+  };
+
+  type PayPalProps = {
+    totalPrice: number;
+    orderId: string;
+  };
 }

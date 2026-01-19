@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import Paypal from "@/components/buttons/paypal";
 import CartSummary from "@/components/cart/cart-summary";
 import AddressEdit from "@/components/orders/place-order/address-edit";
 import OrderItems from "@/components/orders/place-order/order-items";
@@ -21,12 +22,13 @@ export default async function OrderPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const order = await getOrderById(id);
-  if (!order) notFound();
-
   const session = await auth();
   const userId = session?.user?.id;
   if (!userId || !session) redirect("/");
+
+  const order = await getOrderById(id);
+  if (order.userId !== userId) redirect("/");
+  if (!order) notFound();
 
   const address = order.shippingAddress as shippingType;
   const prices = {
@@ -55,18 +57,28 @@ export default async function OrderPage({
             <AddressEdit address={address} readOnly={true} />
           </div>
           <div className="h-full lg:col-span-2">
-            <PaymentEdit paymentMethod={order.paymentMethod} readOnly={true} />
+            <PaymentEdit
+              paymentMethod={order.paymentMethod}
+              isPaid={order.isPaid}
+              paidAt={order.paidAt}
+              readOnly={true}
+            />
           </div>
           <div className="lg:col-span-3">
             <OrderItems items={order.orderItems} />
           </div>
-          <div className="lg:col-span-1">
-            <Card className="relative overflow-hidden">
+          <div className="flex flex-col gap-4 lg:col-span-1">
+            <Card className="relative h-fit overflow-hidden">
               <CardContent>
                 <CartSummary prices={prices} compact={true} />
               </CardContent>
               <IconCashEdit className="absolute right-0 bottom-0 size-72 overflow-hidden opacity-4 lg:size-32" />
             </Card>
+            <div className="flex-1">
+              {!order.isPaid && order.paymentMethod === "PayPal" && (
+                <Paypal totalPrice={order.totalPrice} orderId={order.id} />
+              )}
+            </div>
           </div>
         </div>
       </div>

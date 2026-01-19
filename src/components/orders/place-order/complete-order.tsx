@@ -9,12 +9,13 @@ import { toast } from "sonner";
 
 function CompleteOrder() {
   const [isLoading, setIsLoading] = useState(false);
-  const { push } = useRouter();
+  const { replace } = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setIsLoading(true);
+    if (isLoading) return;
 
+    setIsLoading(true);
     try {
       const result = await createOrder();
       if (!result.success) {
@@ -23,7 +24,7 @@ function CompleteOrder() {
       }
 
       if (result.redirectTo) {
-        push(result.redirectTo);
+        replace(result.redirectTo);
       } else {
         toast.error("Something went wrong. Please try again.");
       }
@@ -41,7 +42,7 @@ function CompleteOrder() {
         disabled={isLoading}
         type="submit"
         size="lg"
-        className="hover:bg-distinct h-16 w-full text-xl transition hover:translate-x-5 hover:text-white"
+        className="hover:bg-distinct h-16 w-full border-0 text-xl transition hover:translate-x-5 hover:text-white"
       >
         <span>Place Order!</span>
         {isLoading ? (

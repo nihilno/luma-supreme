@@ -4,7 +4,9 @@ import { auth } from "@/auth";
 import { getUserById } from "@/lib/data/getUserById";
 import { prisma } from "@/lib/prisma";
 import { orderSchema } from "@/lib/schemas/order";
+import { revalidatePath } from "next/cache";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
+import { getOrderById } from "../data/getOrderById";
 import { getMyCart } from "./cart";
 
 export async function createOrder() {
@@ -97,6 +99,48 @@ export async function createOrder() {
       success: false,
       message:
         "An error occurred while accepting order details. Try again later.",
+    };
+  }
+}
+
+export async function payForOrder(orderId: string) {
+  try {
+    const session = await auth();
+    const userId = session?.user?.id;
+    if (!userId) throw new Error("User not found.");
+
+    const order = await getOrderById(orderId);
+    if (order.isPaid) throw new Error("This order was already paid.");
+
+    await prisma.$transaction(async (tx) => {
+      for (const item of order.orderItems) {
+        await tx.product.update({
+          where: { id: item.productId },
+          data: { stock: { increment: -item.qty } },
+        });
+      }
+
+      await tx.order.update({
+        where: { userId, id: order.id },
+        data: {
+          isPaid: true,
+          paidAt: new Date(),
+          paymentResult: { status: "COMPLETED", pricePaid: order.totalPrice },
+        },
+      });
+    });
+
+    revalidatePath(`/order/${orderId}`);
+
+    return {
+      success: true,
+      message: "Demo payment was completed. Your order has been paid.",
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      success: false,
+      message: "An error occurred while paying. Try again later.",
     };
   }
 }

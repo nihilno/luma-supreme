@@ -33,7 +33,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 function ShippingForm({ address }: { address: JsonValue }) {
-  const { push } = useRouter();
+  const { replace } = useRouter();
 
   const form = useForm<shippingType>({
     defaultValues: {
@@ -56,7 +56,7 @@ function ShippingForm({ address }: { address: JsonValue }) {
         return;
       }
 
-      push("/payment-method");
+      replace("/payment-method");
     } catch (error) {
       console.error(error);
       toast.error("An internal error has occurred. Try again later.");
