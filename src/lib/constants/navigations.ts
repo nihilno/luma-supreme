@@ -27,12 +27,12 @@ export const publicButtons = [
 export const sessionButtons = [
   {
     label: "User Profile",
-    href: "/user/profile",
+    href: "/profile",
     icon: IconUserCog,
   },
   {
     label: "Orders History",
-    href: "/user/orders",
+    href: "/orders",
     icon: IconPackages,
   },
   {

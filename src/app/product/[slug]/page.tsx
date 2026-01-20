@@ -4,7 +4,7 @@ import ProductCard from "@/components/products/single-product/product-card";
 import Reviews from "@/components/products/single-product/reviews";
 import Stars from "@/components/products/single-product/stars";
 import { getMyCart } from "@/lib/actions/cart";
-import { fetchProductBySlug } from "@/lib/data/fetchBySlug";
+import { getProductBySlug } from "@/lib/data/getProductBySlug";
 import { IconBrandLinktree } from "@tabler/icons-react";
 
 export default async function ProductPage({
@@ -13,7 +13,7 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = await fetchProductBySlug(slug);
+  const product = await getProductBySlug(slug);
   const cart = await getMyCart();
 
   if (!product)
@@ -25,7 +25,7 @@ export default async function ProductPage({
   const { stock, price, description, numReviews, id, name, images } = product;
 
   return (
-    <section className="mx-auto mt-16 grid grid-cols-1 space-y-16 gap-x-8 md:grid-cols-2">
+    <section className="mx-auto mt-16 grid min-h-screen grid-cols-1 space-y-16 gap-x-8 md:grid-cols-2">
       <IconBrandLinktree className="distinct mx-auto size-12 animate-pulse md:col-span-2" />
       <ProductCard product={product} />
 

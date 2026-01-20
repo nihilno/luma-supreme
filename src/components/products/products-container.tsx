@@ -5,7 +5,7 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { getFeaturedProducts } from "@/lib/data/fetchFeatured";
+import { getFeaturedProducts } from "@/lib/data/getFeaturedProducts";
 import { cn, toGBP } from "@/lib/utils";
 import {
   IconFileUnknown,
