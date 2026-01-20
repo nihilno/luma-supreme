@@ -73,7 +73,7 @@ function OrdersTable({ orders }: { orders: OrderTableItem[] }) {
                   title="See your order details."
                 >
                   <Link href={`/order/${id}`}>
-                    <IconExternalLink className="size-6" />
+                    <IconExternalLink className="size-5 lg:size-6" />
                   </Link>
                 </Button>
               </TableCell>

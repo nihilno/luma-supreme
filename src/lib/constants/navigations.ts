@@ -4,10 +4,14 @@ import {
   IconBrandInstagram,
   IconBrandLinkedin,
   IconBrandX,
+  IconGridScan,
+  IconListTree,
   IconPackages,
   IconShield,
   IconShoppingBagSearch,
+  IconTagStarred,
   IconUserCog,
+  IconUserSearch,
 } from "@tabler/icons-react";
 
 export const headerNav = [
@@ -37,8 +41,31 @@ export const sessionButtons = [
   },
   {
     label: "Admin",
-    href: "#",
+    href: "/admin/overview",
     icon: IconShield,
+  },
+];
+
+export const adminButtons = [
+  {
+    label: "Overview",
+    href: "/admin/overview",
+    icon: IconListTree,
+  },
+  {
+    label: "Products",
+    href: "/admin/products",
+    icon: IconTagStarred,
+  },
+  {
+    label: "Orders",
+    href: "/admin/orders",
+    icon: IconGridScan,
+  },
+  {
+    label: "Users",
+    href: "/admin/users",
+    icon: IconUserSearch,
   },
 ];
 

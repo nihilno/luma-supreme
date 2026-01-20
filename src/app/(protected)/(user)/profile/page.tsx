@@ -29,7 +29,7 @@ export default async function ProfilePage() {
           </p>
         </div>
       </div>
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-6">
         <UserSettings user={user} />
         <UserData />
       </div>

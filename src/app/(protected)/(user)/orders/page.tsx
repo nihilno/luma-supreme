@@ -18,7 +18,7 @@ export default async function OrdersPage({
   const { orders, totalPages } = await getOrders({ page: Number(page) || 1 });
 
   return (
-    <section className="mt-16 flex min-h-170 flex-col space-y-16 pb-8">
+    <section className="mt-16 flex min-h-150 flex-col space-y-16 pb-8">
       <div className="flex items-center gap-3">
         <IconGridScan className="text-distinct size-12" />
         <div>

@@ -58,10 +58,10 @@ function UserSettings({ user }: { user: { email: string; name: string } }) {
           Change your Name
         </div>
         <CardDescription>
-          Got bored with previous nickname? Don&apos;t worry.
+          Got tired of your old nickname? <br /> No problem.
         </CardDescription>
       </CardHeader>
-      <CardContent className="mt-4">
+      <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSubmit)}>
             <FormField
