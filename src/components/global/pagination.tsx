@@ -30,12 +30,13 @@ function Pagination({
   }
 
   return (
-    <div className="space-x-6">
+    <div className="space-x-4">
       <Button
         disabled={Number(page) <= 1}
         size="icon"
         variant="outline"
         onClick={() => handlePageChange("prev")}
+        aria-label="Previous page"
       >
         <IconChevronLeft />
       </Button>
@@ -45,6 +46,7 @@ function Pagination({
         size="icon"
         variant="outline"
         onClick={() => handlePageChange("next")}
+        aria-label="Next page"
       >
         <IconChevronRight />
       </Button>

@@ -5,7 +5,7 @@ function Logo({ withTitle = false }: { withTitle?: boolean }) {
   return (
     <Link
       href={"/"}
-      className="flex shrink-0 items-center gap-1"
+      className="flex shrink-0 items-center gap-2"
       aria-label="Home"
     >
       <Image

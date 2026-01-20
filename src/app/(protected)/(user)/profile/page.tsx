@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import UserData from "@/components/user/user-data";
 import UserSettings from "@/components/user/user-settings";
 import { getUserById } from "@/lib/data/getUserById";
 import { IconUserCog } from "@tabler/icons-react";
@@ -13,6 +14,7 @@ export default async function ProfilePage() {
   const session = await auth();
   const userId = session?.user?.id;
   if (!userId) throw new Error("You must be logged in to perform this action.");
+
   const { email, name } = await getUserById(userId);
   const user = { email, name };
 
@@ -27,7 +29,10 @@ export default async function ProfilePage() {
           </p>
         </div>
       </div>
-      <UserSettings user={user} />
+      <div className="flex flex-wrap gap-4">
+        <UserSettings user={user} />
+        <UserData />
+      </div>
     </section>
   );
 }

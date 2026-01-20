@@ -15,6 +15,7 @@ export async function getOrders({
   const userId = session?.user?.id;
 
   if (!userId) throw new Error("Only logged in users can perform this action.");
+  if (page < 1) throw new Error("Page must be at least 1.");
 
   const initialOrders = await prisma.order.findMany({
     where: {

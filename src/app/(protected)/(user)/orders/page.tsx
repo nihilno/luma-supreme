@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default async function OrdersPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page: string }>;
+  searchParams: Promise<{ page?: string }>;
 }) {
   const { page } = await searchParams;
   const { orders, totalPages } = await getOrders({ page: Number(page) || 1 });

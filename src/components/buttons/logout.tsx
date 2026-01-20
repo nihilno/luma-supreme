@@ -24,7 +24,7 @@ function Logout() {
       toast.success(result.message);
     } catch (error) {
       console.error(error);
-      toast.error("External error occurred. Try again later.");
+      toast.error("Internal error occurred. Try again later.");
     } finally {
       setIsLoading(false);
     }

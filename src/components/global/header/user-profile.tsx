@@ -24,14 +24,16 @@ function UserProfile({ dropdown = false, name, email }: UserProfileProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="start" sideOffset={16}>
-        <DropdownMenuLabel className="pb-0">
-          {name ? name : "My Account"}
-        </DropdownMenuLabel>
+        <DropdownMenuLabel>{name ? name : "My Account"}</DropdownMenuLabel>
         <p className="px-2 pb-1.5 text-xs">{email ? email : ""}</p>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           {sessionButtons.map(({ label, href, icon: Icon }) => (
-            <DropdownMenuItem key={label} asChild className="cursor-pointer">
+            <DropdownMenuItem
+              key={label}
+              asChild
+              className="cursor-pointer py-3"
+            >
               <Link href={href}>
                 <Icon className="size-5" /> <span>{label}</span>
               </Link>

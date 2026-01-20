@@ -5,8 +5,10 @@ import { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { signInSchema, signUpSchema } from "@/lib/schemas/auth";
 import { hashSync } from "bcrypt-ts-edge";
+import { revalidatePath } from "next/cache";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { shippingSchema } from "../schemas/shipping-address";
+import { userProfileSchema } from "../schemas/user";
 
 export async function SignInUser(formData: unknown) {
   const validated = signInSchema.safeParse(formData);
@@ -156,6 +158,43 @@ export async function updateAddress(formData: unknown) {
       throw new Error("You must be logged in to perform this action.");
 
     await prisma.user.update({ data: { address }, where: { id: userId } });
+
+    return {
+      success: true,
+      message: "User updated successfully.",
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      success: false,
+      message:
+        "An error occurred while sending the address details. Try again.",
+    };
+  }
+}
+
+export async function updateName(formData: unknown) {
+  const validated = userProfileSchema.safeParse(formData);
+  if (!validated.success) {
+    return {
+      success: false,
+      message: "An error occurred while sending the name details. Try again.",
+    };
+  }
+
+  try {
+    const session = await auth();
+    const userId = session?.user?.id;
+
+    if (!userId)
+      throw new Error("You must be logged in to perform this action.");
+
+    await prisma.user.update({
+      data: { name: validated.data.name },
+      where: { id: userId },
+    });
+
+    revalidatePath("/profile");
 
     return {
       success: true,
