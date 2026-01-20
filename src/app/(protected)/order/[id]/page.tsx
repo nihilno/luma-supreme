@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
-import Paypal from "@/components/buttons/paypal";
 import CartSummary from "@/components/cart/cart-summary";
+import Paypal from "@/components/orders/payment/paypal";
 import AddressEdit from "@/components/orders/place-order/address-edit";
 import OrderItems from "@/components/orders/place-order/order-items";
 import PaymentEdit from "@/components/orders/place-order/payment-edit";
@@ -27,8 +27,8 @@ export default async function OrderPage({
   if (!userId || !session) redirect("/");
 
   const order = await getOrderById(id);
-  if (order.userId !== userId) redirect("/");
   if (!order) notFound();
+  if (order.userId !== userId) redirect("/");
 
   const address = order.shippingAddress as shippingType;
   const prices = {

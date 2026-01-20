@@ -35,7 +35,9 @@ function PaymentEdit({
             ) : (
               <IconLoader className="size-5!" />
             )}
-            {isPaid ? `Paid at ${paidAt?.toLocaleDateString()}` : "Not Paid"}
+            {isPaid
+              ? `Paid at ${paidAt?.toLocaleString() ?? "unknown date"}`
+              : "Not Paid"}
           </Badge>
         ) : (
           <EditButton href="/payment-method" />

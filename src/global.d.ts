@@ -1,5 +1,6 @@
 import { Session } from "next-auth";
 import { cartItemType } from "./lib/schemas/cart";
+import { shippingType } from "./lib/schemas/shipping-address";
 
 export {};
 
@@ -80,5 +81,15 @@ declare global {
   type PayPalProps = {
     totalPrice: number;
     orderId: string;
+  };
+
+  type OrderTableItem = {
+    id: string;
+    createdAt: Date | null;
+    totalPrice: number;
+    isPaid: boolean;
+    isDelivered: boolean;
+    paidAt: Date | null;
+    deliveredAt: Date | null;
   };
 }

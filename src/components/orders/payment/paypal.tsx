@@ -80,11 +80,11 @@ function PaymentDialog({ totalPrice, orderId }: PayPalProps) {
               Complete your PayPal payment here.
             </DialogDescription>
           </DialogHeader>
-          <div className="flex flex-col items-center">
+          <div className="my-6 flex flex-col items-center space-y-4">
             <Button
               type="submit"
               disabled={isLoading}
-              className="bg-card text-distinct group hover:bg-distinct my-6 grid size-40 place-items-center rounded-xl transition hover:text-white"
+              className="bg-card text-distinct group hover:bg-distinct grid size-40 place-items-center rounded-xl transition hover:text-white"
               title="Mark as Complete!"
             >
               {isLoading ? (

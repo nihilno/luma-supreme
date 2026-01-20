@@ -104,13 +104,13 @@ const authConfig = {
     },
     async authorized({ request, auth }: any) {
       const protectedPaths = [
-        /\/shipping-address/,
+        /\/admin\/(.*)/,
+        /\/order\/(.*)/,
         /\/payment-method/,
         /\/place-order/,
+        /\/shipping-address/,
         /\/profile/,
         /\/user\/(.*)/,
-        /\/order\/(.*)/,
-        /\/admin\/(.*)/,
       ];
 
       const { pathname } = request.nextUrl;

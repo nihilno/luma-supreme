@@ -18,14 +18,15 @@ export function LenisProvider() {
       syncTouchLerp: 0.1,
     });
 
+    let rafId: number;
+
     function raf(time: number) {
-      lenis?.raf(time);
-      requestAnimationFrame(raf);
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
     }
 
-    const rafId = requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
-    // Reset on route change
     lenis.scrollTo(0, { immediate: true, force: true });
 
     return () => {

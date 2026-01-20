@@ -1,5 +1,6 @@
-import { prisma } from "@/lib/prisma";
 import "server-only";
+
+import { prisma } from "@/lib/prisma";
 import { decimalToNumber } from "../utils";
 
 export async function getOrderById(id: string) {

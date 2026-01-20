@@ -107,11 +107,17 @@ export async function payForOrder(orderId: string) {
   try {
     const session = await auth();
     const userId = session?.user?.id;
-    if (!userId) throw new Error("User not found.");
+    if (!userId)
+      return {
+        success: false,
+        message: "Only authenticated users can perform this action.",
+      };
 
     const order = await getOrderById(orderId);
+    if (!order) {
+      return { success: false, message: "Order not found." };
+    }
     if (order.isPaid) throw new Error("This order was already paid.");
-
     await prisma.$transaction(async (tx) => {
       for (const item of order.orderItems) {
         await tx.product.update({
