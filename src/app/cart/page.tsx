@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
-import CartEmpty from "@/components/cart/cart-empty";
 import CartTable from "@/components/cart/cart-table";
 import CartTotal from "@/components/cart/cart-total";
+import ItemEmpty from "@/components/global/empty";
 import { getMyCart } from "@/lib/actions/cart";
 import { IconShoppingCartSearch } from "@tabler/icons-react";
 import { Metadata } from "next";
@@ -12,14 +12,17 @@ export const metadata: Metadata = {
 
 export default async function CartPage() {
   const cart = await getMyCart();
-  const cartDontExist = !cart || cart.items.length === 0;
+  const cartNotExists = !cart || cart.items.length === 0;
   const session = await auth();
 
-  if (cartDontExist)
+  if (cartNotExists)
     return (
-      <div className="-mt-32 grid h-screen place-items-center">
-        <CartEmpty />
-      </div>
+      <section className="-mt-32 grid h-screen place-items-center">
+        <ItemEmpty
+          title="Your cart is empty"
+          subtitle="Looks like you haven't added anything to your cart yet."
+        />
+      </section>
     );
 
   const { items, itemsPrice, shippingPrice, taxPrice, totalPrice } = cart;
@@ -44,7 +47,7 @@ export default async function CartPage() {
       <CartTable items={items} />
       <CartTotal
         prices={prices}
-        cartDontExist={cartDontExist}
+        cartDontExist={cartNotExists}
         session={session}
       />
     </section>

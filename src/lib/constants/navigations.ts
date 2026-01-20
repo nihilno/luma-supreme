@@ -40,7 +40,7 @@ export const sessionButtons = [
     icon: IconPackages,
   },
   {
-    label: "Admin",
+    label: "Admin (Demo)",
     href: "/admin/overview",
     icon: IconShield,
   },

@@ -15,16 +15,20 @@ import {
 } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
-import ProductEmpty from "./product-empty";
+import ItemEmpty from "../global/empty";
 
 async function ProductsContainer({ title }: { title?: string }) {
   const featured = await getFeaturedProducts();
 
   if (!featured || featured.length === 0)
     return (
-      <div className="-mt-32 grid min-h-dvh place-items-center">
-        <ProductEmpty />
-      </div>
+      <section className="-mt-32 grid h-screen place-items-center">
+        <ItemEmpty
+          title="Product/s not found"
+          subtitle="We couldn't find any products. You may want to update your
+          filters."
+        />
+      </section>
     );
 
   return (
@@ -35,7 +39,7 @@ async function ProductsContainer({ title }: { title?: string }) {
           {title}
         </h2>
       </div>
-      <div className="mt-16 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {featured.map(
           ({ id, brand, images, name, rating, price, stock, slug }) => (
             <Link key={id} href={`/product/${slug}`}>

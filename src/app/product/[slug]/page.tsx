@@ -1,4 +1,4 @@
-import ProductEmpty from "@/components/products/product-empty";
+import ItemEmpty from "@/components/global/empty";
 import AddToCartButton from "@/components/products/single-product/add-to-cart-btn";
 import ProductCard from "@/components/products/single-product/product-card";
 import Reviews from "@/components/products/single-product/reviews";
@@ -18,8 +18,12 @@ export default async function ProductPage({
 
   if (!product)
     return (
-      <section className="-mt-32 grid min-h-dvh place-items-center">
-        <ProductEmpty />
+      <section className="-mt-32 grid h-screen place-items-center">
+        <ItemEmpty
+          title="Product/s not found"
+          subtitle="We couldn't find any products. You may want to update your
+          filters."
+        />
       </section>
     );
   const { stock, price, description, numReviews, id, name, images } = product;

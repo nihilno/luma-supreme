@@ -11,26 +11,24 @@ import {
 } from "@/components/ui/empty";
 import {
   IconArrowUpRight,
-  IconBasketCancel,
   IconListSearch,
   IconRotate2,
+  IconZoomOutArea,
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-function CartEmpty() {
+function ItemEmpty({ title, subtitle }: { title: string; subtitle: string }) {
   const { refresh } = useRouter();
 
   return (
     <Empty>
       <EmptyHeader>
         <EmptyMedia variant="icon" className="size-14">
-          <IconBasketCancel className="size-12 opacity-75" />
+          <IconZoomOutArea className="size-12 opacity-75" />
         </EmptyMedia>
-        <EmptyTitle className="mb-2 text-2xl">Your cart is empty</EmptyTitle>
-        <EmptyDescription className="text-base">
-          Looks like you haven&apos;t added anything to your cart yet.
-        </EmptyDescription>
+        <EmptyTitle className="mb-2 text-2xl">{title}</EmptyTitle>
+        <EmptyDescription className="text-base">{subtitle}</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <div className="flex items-center gap-3">
@@ -60,4 +58,4 @@ function CartEmpty() {
   );
 }
 
-export default CartEmpty;
+export default ItemEmpty;

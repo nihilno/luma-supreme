@@ -1,6 +1,6 @@
 "use client";
 
-import ProductEmpty from "@/components/products/product-empty";
+import ItemEmpty from "@/components/global/empty";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -21,7 +21,16 @@ import Images from "./images";
 function ProductCard({ product }: { product: Product | null }) {
   const [image, setImage] = useState(0);
 
-  if (!product) return <ProductEmpty />;
+  if (!product)
+    return (
+      <section className="-mt-32 grid h-screen place-items-center">
+        <ItemEmpty
+          title="Product/s not found"
+          subtitle="  We couldn't find any products. You may want to update your
+          filters."
+        />
+      </section>
+    );
   const { name, stock, images, brand, rating, price } = product;
   const currentImage = images?.[image] ?? images?.[0];
 

@@ -1,3 +1,4 @@
+import ItemEmpty from "@/components/global/empty";
 import Pagination from "@/components/global/pagination";
 import OrdersTable from "@/components/orders/orders-table";
 import { getOrders } from "@/lib/data/getOrders";
@@ -16,6 +17,16 @@ export default async function OrdersPage({
 }) {
   const { page } = await searchParams;
   const { orders, totalPages } = await getOrders({ page: Number(page) || 1 });
+
+  if (!orders || orders.length === 0)
+    return (
+      <section className="mt-16 flex min-h-150">
+        <ItemEmpty
+          title="No orders yet"
+          subtitle="You don't have any orders at the moment."
+        />
+      </section>
+    );
 
   return (
     <section className="mt-16 flex min-h-150 flex-col space-y-16 pb-8">
