@@ -62,6 +62,5 @@ export async function getOrderSummary() {
     };
   } catch (error) {
     console.error(error);
-    return [];
   }
 }
