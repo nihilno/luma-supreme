@@ -30,12 +30,12 @@ async function ProductsContainer({ title }: { title?: string }) {
   return (
     <div className="mx-auto mt-16 max-w-sm sm:max-w-none">
       <div className="flex items-center justify-center sm:justify-start">
-        <h2 className="mb-6 flex items-center gap-3 text-3xl font-bold sm:text-left sm:text-4xl">
+        <h2 className="flex items-center gap-3 text-3xl font-bold sm:text-left sm:text-4xl">
           <IconNorthStar className="text-distinct size-12" />
           {title}
         </h2>
       </div>
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-16 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {featured.map(
           ({ id, brand, images, name, rating, price, stock, slug }) => (
             <Link key={id} href={`/product/${slug}`}>

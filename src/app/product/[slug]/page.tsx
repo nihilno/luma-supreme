@@ -25,7 +25,7 @@ export default async function ProductPage({
   const { stock, price, description, numReviews, id, name, images } = product;
 
   return (
-    <section className="mx-auto mt-16 grid min-h-screen grid-cols-1 space-y-16 gap-x-8 md:grid-cols-2">
+    <section className="mx-auto mt-16 grid min-h-screen grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2">
       <IconBrandLinktree className="distinct mx-auto size-12 animate-pulse md:col-span-2" />
       <ProductCard product={product} />
 

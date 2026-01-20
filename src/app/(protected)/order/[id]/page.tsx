@@ -68,17 +68,17 @@ export default async function OrderPage({
             <OrderItems items={order.orderItems} />
           </div>
           <div className="flex flex-col gap-4 lg:col-span-1">
-            <Card className="relative h-fit overflow-hidden">
+            <Card className="relative h-full overflow-hidden">
               <CardContent>
                 <CartSummary prices={prices} compact={true} />
               </CardContent>
               <IconCashEdit className="absolute right-0 bottom-0 size-72 overflow-hidden opacity-4 lg:size-32" />
             </Card>
-            <div className="flex-1">
-              {!order.isPaid && order.paymentMethod === "PayPal" && (
+            {!order.isPaid && order.paymentMethod === "PayPal" && (
+              <div className="flex-1">
                 <Paypal totalPrice={order.totalPrice} orderId={order.id} />
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

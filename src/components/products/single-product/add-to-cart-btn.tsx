@@ -58,7 +58,7 @@ function AddToCartButton({ cart, price, stock, cartItem }: AddToCartProps) {
     <Card
       className={cn(
         stock === 0 ? "cursor-not-allowed opacity-50" : "cursor-default",
-        ":mx-0 mx-auto max-w-lg transition",
+        "mx-auto max-w-lg transition md:mx-0",
       )}
     >
       <CardContent className="space-y-4 lg:space-y-6">

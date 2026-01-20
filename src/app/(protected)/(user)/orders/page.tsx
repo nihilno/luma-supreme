@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import Pagination from "@/components/global/pagination";
 import OrdersTable from "@/components/orders/orders-table";
 import { getOrders } from "@/lib/data/getOrders";
 import { IconGridScan } from "@tabler/icons-react";
@@ -9,14 +9,16 @@ export const metadata: Metadata = {
   description: "Manage your orders",
 };
 
-export default async function OrdersPage() {
-  const session = await auth();
-  const userId = session?.user?.id;
-  if (!userId) throw new Error("You must be logged in to perform this action.");
-  const orders = await getOrders(userId);
+export default async function OrdersPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page: string }>;
+}) {
+  const { page } = await searchParams;
+  const { orders, totalPages } = await getOrders({ page: Number(page) || 1 });
 
   return (
-    <section className="mt-16 h-screen space-y-16 pb-32">
+    <section className="mt-16 flex min-h-170 flex-col space-y-16 pb-8">
       <div className="flex items-center gap-3">
         <IconGridScan className="text-distinct size-12" />
         <div>
@@ -26,8 +28,12 @@ export default async function OrdersPage() {
           </p>
         </div>
       </div>
-
       <OrdersTable orders={orders} />
+      {totalPages > 1 && (
+        <div className="mt-auto w-full border-t pt-4 text-center">
+          <Pagination totalPages={totalPages} page={Number(page) || 1} />
+        </div>
+      )}
     </section>
   );
 }
