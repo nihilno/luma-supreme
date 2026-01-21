@@ -40,6 +40,8 @@ export default async function OrderPage({
     totalPrice: decimalToNumber(order.totalPrice),
   };
 
+  const isAdmin = session?.user?.role === "ADMIN";
+
   return (
     <section className="mt-16 pb-32">
       <div className="space-y-16">
@@ -55,7 +57,14 @@ export default async function OrderPage({
               </p>
             </div>
           </div>
-          {session.user.role === "ADMIN" && <AdminOrderActions />}
+          {isAdmin && (
+            <AdminOrderActions
+              isAdmin={isAdmin}
+              isPaid={order.isPaid}
+              isDelivered={order.isDelivered}
+              id={order.id}
+            />
+          )}
         </div>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
           <div className="lg:col-span-2">
@@ -84,7 +93,7 @@ export default async function OrderPage({
               </CardContent>
               <IconCashEdit className="absolute right-0 bottom-0 size-72 overflow-hidden opacity-4 lg:size-32" />
             </Card>
-            {!order.isPaid && order.paymentMethod === "PayPal" && (
+            {!order.isPaid && order.paymentMethod === "PayPal" && !isAdmin && (
               <div className="flex-1">
                 <Paypal totalPrice={order.totalPrice} orderId={order.id} />
               </div>

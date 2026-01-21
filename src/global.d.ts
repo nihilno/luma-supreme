@@ -99,4 +99,11 @@ declare global {
     month: string;
     totalSales: number;
   };
+
+  type AdminActionsProps = {
+    isAdmin: boolean;
+    isPaid: boolean;
+    isDelivered: boolean;
+    id: string;
+  };
 }

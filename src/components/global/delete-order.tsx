@@ -52,7 +52,7 @@ function DeleteOrder({ id }: { id: string }) {
           <DialogTitle>Are you absolutely sure?</DialogTitle>
           <DialogDescription>
             This action cannot be undone. This will permanently delete your
-            order and remove it&apos;s data from our servers.
+            order and remove its data from our servers.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="mt-4">

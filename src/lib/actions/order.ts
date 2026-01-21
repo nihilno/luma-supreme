@@ -190,7 +190,10 @@ export async function markAsPaid(id: string) {
         message: "Only Administrators can perform this action.",
       };
 
-    await prisma.order.update({ where: { id }, data: { isPaid: true } });
+    await prisma.order.update({
+      where: { id },
+      data: { isPaid: true, paidAt: new Date() },
+    });
     revalidatePath(`/order/${id}`);
 
     return {
@@ -215,7 +218,17 @@ export async function markAsDelivered(id: string) {
         message: "Only Administrators can perform this action.",
       };
 
-    await prisma.order.update({ where: { id }, data: { isDelivered: true } });
+    const order = await prisma.order.findUnique({ where: { id } });
+
+    if (!order) throw new Error("Order not found.");
+    if (!order.isPaid)
+      throw new Error("Order cannot be makred as delivered if it's not paid.");
+
+    await prisma.order.update({
+      where: { id },
+      data: { isDelivered: true, deliveredAt: new Date() },
+    });
+
     revalidatePath(`/order/${id}`);
 
     return {
