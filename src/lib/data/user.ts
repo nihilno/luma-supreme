@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { decimalToNumber } from "@/lib/utils";
 import "server-only";
 
-export async function getOrders({
+export async function getUserOrders({
   limit = PAGE_SIZE,
   page,
 }: {
@@ -48,4 +48,13 @@ export async function getOrders({
     orders,
     totalPages: Math.ceil(dataCount / limit),
   };
+}
+
+export async function getUserById(userId: string) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!user) throw new Error("Cannot find this user.");
+  return user;
 }

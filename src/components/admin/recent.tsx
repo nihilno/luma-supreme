@@ -14,7 +14,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getOrderSummary } from "@/lib/data/getOrderSummary";
+import { getOrderSummary } from "@/lib/data/orders";
 import { toGBP } from "@/lib/utils";
 import { IconExternalLink } from "@tabler/icons-react";
 import Link from "next/link";

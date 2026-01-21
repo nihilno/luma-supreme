@@ -1,7 +1,7 @@
 import ItemEmpty from "@/components/global/empty";
 import Pagination from "@/components/global/pagination";
 import OrdersTable from "@/components/orders/orders-table";
-import { getOrders } from "@/lib/data/getOrders";
+import { getUserOrders } from "@/lib/data/user";
 import { IconGridScan } from "@tabler/icons-react";
 import { Metadata } from "next";
 
@@ -16,7 +16,9 @@ export default async function OrdersPage({
   searchParams: Promise<{ page?: string }>;
 }) {
   const { page } = await searchParams;
-  const { orders, totalPages } = await getOrders({ page: Number(page) || 1 });
+  const { orders, totalPages } = await getUserOrders({
+    page: Number(page) || 1,
+  });
 
   if (!orders || orders.length === 0)
     return (

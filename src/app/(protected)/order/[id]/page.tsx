@@ -6,7 +6,7 @@ import AddressEdit from "@/components/orders/place-order/address-edit";
 import OrderItems from "@/components/orders/place-order/order-items";
 import PaymentEdit from "@/components/orders/place-order/payment-edit";
 import { Card, CardContent } from "@/components/ui/card";
-import { getOrderById } from "@/lib/data/getOrderById";
+import { getOrderById } from "@/lib/data/orders";
 import { shippingType } from "@/lib/schemas/shipping-address";
 import { decimalToNumber, formatId } from "@/lib/utils";
 import { IconCashEdit, IconGridScan } from "@tabler/icons-react";
@@ -32,12 +32,27 @@ export default async function OrderPage({
   if (!order) notFound();
   if (order.userId !== userId && session.user.role !== "ADMIN") redirect("/");
 
-  const address = order.shippingAddress as shippingType;
+  const {
+    shippingAddress,
+    itemsPrice,
+    shippingPrice,
+    taxPrice,
+    totalPrice,
+    isPaid,
+    isDelivered,
+    deliveredAt,
+    paymentMethod,
+    paidAt,
+    orderItems,
+    id: orderId,
+  } = order;
+
+  const address = shippingAddress as shippingType;
   const prices = {
-    itemsPrice: decimalToNumber(order.itemsPrice),
-    shippingPrice: decimalToNumber(order.shippingPrice),
-    taxPrice: decimalToNumber(order.taxPrice),
-    totalPrice: decimalToNumber(order.totalPrice),
+    itemsPrice: decimalToNumber(itemsPrice),
+    shippingPrice: decimalToNumber(shippingPrice),
+    taxPrice: decimalToNumber(taxPrice),
+    totalPrice: decimalToNumber(totalPrice),
   };
 
   const isAdmin = session?.user?.role === "ADMIN";
@@ -50,7 +65,7 @@ export default async function OrderPage({
             <IconGridScan className="text-distinct size-12" />
             <div>
               <h2 className="text-3xl font-bold">
-                Order <span className="text-distinct">{formatId(id)}</span>
+                Order <span className="text-distinct">{formatId(orderId)}</span>
               </h2>
               <p className="text-muted-foreground text-sm">
                 You can inspect details of your order.
@@ -60,9 +75,9 @@ export default async function OrderPage({
           {isAdmin && (
             <AdminOrderActions
               isAdmin={isAdmin}
-              isPaid={order.isPaid}
-              isDelivered={order.isDelivered}
-              id={order.id}
+              isPaid={isPaid}
+              isDelivered={isDelivered}
+              id={orderId}
             />
           )}
         </div>
@@ -70,21 +85,21 @@ export default async function OrderPage({
           <div className="lg:col-span-2">
             <AddressEdit
               address={address}
-              isDelivered={order.isDelivered}
-              deliveredAt={order.deliveredAt}
+              isDelivered={isDelivered}
+              deliveredAt={deliveredAt}
               readOnly={true}
             />
           </div>
           <div className="h-full lg:col-span-2">
             <PaymentEdit
-              paymentMethod={order.paymentMethod}
-              isPaid={order.isPaid}
-              paidAt={order.paidAt}
+              paymentMethod={paymentMethod}
+              isPaid={isPaid}
+              paidAt={paidAt}
               readOnly={true}
             />
           </div>
           <div className="lg:col-span-3">
-            <OrderItems items={order.orderItems} />
+            <OrderItems items={orderItems} />
           </div>
           <div className="flex flex-col gap-4 lg:col-span-1">
             <Card className="relative h-full overflow-hidden">
@@ -95,7 +110,7 @@ export default async function OrderPage({
             </Card>
             {!order.isPaid && order.paymentMethod === "PayPal" && !isAdmin && (
               <div className="flex-1">
-                <Paypal totalPrice={order.totalPrice} orderId={order.id} />
+                <Paypal totalPrice={totalPrice} orderId={orderId} />
               </div>
             )}
           </div>

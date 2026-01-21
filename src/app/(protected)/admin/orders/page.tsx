@@ -1,6 +1,6 @@
 import Pagination from "@/components/global/pagination";
 import OrdersTable from "@/components/orders/orders-table";
-import { getAllOrders } from "@/lib/data/getAllOrders";
+import { getAllOrders } from "@/lib/data/orders";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

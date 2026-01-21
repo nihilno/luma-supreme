@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import UserData from "@/components/user/user-data";
 import UserSettings from "@/components/user/user-settings";
-import { getUserById } from "@/lib/data/getUserById";
+import { getUserById } from "@/lib/data/user";
 import { IconUserCog } from "@tabler/icons-react";
 import { Metadata } from "next";
 

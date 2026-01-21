@@ -4,7 +4,7 @@ import ProductCard from "@/components/products/single-product/product-card";
 import Reviews from "@/components/products/single-product/reviews";
 import Stars from "@/components/products/single-product/stars";
 import { getMyCart } from "@/lib/actions/cart";
-import { getProductBySlug } from "@/lib/data/getProductBySlug";
+import { getProductBySlug } from "@/lib/data/products";
 import { IconBrandLinktree } from "@tabler/icons-react";
 
 export default async function ProductPage({

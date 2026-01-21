@@ -2,7 +2,7 @@ import { Chart } from "@/components/admin/chart";
 import Recent from "@/components/admin/recent";
 import Stats from "@/components/admin/stats";
 import { StatsSkeletons } from "@/components/skeletons/admin";
-import { getOrderSummary } from "@/lib/data/getOrderSummary";
+import { getOrderSummary } from "@/lib/data/orders";
 import { Suspense } from "react";
 
 export default async function AdminOverviewPage() {

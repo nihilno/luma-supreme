@@ -30,13 +30,17 @@ function MarkAsPaidBtn({ id }: { id: string }) {
       disabled={isPending}
       onClick={() =>
         startTransition(async () => {
-          const result = await markAsPaid(id);
-          if (!result.success) {
-            toast.warning(result.message);
-            return;
-          }
+          try {
+            const result = await markAsPaid(id);
+            if (!result.success) {
+              toast.warning(result.message);
+              return;
+            }
 
-          toast.success(result.message);
+            toast.success(result.message);
+          } catch {
+            toast.error("Something went wrong. Please try again.");
+          }
         })
       }
     >
@@ -55,13 +59,17 @@ function MarkAsDeliveredBtn({ id }: { id: string }) {
       disabled={isPending}
       onClick={() =>
         startTransition(async () => {
-          const result = await markAsDelivered(id);
-          if (!result.success) {
-            toast.warning(result.message);
-            return;
-          }
+          try {
+            const result = await markAsDelivered(id);
+            if (!result.success) {
+              toast.warning(result.message);
+              return;
+            }
 
-          toast.success(result.message);
+            toast.success(result.message);
+          } catch {
+            toast.error("Something went wrong. Please try again.");
+          }
         })
       }
     >

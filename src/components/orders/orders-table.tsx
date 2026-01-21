@@ -15,7 +15,7 @@ import {
   IconLoader,
 } from "@tabler/icons-react";
 import Link from "next/link";
-import DeleteOrder from "../global/delete-order";
+import DeleteOrder from "../buttons/delete-order";
 
 function OrdersTable({
   orders,

@@ -1,3 +1,4 @@
+import ItemEmpty from "@/components/global/empty";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -5,7 +6,7 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { getFeaturedProducts } from "@/lib/data/getFeaturedProducts";
+import { getFeaturedProducts } from "@/lib/data/products";
 import { cn, toGBP } from "@/lib/utils";
 import {
   IconFileUnknown,
@@ -15,7 +16,6 @@ import {
 } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
-import ItemEmpty from "../global/empty";
 
 async function ProductsContainer({ title }: { title?: string }) {
   const featured = await getFeaturedProducts();

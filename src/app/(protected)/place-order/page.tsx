@@ -7,7 +7,7 @@ import OrderItems from "@/components/orders/place-order/order-items";
 import PaymentEdit from "@/components/orders/place-order/payment-edit";
 import { Card, CardContent } from "@/components/ui/card";
 import { getMyCart } from "@/lib/actions/cart";
-import { getUserById } from "@/lib/data/getUserById";
+import { getUserById } from "@/lib/data/user";
 import { shippingType } from "@/lib/schemas/shipping-address";
 import { IconCashEdit, IconTruckDelivery } from "@tabler/icons-react";
 import { Metadata } from "next";

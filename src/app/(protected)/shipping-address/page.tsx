@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import Steps from "@/components/global/steps";
 import ShippingForm from "@/components/orders/shipping/shipping-form";
 import { getMyCart } from "@/lib/actions/cart";
-import { getUserById } from "@/lib/data/getUserById";
+import { getUserById } from "@/lib/data/user";
 import { IconMapPins } from "@tabler/icons-react";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
@@ -18,7 +18,7 @@ export default async function ShippingAddressPage() {
   if (!cart || cart.items.length === 0) redirect("/cart");
   if (!userId) throw new Error("No user ID.");
 
-  const user = await getUserById(userId);
+  const { address } = await getUserById(userId);
 
   return (
     <section className="mt-8 pb-32">
@@ -33,7 +33,7 @@ export default async function ShippingAddressPage() {
             </p>
           </div>
         </div>
-        <ShippingForm address={user.address} />
+        <ShippingForm address={address} />
       </div>
     </section>
   );

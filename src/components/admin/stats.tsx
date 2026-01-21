@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { getOrderSummary } from "@/lib/data/getOrderSummary";
+import { getOrderSummary } from "@/lib/data/orders";
 import { toGBP } from "@/lib/utils";
 import {
   IconCurrencyDollar,
