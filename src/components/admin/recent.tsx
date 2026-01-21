@@ -72,7 +72,7 @@ async function Recent() {
                     asChild
                     title="See order details."
                   >
-                    <Link href={`/order/${id}`}>
+                    <Link href={`/order/${id}`} target="_blank">
                       <IconExternalLink className="size-5" />
                     </Link>
                   </Button>

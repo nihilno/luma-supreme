@@ -1,3 +1,5 @@
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -13,10 +15,15 @@ import {
   IconLoader,
 } from "@tabler/icons-react";
 import Link from "next/link";
-import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
+import DeleteOrder from "../global/delete-order";
 
-function OrdersTable({ orders }: { orders: OrderTableItem[] }) {
+function OrdersTable({
+  orders,
+  isAdmin = false,
+}: {
+  orders: OrderTableItem[];
+  isAdmin?: boolean;
+}) {
   return (
     <Table>
       <TableHeader>
@@ -36,7 +43,7 @@ function OrdersTable({ orders }: { orders: OrderTableItem[] }) {
           <TableHead className="text-distinct font-semibold sm:text-base md:text-lg">
             Delivered
           </TableHead>
-          <TableHead className="text-distinct w-20 font-semibold sm:text-base md:text-lg">
+          <TableHead className="text-distinct w-16 font-semibold sm:text-base md:text-lg">
             Actions
           </TableHead>
         </TableRow>
@@ -64,18 +71,26 @@ function OrdersTable({ orders }: { orders: OrderTableItem[] }) {
                     : "Not Paid"}
                 </Badge>
               </TableCell>
-              <TableCell>TBD</TableCell>
-              <TableCell className="text-center">
+              <TableCell>
+                <Badge variant={isDelivered ? "outline" : "destructive"}>
+                  {isDelivered ? <IconCheckbox /> : <IconLoader />}
+                  {isDelivered
+                    ? `Delivered at ${paidAt?.toLocaleString() ?? "unknown date"}`
+                    : "Not Delivered"}
+                </Badge>
+              </TableCell>
+              <TableCell className="flex items-center text-center">
                 <Button
                   variant="ghost"
                   size="icon"
                   asChild
-                  title="See your order details."
+                  title="See order details."
                 >
-                  <Link href={`/order/${id}`}>
+                  <Link href={`/order/${id}`} target="_blank">
                     <IconExternalLink className="size-5 lg:size-6" />
                   </Link>
                 </Button>
+                {isAdmin && <DeleteOrder id={id} />}
               </TableCell>
             </TableRow>
           ),

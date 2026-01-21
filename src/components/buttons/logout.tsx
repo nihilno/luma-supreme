@@ -13,6 +13,7 @@ function Logout() {
 
   async function onLogout() {
     setIsLoading(true);
+    if (isLoading) return;
 
     try {
       const result = await SignOutUser();

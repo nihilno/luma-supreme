@@ -53,14 +53,14 @@ export const adminButtons = [
     icon: IconListTree,
   },
   {
-    label: "Products",
-    href: "/admin/products",
-    icon: IconTagStarred,
-  },
-  {
     label: "Orders",
     href: "/admin/orders",
     icon: IconGridScan,
+  },
+  {
+    label: "Products",
+    href: "/admin/products",
+    icon: IconTagStarred,
   },
   {
     label: "Users",

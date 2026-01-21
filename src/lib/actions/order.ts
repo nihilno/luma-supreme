@@ -150,3 +150,33 @@ export async function payForOrder(orderId: string) {
     };
   }
 }
+
+export async function removeOrder(orderId: string) {
+  try {
+    const session = await auth();
+    if (session?.user.role !== "ADMIN")
+      return {
+        success: false,
+        message: "Only Administrators can perform this action.",
+      };
+
+    await prisma.order.delete({
+      where: {
+        id: orderId,
+      },
+    });
+
+    revalidatePath("/admin/orders");
+
+    return {
+      susccess: true,
+      message: `Order ${orderId} was removed.`,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      susccess: false,
+      message: "Cannot remove this order right now. Try again later.",
+    };
+  }
+}

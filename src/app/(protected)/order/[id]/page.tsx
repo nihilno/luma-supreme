@@ -24,11 +24,12 @@ export default async function OrderPage({
   const { id } = await params;
   const session = await auth();
   const userId = session?.user?.id;
-  if (!userId || !session) redirect("/");
+  if (!userId || !session)
+    throw new Error("You must be logged in to browse orders.");
 
   const order = await getOrderById(id);
+  if (order.userId !== userId && session.user.role !== "ADMIN") redirect("/");
   if (!order) notFound();
-  if (order.userId !== userId) redirect("/");
 
   const address = order.shippingAddress as shippingType;
   const prices = {
