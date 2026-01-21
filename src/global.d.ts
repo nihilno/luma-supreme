@@ -76,6 +76,8 @@ declare global {
   type AddressEditProps = {
     address: shippingType;
     readOnly?: boolean;
+    isDelivered: boolean;
+    deliveredAt: Date | null;
   };
 
   type PayPalProps = {

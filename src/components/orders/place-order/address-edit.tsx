@@ -6,9 +6,14 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { IconMapPins } from "@tabler/icons-react";
+import { IconCheckbox, IconLoader, IconMapPins } from "@tabler/icons-react";
 
-function AddressEdit({ address, readOnly = false }: AddressEditProps) {
+function AddressEdit({
+  address,
+  readOnly = false,
+  isDelivered,
+  deliveredAt,
+}: AddressEditProps) {
   const { fullName, streetAddress, city, postalCode, country } = address;
 
   return (
@@ -23,8 +28,18 @@ function AddressEdit({ address, readOnly = false }: AddressEditProps) {
       </CardContent>
       <CardFooter className="mt-auto">
         {readOnly ? (
-          <Badge variant={"destructive"} className="text-sm">
-            Not Delivered
+          <Badge
+            variant={isDelivered ? "outline" : "destructive"}
+            className="text-sm"
+          >
+            {isDelivered ? (
+              <IconCheckbox className="size-4!" />
+            ) : (
+              <IconLoader className="size-4!" />
+            )}
+            {isDelivered
+              ? `Delivered at ${deliveredAt ?? "unknown date"}`
+              : "Not Delivered"}
           </Badge>
         ) : (
           <EditButton href="/shipping-address" />

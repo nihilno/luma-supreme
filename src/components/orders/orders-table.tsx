@@ -75,7 +75,7 @@ function OrdersTable({
                 <Badge variant={isDelivered ? "outline" : "destructive"}>
                   {isDelivered ? <IconCheckbox /> : <IconLoader />}
                   {isDelivered
-                    ? `Delivered at ${paidAt?.toLocaleString() ?? "unknown date"}`
+                    ? `Delivered at ${deliveredAt ?? "unknown date"}`
                     : "Not Delivered"}
                 </Badge>
               </TableCell>

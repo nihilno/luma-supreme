@@ -169,14 +169,64 @@ export async function removeOrder(orderId: string) {
     revalidatePath("/admin/orders");
 
     return {
-      susccess: true,
+      success: true,
       message: `Order ${orderId} was removed.`,
     };
   } catch (error) {
     console.error(error);
     return {
-      susccess: false,
+      success: false,
       message: "Cannot remove this order right now. Try again later.",
+    };
+  }
+}
+
+export async function markAsPaid(id: string) {
+  try {
+    const session = await auth();
+    if (session?.user.role !== "ADMIN")
+      return {
+        success: false,
+        message: "Only Administrators can perform this action.",
+      };
+
+    await prisma.order.update({ where: { id }, data: { isPaid: true } });
+    revalidatePath(`/order/${id}`);
+
+    return {
+      susccess: true,
+      message: `Order was marked as Paid.`,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      susccess: false,
+      message: "Cannot perform this action right now. Try again later.",
+    };
+  }
+}
+
+export async function markAsDelivered(id: string) {
+  try {
+    const session = await auth();
+    if (session?.user.role !== "ADMIN")
+      return {
+        success: false,
+        message: "Only Administrators can perform this action.",
+      };
+
+    await prisma.order.update({ where: { id }, data: { isDelivered: true } });
+    revalidatePath(`/order/${id}`);
+
+    return {
+      susccess: true,
+      message: `Order was marked as Delivered.`,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      susccess: false,
+      message: "Cannot perform this action right now. Try again later.",
     };
   }
 }

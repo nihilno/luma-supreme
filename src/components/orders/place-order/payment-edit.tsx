@@ -28,12 +28,12 @@ function PaymentEdit({
         {readOnly ? (
           <Badge
             variant={isPaid ? "outline" : "destructive"}
-            className="text-base"
+            className="text-sm"
           >
             {isPaid ? (
-              <IconCheckbox className="size-5!" />
+              <IconCheckbox className="size-4!" />
             ) : (
-              <IconLoader className="size-5!" />
+              <IconLoader className="size-4!" />
             )}
             {isPaid
               ? `Paid at ${paidAt?.toLocaleString() ?? "unknown date"}`

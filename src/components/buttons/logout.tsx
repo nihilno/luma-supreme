@@ -12,8 +12,8 @@ function Logout() {
   const { refresh } = useRouter();
 
   async function onLogout() {
-    setIsLoading(true);
     if (isLoading) return;
+    setIsLoading(true);
 
     try {
       const result = await SignOutUser();

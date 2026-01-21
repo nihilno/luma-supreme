@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import AdminOrderActions from "@/components/admin/admin-order-action";
 import CartSummary from "@/components/cart/cart-summary";
 import Paypal from "@/components/orders/payment/paypal";
 import AddressEdit from "@/components/orders/place-order/address-edit";
@@ -28,8 +29,8 @@ export default async function OrderPage({
     throw new Error("You must be logged in to browse orders.");
 
   const order = await getOrderById(id);
-  if (order.userId !== userId && session.user.role !== "ADMIN") redirect("/");
   if (!order) notFound();
+  if (order.userId !== userId && session.user.role !== "ADMIN") redirect("/");
 
   const address = order.shippingAddress as shippingType;
   const prices = {
@@ -42,20 +43,28 @@ export default async function OrderPage({
   return (
     <section className="mt-16 pb-32">
       <div className="space-y-16">
-        <div className="flex items-center gap-3">
-          <IconGridScan className="text-distinct size-12" />
-          <div>
-            <h2 className="text-3xl font-bold">
-              Order <span className="text-distinct">{formatId(id)}</span>
-            </h2>
-            <p className="text-muted-foreground text-sm">
-              You can inspect details of your order.
-            </p>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <IconGridScan className="text-distinct size-12" />
+            <div>
+              <h2 className="text-3xl font-bold">
+                Order <span className="text-distinct">{formatId(id)}</span>
+              </h2>
+              <p className="text-muted-foreground text-sm">
+                You can inspect details of your order.
+              </p>
+            </div>
           </div>
+          {session.user.role === "ADMIN" && <AdminOrderActions />}
         </div>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <AddressEdit address={address} readOnly={true} />
+            <AddressEdit
+              address={address}
+              isDelivered={order.isDelivered}
+              deliveredAt={order.deliveredAt}
+              readOnly={true}
+            />
           </div>
           <div className="h-full lg:col-span-2">
             <PaymentEdit
