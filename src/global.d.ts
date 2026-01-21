@@ -92,4 +92,9 @@ declare global {
     paidAt: Date | null;
     deliveredAt: Date | null;
   };
+
+  type SalesDataType = {
+    month: string;
+    totalSales: number;
+  };
 }

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <section className="mt-16 grid min-h-150 grid-cols-[1fr_8fr] gap-4 pb-8 sm:gap-8">
+    <section className="mt-24 grid min-h-150 grid-cols-[1fr_8fr] gap-4 pb-16 sm:gap-8">
       <div>
         <Sidebar />
       </div>

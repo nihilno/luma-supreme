@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -20,7 +26,8 @@ async function Recent() {
     return (
       <Card>
         <CardHeader className="border-b border-dashed text-xl font-bold">
-          Recent Sales
+          <CardTitle>Recent Sales</CardTitle>
+          <CardDescription>Sales per month</CardDescription>
         </CardHeader>
         <CardContent className="grid h-full min-h-40 place-items-center italic">
           No recent sales yet.
@@ -31,7 +38,8 @@ async function Recent() {
   return (
     <Card>
       <CardHeader className="border-b border-dashed text-xl font-bold">
-        Recent Sales
+        <CardTitle>Sales</CardTitle>
+        <CardDescription>The most recent sales</CardDescription>
       </CardHeader>
       <CardContent>
         <Table>

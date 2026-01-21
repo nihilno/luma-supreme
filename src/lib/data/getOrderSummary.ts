@@ -4,11 +4,6 @@ import { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { decimalToNumber } from "../utils";
 
-type SalesDataType = {
-  month: string;
-  totalSales: number;
-};
-
 export async function getOrderSummary() {
   try {
     const [
