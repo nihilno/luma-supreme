@@ -38,7 +38,7 @@ function AddressEdit({
               <IconLoader className="size-4!" />
             )}
             {isDelivered
-              ? `Delivered at ${deliveredAt ?? "unknown date"}`
+              ? `Delivered at ${deliveredAt?.toLocaleString() ?? "unknown date"}`
               : "Not Delivered"}
           </Badge>
         ) : (

@@ -222,13 +222,12 @@ export async function markAsDelivered(id: string) {
 
     if (!order) throw new Error("Order not found.");
     if (!order.isPaid)
-      throw new Error("Order cannot be makred as delivered if it's not paid.");
+      throw new Error("Order cannot be marked as delivered if it's not paid.");
 
     await prisma.order.update({
       where: { id },
       data: { isDelivered: true, deliveredAt: new Date() },
     });
-
     revalidatePath(`/order/${id}`);
 
     return {
