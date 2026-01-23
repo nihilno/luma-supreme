@@ -3,7 +3,7 @@
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { insertProductSchema, updateProductSchema } from "../schemas/product";
+import { upsertProductSchema } from "../schemas/product";
 
 export async function removeProduct(productId: string) {
   try {
@@ -24,7 +24,7 @@ export async function removeProduct(productId: string) {
 
     return {
       success: true,
-      message: `Order ${productId} was removed.`,
+      message: `Product ${productId} was removed.`,
     };
   } catch (error) {
     console.error(error);
@@ -36,7 +36,7 @@ export async function removeProduct(productId: string) {
 }
 
 export async function createProduct(formData: unknown) {
-  const validated = insertProductSchema.safeParse(formData);
+  const validated = upsertProductSchema.safeParse(formData);
   if (!validated.success)
     return {
       success: false,
@@ -56,7 +56,7 @@ export async function createProduct(formData: unknown) {
 
     return {
       success: true,
-      message: "Product added successfully.",
+      message: "Product updated successfully.",
     };
   } catch (error) {
     console.error(error);
@@ -68,7 +68,7 @@ export async function createProduct(formData: unknown) {
 }
 
 export async function updateProduct(formData: unknown) {
-  const validated = updateProductSchema.safeParse(formData);
+  const validated = upsertProductSchema.safeParse(formData);
   if (!validated.success)
     return {
       success: false,
@@ -102,7 +102,7 @@ export async function updateProduct(formData: unknown) {
 
     return {
       success: true,
-      message: "Product added successfully.",
+      message: "Product updated successfully.",
     };
   } catch (error) {
     console.error(error);

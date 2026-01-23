@@ -43,7 +43,7 @@ function DeleteProduct({ id }: { id: string }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" title="Delete this order.">
+        <Button variant="ghost" size="icon" title="Delete this item.">
           <IconSquareMinus className="text-destructive size-5.5" />
         </Button>
       </DialogTrigger>

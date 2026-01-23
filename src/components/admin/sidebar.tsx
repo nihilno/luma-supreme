@@ -9,7 +9,7 @@ function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <nav className="w-fit rounded-xl border px-2 sm:px-4">
+    <nav className="bg-card w-fit rounded-xl border px-2 sm:px-4">
       <ul className="space-y-6 py-4">
         {adminButtons.map(({ label, href, icon: Icon }) => (
           <li key={label}>

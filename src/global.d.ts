@@ -116,4 +116,9 @@ declare global {
     query: string;
     category?: string;
   };
+
+  type AdminProductFormProps = {
+    type: "Create" | "Update";
+    productId?: string;
+  };
 }

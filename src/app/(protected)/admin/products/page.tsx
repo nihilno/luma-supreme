@@ -1,4 +1,4 @@
-import DeleteProduct from "@/components/buttons/delete-produt";
+import DeleteProduct from "@/components/buttons/delete-product";
 import Pagination from "@/components/global/pagination";
 import { Button } from "@/components/ui/button";
 import {
