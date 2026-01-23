@@ -7,10 +7,7 @@ import "server-only";
 export async function getUserOrders({
   limit = PAGE_SIZE,
   page,
-}: {
-  limit?: number;
-  page: number;
-}) {
+}: PaginationProps) {
   const session = await auth();
   const userId = session?.user?.id;
 

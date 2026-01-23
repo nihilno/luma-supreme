@@ -90,7 +90,7 @@ export async function AddToCart(data: cartItemType) {
     console.error(error);
     return {
       success: false,
-      message: "Cannot add to Cart. Try again later.",
+      message: "Cannot add more of this product right now.",
     };
   }
 }

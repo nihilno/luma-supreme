@@ -8,7 +8,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatId, toGBP } from "@/lib/utils";
+import { tableHeadStyle } from "@/lib/constants/styles";
+import { cn, formatId, toGBP } from "@/lib/utils";
 import {
   IconCheckbox,
   IconExternalLink,
@@ -28,22 +29,12 @@ function OrdersTable({
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="text-distinct font-semibold sm:text-base md:text-lg">
-            ID
-          </TableHead>
-          <TableHead className="text-distinct font-semibold sm:text-base md:text-lg">
-            Date
-          </TableHead>
-          <TableHead className="text-distinct font-semibold sm:text-base md:text-lg">
-            Total
-          </TableHead>
-          <TableHead className="text-distinct font-semibold sm:text-base md:text-lg">
-            Paid
-          </TableHead>
-          <TableHead className="text-distinct font-semibold sm:text-base md:text-lg">
-            Delivered
-          </TableHead>
-          <TableHead className="text-distinct w-16 font-semibold sm:text-base md:text-lg">
+          <TableHead className={tableHeadStyle}>ID</TableHead>
+          <TableHead className={tableHeadStyle}>Date</TableHead>
+          <TableHead className={tableHeadStyle}>Total</TableHead>
+          <TableHead className={tableHeadStyle}>Paid</TableHead>
+          <TableHead className={tableHeadStyle}>Delivered</TableHead>
+          <TableHead className={cn(tableHeadStyle, "md:text-lg")}>
             Actions
           </TableHead>
         </TableRow>

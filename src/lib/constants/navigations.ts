@@ -9,6 +9,7 @@ import {
   IconPackages,
   IconShield,
   IconShoppingBagSearch,
+  IconTagPlus,
   IconTagStarred,
   IconUserCog,
   IconUserSearch,
@@ -61,6 +62,12 @@ export const adminButtons = [
     label: "Products",
     href: "/admin/products",
     icon: IconTagStarred,
+  },
+
+  {
+    label: "Add product",
+    href: "/admin/products/new",
+    icon: IconTagPlus,
   },
   {
     label: "Users",

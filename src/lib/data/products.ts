@@ -1,6 +1,7 @@
 import "server-only";
 
-import { FEATURED_LIMIT } from "@/lib/constants/consts";
+import { auth } from "@/auth";
+import { FEATURED_LIMIT, PAGE_SIZE } from "@/lib/constants/consts";
 import { prisma } from "@/lib/prisma";
 import { decimalToNumber } from "@/lib/utils";
 
@@ -42,4 +43,40 @@ export async function getProductBySlug(slug: string) {
     console.error(error);
     return null;
   }
+}
+
+export async function getAllProducts({
+  limit = PAGE_SIZE,
+  page,
+  query,
+  category,
+}: ProductPaginationProps) {
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  if (!userId) throw new Error("Only logged in users can perform this action.");
+  if (session?.user?.role !== "ADMIN")
+    throw new Error("Unauthorized: Admin access required.");
+  if (page < 1) throw new Error("Page must be at least 1.");
+
+  const initialProducts = await prisma.product.findMany({
+    orderBy: { createdAt: "desc" },
+    take: limit,
+    skip: (page - 1) * limit,
+  });
+
+  const dataCount = await prisma.product.count();
+
+  const products = initialProducts.map((product): Product => {
+    return {
+      ...product,
+      price: decimalToNumber(product.price),
+      rating: decimalToNumber(product.rating),
+    };
+  });
+
+  return {
+    products,
+    totalPages: Math.ceil(dataCount / limit),
+  };
 }

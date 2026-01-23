@@ -14,8 +14,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { tableHeadStyle } from "@/lib/constants/styles";
 import { getOrderSummary } from "@/lib/data/orders";
-import { toGBP } from "@/lib/utils";
+import { cn, toGBP } from "@/lib/utils";
 import { IconExternalLink } from "@tabler/icons-react";
 import Link from "next/link";
 
@@ -45,16 +46,10 @@ async function Recent() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="text-distinct font-semibold sm:text-base md:text-lg">
-                Buyer
-              </TableHead>
-              <TableHead className="text-distinct font-semibold sm:text-base md:text-lg">
-                Date
-              </TableHead>
-              <TableHead className="text-distinct font-semibold sm:text-base md:text-lg">
-                Total
-              </TableHead>
-              <TableHead className="text-distinct w-20 font-semibold sm:text-base md:text-lg">
+              <TableHead className={tableHeadStyle}>Buyer</TableHead>
+              <TableHead className={tableHeadStyle}>Date</TableHead>
+              <TableHead className={tableHeadStyle}>Total</TableHead>
+              <TableHead className={cn(tableHeadStyle, "md:text-lg")}>
                 Actions
               </TableHead>
             </TableRow>

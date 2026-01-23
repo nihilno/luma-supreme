@@ -25,7 +25,7 @@ declare global {
     isFeatured: boolean;
     banner: string | null;
     createdAt: Date;
-  } | null;
+  };
 
   type AddToCartProps = {
     price: number;
@@ -105,5 +105,15 @@ declare global {
     isPaid: boolean;
     isDelivered: boolean;
     id: string;
+  };
+
+  type PaginationProps = {
+    limit?: number;
+    page: number;
+  };
+
+  type ProductPaginationProps = PaginationProps & {
+    query: string;
+    category?: string;
   };
 }

@@ -20,8 +20,8 @@ function DeleteOrder({ id }: { id: string }) {
   const [isLoading, setIsLoading] = useState(false);
 
   async function onDelete() {
-    setIsLoading(true);
     if (isLoading) return;
+    setIsLoading(true);
 
     try {
       const result = await removeOrder(id);

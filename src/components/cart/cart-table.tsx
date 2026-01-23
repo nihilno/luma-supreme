@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { AddToCart, removeItemFromCart } from "@/lib/actions/cart";
+import { tableHeadStyle } from "@/lib/constants/styles";
 import { cartItemType } from "@/lib/schemas/cart";
 import { toGBP } from "@/lib/utils";
 import {
@@ -37,15 +38,9 @@ function CartTable({
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="text-distinct font-semibold sm:text-base md:text-lg">
-            Item
-          </TableHead>
-          <TableHead className="text-distinct font-semibold sm:text-base md:text-lg">
-            Quantity
-          </TableHead>
-          <TableHead className="text-distinct font-semibold sm:text-base md:text-lg">
-            Price
-          </TableHead>
+          <TableHead className={tableHeadStyle}>Item</TableHead>
+          <TableHead className={tableHeadStyle}>Quantity</TableHead>
+          <TableHead className={tableHeadStyle}>Price</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -125,9 +120,7 @@ function CartTable({
                           const result = await AddToCart(item);
 
                           if (!result?.success) {
-                            toast.warning(
-                              "Cannot change quantity. Try again later.",
-                            );
+                            toast.warning(result.message);
                             setPendingId(null);
                             return;
                           }

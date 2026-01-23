@@ -1,12 +1,12 @@
 "use server";
 
 import { auth } from "@/auth";
-import { getUserById } from "@/lib/data/getUserById";
+import { getOrderById } from "@/lib/data/orders";
+import { getUserById } from "@/lib/data/user";
 import { prisma } from "@/lib/prisma";
 import { orderSchema } from "@/lib/schemas/order";
 import { revalidatePath } from "next/cache";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
-import { getOrderById } from "../data/getOrderById";
 import { getMyCart } from "./cart";
 
 export async function createOrder() {
