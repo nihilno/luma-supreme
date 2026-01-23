@@ -1,3 +1,4 @@
+import DeleteOrder from "@/components/buttons/delete-order";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,7 +17,6 @@ import {
   IconLoader,
 } from "@tabler/icons-react";
 import Link from "next/link";
-import DeleteOrder from "../buttons/delete-order";
 
 function OrdersTable({
   orders,

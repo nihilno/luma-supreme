@@ -27,8 +27,13 @@ export async function getAllOrders({
 
   const orders = initialOrders.map((order): OrderTableItem => {
     return {
-      ...order,
+      id: order.id,
+      createdAt: order.createdAt,
       totalPrice: decimalToNumber(order.totalPrice),
+      isPaid: order.isPaid,
+      isDelivered: order.isDelivered,
+      paidAt: order.paidAt,
+      deliveredAt: order.deliveredAt,
     };
   });
 
