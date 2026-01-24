@@ -10,6 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { SheetClose } from "@/components/ui/sheet";
 import { sessionButtons } from "@/lib/constants/navigations";
 import { cn } from "@/lib/utils";
 import { IconUserPentagon } from "@tabler/icons-react";
@@ -46,10 +47,12 @@ function UserProfile({ dropdown = false, name, email }: UserProfileProps) {
     <div className={cn(!dropdown && "flex w-full flex-col gap-2.5")}>
       {sessionButtons.map(({ label, href, icon: Icon }) => (
         <Button key={label} asChild>
-          <Link href={href}>
-            <Icon className="size-5" />
-            {!dropdown && <span>{label}</span>}
-          </Link>
+          <SheetClose asChild>
+            <Link href={href}>
+              <Icon className="size-5" />
+              {!dropdown && <span>{label}</span>}
+            </Link>
+          </SheetClose>
         </Button>
       ))}
     </div>

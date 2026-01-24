@@ -11,9 +11,9 @@ import {
 } from "@tabler/icons-react";
 
 export const headerNav = [
-  { label: "Pricing", href: "/pricing" },
-  { label: "Docs", href: "/docs" },
-  { label: "About Us", href: "/about-us" },
+  { label: "Pricing", href: "#" },
+  { label: "Docs", href: "#" },
+  { label: "About Us", href: "#" },
 ];
 
 export const publicButtons = [

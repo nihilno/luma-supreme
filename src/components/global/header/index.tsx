@@ -4,6 +4,7 @@ import { ModeToggle } from "@/components/buttons/mode-toggle";
 import SignIn from "@/components/buttons/signin";
 import Logo from "@/components/global/logo";
 import Buttons from "./buttons";
+import CategoriesDrawer from "./categories-drawer";
 import { Mobile } from "./mobile";
 import Navigation from "./navigation";
 import UserProfile from "./user-profile";
@@ -16,7 +17,10 @@ async function Header() {
   return (
     <header className="wrapper sticky top-0 z-50 grid h-25 max-w-6xl place-items-center">
       <div className="bg-background/30 flex w-full items-center justify-between rounded-full border p-4 backdrop-blur-sm lg:px-24">
-        <Logo withTitle={true} />
+        <div className="flex items-center gap-2">
+          <Logo />
+          <CategoriesDrawer />
+        </div>
         <div className="hidden sm:block">
           <Navigation />
         </div>

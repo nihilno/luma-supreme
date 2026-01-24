@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-function Logo({ withTitle = false }: { withTitle?: boolean }) {
+function Logo() {
   return (
     <Link
       href={"/"}
@@ -18,9 +18,6 @@ function Logo({ withTitle = false }: { withTitle?: boolean }) {
         quality={25}
         className="dark:bg-primary rounded-xl p-0.5 opacity-90"
       />
-      {withTitle && (
-        <h1 className="hidden -translate-y-0.5 text-2xl sm:block">Luma</h1>
-      )}
     </Link>
   );
 }
