@@ -56,7 +56,7 @@ export async function createProduct(formData: unknown) {
 
     return {
       success: true,
-      message: "Product updated successfully.",
+      message: "Product created successfully.",
     };
   } catch (error) {
     console.error(error);

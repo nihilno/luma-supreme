@@ -20,16 +20,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { createProduct, updateProduct } from "@/lib/actions/products";
 import { upsertProductSchema, UpsertProductType } from "@/lib/schemas/product";
+import { UploadButton } from "@/lib/uploadthing";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IconChecks, IconLoader2, IconSparkles2 } from "@tabler/icons-react";
-import { Metadata } from "next";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-
-export const metadata: Metadata = {
-  title: "Add new product",
-};
+import { Checkbox } from "../ui/checkbox";
 
 function AdminProductForm({
   type = "Create",
@@ -93,11 +91,16 @@ function AdminProductForm({
   }
 
   const disabled = form.formState.isSubmitting;
+  const images = form.watch("images");
+  const isFeatured = form.watch("isFeatured");
+  const banner = form.watch("banner");
 
   return (
     <Card>
       <CardHeader className="border-b border-dashed">
-        <CardTitle className="text-lg">Create Product Listing</CardTitle>
+        <CardTitle className="text-lg">
+          {type === "Create" ? "Create Product Listing" : "Update Product"}
+        </CardTitle>
         <CardDescription>
           Provide accurate product information for the catalog.
         </CardDescription>
@@ -237,12 +240,35 @@ function AdminProductForm({
             <FormField
               name="images"
               control={form.control}
-              render={({ field }) => (
+              render={() => (
                 <FormItem>
-                  <FormLabel>Images</FormLabel>
-                  <FormControl>
-                    <Input {...field} className="h-11 text-sm" type="file" />
-                  </FormControl>
+                  <div className="flex min-h-48 flex-col rounded-xl border">
+                    <FormControl>
+                      <UploadButton
+                        className="bg-distinct/50 rounded-t-xl pb-2 text-white"
+                        endpoint="imageUploader"
+                        onClientUploadComplete={(res: { url: string }[]) => {
+                          form.setValue("images", [...images, res[0].url]);
+                        }}
+                        onUploadError={(error: Error) => {
+                          toast.error(error.message);
+                        }}
+                      />
+                    </FormControl>
+                    <div className="flex h-full flex-wrap items-center justify-center gap-2">
+                      {images.map((img, index) => (
+                        <Image
+                          key={index}
+                          src={img}
+                          alt="Product image"
+                          className="h-20 w-20 rounded-sm border object-cover object-center"
+                          width={100}
+                          height={100}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
                   <FormMessage />
                 </FormItem>
               )}
@@ -250,33 +276,55 @@ function AdminProductForm({
             <FormField
               name="isFeatured"
               control={form.control}
-              render={() => (
-                <FormItem>
-                  <FormLabel>Featured Product</FormLabel>
+              render={({ field }) => (
+                <FormItem className="flex flex-col items-center">
+                  <FormLabel className="text-base">Featured Product</FormLabel>
                   <FormControl>
-                    <Input
-                      type="checkbox"
-                      placeholder="Enter product name"
-                      className="h-11 text-sm"
+                    <Checkbox
+                      className="size-8"
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <FormField
-              name="banner"
-              control={form.control}
-              render={() => (
-                <FormItem>
-                  <FormLabel>Banner</FormLabel>
-                  <FormControl>
-                    <Input type="file" className="h-11 text-sm" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {isFeatured && (
+              <FormField
+                name="banner"
+                control={form.control}
+                render={() => (
+                  <FormItem>
+                    <div className="flex min-h-48 flex-col rounded-xl border">
+                      <FormControl>
+                        <UploadButton
+                          className="bg-distinct/50 rounded-t-xl pb-2 text-white"
+                          endpoint="imageUploader"
+                          onClientUploadComplete={(res: { url: string }[]) => {
+                            form.setValue("banner", res[0].url);
+                          }}
+                          onUploadError={(error: Error) => {
+                            toast.error(error.message);
+                          }}
+                        />
+                      </FormControl>
+                      <div className="flex h-full flex-wrap items-center justify-center gap-2">
+                        {isFeatured && banner && (
+                          <Image
+                            src={banner}
+                            alt="Product image"
+                            className="w-full rounded-sm border object-cover object-center"
+                            width={1920}
+                            height={680}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  </FormItem>
+                )}
+              />
+            )}
             <FormField
               name="description"
               control={form.control}

@@ -56,11 +56,13 @@ function DeleteProduct({ id }: { id: string }) {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="mt-4">
+          <DialogClose asChild>
+            <Button>Close</Button>
+          </DialogClose>
           <Button
             variant={"destructive"}
             onClick={onDelete}
             disabled={isLoading}
-            className="w-20"
           >
             {isLoading ? (
               <IconLoader2 className="size-4 animate-spin" />
@@ -68,9 +70,6 @@ function DeleteProduct({ id }: { id: string }) {
               <span>Delete</span>
             )}
           </Button>
-          <DialogClose asChild>
-            <Button className="w-20">Close</Button>
-          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -11,12 +11,7 @@ const upsertProductSchema = z.object({
   images: z.array(z.string()).min(1, "Product must have at least one image."),
   isFeatured: z.boolean(),
   banner: z.string().nullable(),
-  price: z
-    .number()
-    .positive("Value must be greater than 0.")
-    .refine((value) => !/^0\d+/.test(String(value)), {
-      message: "Value cannot start with 0",
-    }),
+  price: z.number().positive("Price must be greater than 0."),
 });
 
 type UpsertProductType = z.infer<typeof upsertProductSchema>;

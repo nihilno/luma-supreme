@@ -9,7 +9,7 @@ function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-card w-fit rounded-xl border px-2 sm:px-4">
+    <nav className="bg-card sticky top-24 left-0 w-fit rounded-xl border px-2">
       <ul className="space-y-6 py-4">
         {adminButtons.map(({ label, href, icon: Icon }) => (
           <li key={label}>
@@ -20,8 +20,8 @@ function Sidebar() {
                 pathname === href && "text-distinct",
               )}
             >
-              <Icon className="size-8 sm:size-7" />
-              <span className="group-hover:text-distinct hidden transition sm:block">
+              <Icon className="size-6 sm:size-8" />
+              <span className="group-hover:text-distinct hidden text-sm transition sm:block">
                 {label}
               </span>
             </Link>

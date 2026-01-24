@@ -8,7 +8,7 @@ import { decimalToNumber } from "@/lib/utils";
 export async function getFeaturedProducts() {
   try {
     const featured = await prisma.product.findMany({
-      where: { isFeatured: true },
+      // where: { isFeatured: true },
       orderBy: { createdAt: "desc" },
       take: FEATURED_LIMIT,
     });

@@ -34,7 +34,7 @@ async function ProductsContainer({ title }: { title?: string }) {
   return (
     <div className="mx-auto mt-16 max-w-sm sm:max-w-none">
       <div className="flex items-center justify-center sm:justify-start">
-        <h2 className="flex items-center gap-3 text-3xl font-bold sm:text-left sm:text-4xl">
+        <h2 className="flex flex-col items-center gap-3 text-2xl font-bold sm:flex-row sm:text-left sm:text-4xl">
           <IconNorthStar className="text-distinct size-12" />
           {title}
         </h2>
