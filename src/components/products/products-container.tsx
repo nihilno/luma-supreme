@@ -6,7 +6,6 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { getFeaturedProducts } from "@/lib/data/products";
 import { cn, toGBP } from "@/lib/utils";
 import {
   IconFileUnknown,
@@ -17,9 +16,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-async function ProductsContainer({ title }: { title?: string }) {
-  const featured = await getFeaturedProducts();
-
+async function ProductsContainer({ title, featured }: ProductsContainerProps) {
   if (!featured || featured.length === 0)
     return (
       <section className="-mt-32 grid h-screen place-items-center">
@@ -32,7 +29,7 @@ async function ProductsContainer({ title }: { title?: string }) {
     );
 
   return (
-    <div className="mx-auto mt-16 max-w-sm sm:max-w-none">
+    <div className="mx-auto max-w-sm sm:max-w-none">
       <div className="flex items-center justify-center sm:justify-start">
         <h2 className="flex flex-col items-center gap-3 text-2xl font-bold sm:flex-row sm:text-left sm:text-4xl">
           <IconNorthStar className="text-distinct size-12" />

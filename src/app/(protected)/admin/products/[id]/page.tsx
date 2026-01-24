@@ -16,5 +16,5 @@ export default async function EditProductPage({
   const product = await getProductById(id);
   if (!product) notFound();
 
-  return <AdminProductForm type="Update" product={product} />;
+  return <AdminProductForm type="Update" product={product} productId={id} />;
 }

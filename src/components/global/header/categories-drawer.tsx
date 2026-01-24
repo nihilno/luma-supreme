@@ -34,7 +34,7 @@ async function CategoriesDrawer() {
               variant="ghost"
             >
               <DrawerClose asChild>
-                <Link href={`/searct?category=${c.category}`}>
+                <Link href={`/search?category=${c.category}`}>
                   {c.category} ({c._count})
                 </Link>
               </DrawerClose>

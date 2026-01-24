@@ -117,4 +117,9 @@ declare global {
     productId?: string;
     product?: Product;
   };
+
+  type ProductsContainerProps = {
+    title?: string;
+    featured: Product[];
+  };
 }

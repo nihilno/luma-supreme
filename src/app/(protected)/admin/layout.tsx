@@ -10,7 +10,7 @@ async function Layout({ children }: { children: React.ReactNode }) {
   await requireAdmin();
   return (
     <section className="flex flex-col py-8">
-      <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-4 sm:grid-cols-[2fr_1fr]">
+      <div className="mx-auto w-full max-w-5xl">
         <Sidebar />
       </div>
       <div className="mt-16 min-h-150">{children}</div>

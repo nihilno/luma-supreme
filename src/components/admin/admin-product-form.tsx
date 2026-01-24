@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -27,7 +28,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { Checkbox } from "../ui/checkbox";
 
 function AdminProductForm({
   type = "Create",
@@ -86,6 +86,7 @@ function AdminProductForm({
     } else if (type === "Update") {
       if (!productId) {
         push("/admin/products");
+        toast.warning("No id");
         return;
       }
 
