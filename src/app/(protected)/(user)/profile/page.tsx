@@ -1,5 +1,4 @@
 import { auth } from "@/auth";
-import UserData from "@/components/user/user-data";
 import UserSettings from "@/components/user/user-settings";
 import { getUserById } from "@/lib/data/user";
 import { IconUserCog } from "@tabler/icons-react";
@@ -29,10 +28,8 @@ export default async function ProfilePage() {
           </p>
         </div>
       </div>
-      <div className="flex flex-wrap gap-6">
-        <UserSettings user={user} />
-        <UserData />
-      </div>
+
+      <UserSettings user={user} />
     </section>
   );
 }

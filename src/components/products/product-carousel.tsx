@@ -13,7 +13,7 @@ import Link from "next/link";
 function ProductCarousel({ featured }: { featured: Product[] }) {
   return (
     <Carousel
-      className="mx-auto hidden max-w-300 md:block"
+      className="mx-auto hidden w-full max-w-300 md:block"
       opts={{
         loop: true,
       }}

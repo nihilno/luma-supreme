@@ -1,6 +1,6 @@
 import "server-only";
 
-import { auth } from "@/auth";
+import { Prisma } from "@/generated/prisma/client";
 import { FEATURED_LIMIT, PAGE_SIZE } from "@/lib/constants/consts";
 import { prisma } from "@/lib/prisma";
 import { decimalToNumber } from "@/lib/utils";
@@ -73,16 +73,59 @@ export async function getAllProducts({
   rating,
   sort,
 }: PaginationProps) {
-  const session = await auth();
-  const userId = session?.user?.id;
+  const queryFilter: Prisma.ProductWhereInput =
+    query && query !== "all"
+      ? {
+          name: { contains: query, mode: "insensitive" },
+        }
+      : {};
 
-  if (!userId) throw new Error("Only logged in users can perform this action.");
-  if (session?.user?.role !== "ADMIN")
-    throw new Error("Unauthorized: Admin access required.");
+  const categoryFilter: Prisma.ProductWhereInput =
+    category && category !== "all"
+      ? {
+          category: {
+            contains: category,
+            mode: "insensitive",
+          },
+        }
+      : {};
+
+  const priceFilter: Prisma.ProductWhereInput =
+    price && price !== "all"
+      ? {
+          price: {
+            gte: Number(price.split("-")[0]),
+            lte: Number(price.split("-")[1]),
+          },
+        }
+      : {};
+
+  const ratingFilter: Prisma.ProductWhereInput =
+    rating && rating !== "all"
+      ? {
+          rating: {
+            gte: Number(rating),
+          },
+        }
+      : {};
+
   if (page < 1) throw new Error("Page must be at least 1.");
 
   const initialProducts = await prisma.product.findMany({
-    orderBy: { createdAt: "desc" },
+    where: {
+      ...queryFilter,
+      ...categoryFilter,
+      ...priceFilter,
+      ...ratingFilter,
+    },
+    orderBy:
+      sort === "lowest"
+        ? { price: "asc" }
+        : sort === "highest"
+          ? { price: "desc" }
+          : sort === "rating"
+            ? { rating: "desc" }
+            : { createdAt: "desc" },
     take: limit,
     skip: (page - 1) * limit,
   });

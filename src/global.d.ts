@@ -127,4 +127,13 @@ declare global {
     title?: string;
     featured: Product[];
   };
+
+  type SearchPageParams = {
+    q?: string;
+    category?: string;
+    price?: string;
+    rating?: string;
+    sort?: string;
+    page?: string;
+  };
 }

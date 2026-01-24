@@ -7,15 +7,22 @@ function Search() {
     <form
       action={"/search"}
       method="GET"
-      className="flex max-w-sm gap-2 sm:flex md:max-w-md"
+      className="hidden w-full max-w-[300px] gap-2 sm:flex md:max-w-md"
     >
-      <div className="relative">
-        <Input placeholder="Search..." type="text" name="q" />
+      <div className="relative w-full">
+        <Input
+          placeholder="Search..."
+          type="text"
+          name="q"
+          aria-label="Search"
+          className="w-full rounded-xl"
+        />
         <Button
           size="icon-sm"
           variant={"ghost"}
           className="absolute top-1/2 right-2 -translate-y-1/2"
           type="submit"
+          aria-label="Submit search"
         >
           <IconSearch className="size-5" />
         </Button>

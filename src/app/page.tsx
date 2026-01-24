@@ -9,7 +9,7 @@ export default async function HomePage() {
   const featured = await getFeaturedProducts();
 
   return (
-    <section className="mt-16 flex min-h-dvh flex-col items-center space-y-16 pb-8 text-center">
+    <section className="mt-16 flex min-h-dvh flex-col items-center space-y-32 pb-8 text-center">
       {featured.length > 0 && (
         <Suspense fallback={<Spinner />}>
           <ProductCarousel featured={featured} />
