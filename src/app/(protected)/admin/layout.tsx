@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 async function Layout({ children }: { children: React.ReactNode }) {
   await requireAdmin();
   return (
-    <section className="mt-24 grid min-h-dvh grid-cols-[1fr_8fr] gap-4 pb-8 sm:gap-8">
-      <div>
+    <section className="flex flex-col py-8">
+      <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-4 sm:grid-cols-[2fr_1fr]">
         <Sidebar />
       </div>
-      <div>{children}</div>
+      <div className="mt-16 min-h-150">{children}</div>
     </section>
   );
 }

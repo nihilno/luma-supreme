@@ -22,13 +22,9 @@ export default async function AdminProductsPage({
 }) {
   const params = await searchParams;
   const page = Number(params.page) || 1;
-  const searchText = params.query || "";
-  const category = params.category || "";
 
   const { products, totalPages } = await getAllProducts({
     page,
-    query: searchText,
-    category,
   });
 
   return (

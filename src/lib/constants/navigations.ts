@@ -4,15 +4,10 @@ import {
   IconBrandInstagram,
   IconBrandLinkedin,
   IconBrandX,
-  IconGridScan,
-  IconListTree,
   IconPackages,
   IconShield,
   IconShoppingBagSearch,
-  IconTagPlus,
-  IconTagStarred,
   IconUserCog,
-  IconUserSearch,
 } from "@tabler/icons-react";
 
 export const headerNav = [
@@ -51,28 +46,19 @@ export const adminButtons = [
   {
     label: "Overview",
     href: "/admin/overview",
-    icon: IconListTree,
   },
   {
     label: "Orders",
     href: "/admin/orders",
-    icon: IconGridScan,
   },
   {
     label: "Products",
     href: "/admin/products",
-    icon: IconTagStarred,
   },
 
   {
     label: "Add product",
     href: "/admin/products/new",
-    icon: IconTagPlus,
-  },
-  {
-    label: "Users",
-    href: "/admin/users",
-    icon: IconUserSearch,
   },
 ];
 

@@ -112,11 +112,6 @@ declare global {
     page: number;
   };
 
-  type ProductPaginationProps = PaginationProps & {
-    query: string;
-    category?: string;
-  };
-
   type AdminProductFormProps = {
     type: "Create" | "Update";
     productId?: string;

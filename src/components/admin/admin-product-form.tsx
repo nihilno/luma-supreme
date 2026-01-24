@@ -44,20 +44,28 @@ function AdminProductForm({
             category: "",
             brand: "",
             description: "",
-            stock: 0,
             images: [],
             isFeatured: false,
             banner: null,
             price: 0,
           }
-        : {
-            ...product,
-          },
+        : (product ?? {
+            id: productId,
+            name: "",
+            slug: "",
+            category: "",
+            brand: "",
+            description: "",
+            stock: 0,
+            images: [],
+            isFeatured: false,
+            banner: null,
+            price: 0,
+          }),
     resolver: zodResolver(upsertProductSchema),
     mode: "onBlur",
   });
 
-  console.log(product);
   const { push } = useRouter();
 
   async function handleSubmit(formData: UpsertProductType) {
@@ -103,7 +111,7 @@ function AdminProductForm({
   const banner = form.watch("banner");
 
   return (
-    <Card>
+    <Card className="mx-auto max-w-5xl">
       <CardHeader className="border-b border-dashed">
         <CardTitle className="text-lg">
           {type === "Create" ? "Create Product Listing" : "Update Product"}

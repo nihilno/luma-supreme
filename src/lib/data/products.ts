@@ -67,9 +67,7 @@ export async function getProductById(id: string) {
 export async function getAllProducts({
   limit = PAGE_SIZE,
   page,
-  query,
-  category,
-}: ProductPaginationProps) {
+}: PaginationProps) {
   const session = await auth();
   const userId = session?.user?.id;
 
@@ -85,7 +83,6 @@ export async function getAllProducts({
   });
 
   const dataCount = await prisma.product.count();
-
   const products = initialProducts.map((product): Product => {
     return {
       ...product,
