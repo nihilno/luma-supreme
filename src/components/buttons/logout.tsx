@@ -34,7 +34,7 @@ function Logout() {
   return (
     <Button
       variant={"destructive"}
-      size={"icon"}
+      size={"icon-sm"}
       title="Logout"
       onClick={onLogout}
       disabled={isLoading}

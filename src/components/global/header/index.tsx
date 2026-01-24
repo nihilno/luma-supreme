@@ -6,7 +6,7 @@ import Logo from "@/components/global/logo";
 import Buttons from "./buttons";
 import CategoriesDrawer from "./categories-drawer";
 import { Mobile } from "./mobile";
-import Navigation from "./navigation";
+import Search from "./search";
 import UserProfile from "./user-profile";
 
 async function Header() {
@@ -21,9 +21,7 @@ async function Header() {
           <Logo />
           <CategoriesDrawer />
         </div>
-        <div className="hidden sm:block">
-          <Navigation />
-        </div>
+        <Search />
         <div className="flex items-center gap-2.5">
           <div className="hidden lg:flex lg:items-center lg:gap-2.5">
             <ModeToggle />

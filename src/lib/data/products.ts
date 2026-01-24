@@ -67,6 +67,11 @@ export async function getProductById(id: string) {
 export async function getAllProducts({
   limit = PAGE_SIZE,
   page,
+  query,
+  category,
+  price,
+  rating,
+  sort,
 }: PaginationProps) {
   const session = await auth();
   const userId = session?.user?.id;

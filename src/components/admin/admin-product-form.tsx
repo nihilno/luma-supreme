@@ -85,11 +85,10 @@ function AdminProductForm({
       }
     } else if (type === "Update") {
       if (!productId) {
+        toast.warning("Product ID is missing. Unable to update.");
         push("/admin/products");
-        toast.warning("No id");
         return;
       }
-
       try {
         const result = await updateProduct(formData);
         if (!result.success) {

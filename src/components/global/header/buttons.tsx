@@ -12,7 +12,7 @@ function Buttons() {
           asChild
           title={label}
           aria-label={label}
-          size="icon"
+          size="icon-sm"
         >
           <Link href={href}>
             <Icon className="size-5" />

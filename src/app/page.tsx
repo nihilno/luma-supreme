@@ -1,3 +1,4 @@
+import ViewAll from "@/components/buttons/view-all";
 import Spinner from "@/components/global/spinner";
 import ProductCarousel from "@/components/products/product-carousel";
 import ProductsContainer from "@/components/products/products-container";
@@ -8,7 +9,7 @@ export default async function HomePage() {
   const featured = await getFeaturedProducts();
 
   return (
-    <section className="mt-16 min-h-dvh space-y-16 pb-8">
+    <section className="mt-16 flex min-h-dvh flex-col items-center space-y-16 pb-8 text-center">
       {featured.length > 0 && (
         <Suspense fallback={<Spinner />}>
           <ProductCarousel featured={featured} />
@@ -17,6 +18,7 @@ export default async function HomePage() {
       <Suspense fallback={<Spinner />}>
         <ProductsContainer title="Featured Products" featured={featured} />
       </Suspense>
+      <ViewAll />
     </section>
   );
 }

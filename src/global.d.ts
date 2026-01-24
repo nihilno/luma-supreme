@@ -110,6 +110,11 @@ declare global {
   type PaginationProps = {
     limit?: number;
     page: number;
+    query?: string;
+    category?: string;
+    price?: string;
+    rating?: string;
+    sort?: string;
   };
 
   type AdminProductFormProps = {
