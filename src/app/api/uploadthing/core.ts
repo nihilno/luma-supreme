@@ -12,9 +12,10 @@ export const ourFileRouter = {
   })
     .middleware(async () => {
       const session = await auth();
-      if (!session) throw new UploadThingError("Unauthorized");
+      const userId = session?.user?.id;
+      if (!userId) throw new UploadThingError("Unauthorized");
 
-      return { userId: session?.user?.id };
+      return { userId };
     })
     .onUploadComplete(async ({ metadata }) => {
       return { uploadedBy: metadata.userId };

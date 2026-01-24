@@ -30,14 +30,12 @@ export function Chart({
       </CardHeader>
 
       <CardContent className="pt-6">
-        <ResponsiveContainer width="100%" height={350}>
-          {!salesData || salesData.length === 0 ? (
-            <div className="grid h-full place-items-center">
-              <p className="text-sm italic">
-                There are no sales yet to display
-              </p>
-            </div>
-          ) : (
+        {!salesData || salesData.length === 0 ? (
+          <div className="grid h-[350px] place-items-center">
+            <p className="text-sm italic">There are no sales yet to display</p>
+          </div>
+        ) : (
+          <ResponsiveContainer width="100%" height={350}>
             <BarChart data={salesData} margin={{ left: 10, right: 10 }}>
               <CartesianGrid
                 strokeDasharray="3 3"
@@ -73,8 +71,8 @@ export function Chart({
                 activeBar={{ opacity: 0.85 }}
               />
             </BarChart>
-          )}
-        </ResponsiveContainer>
+          </ResponsiveContainer>
+        )}
       </CardContent>
     </Card>
   );

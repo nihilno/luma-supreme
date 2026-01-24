@@ -8,7 +8,7 @@ import { decimalToNumber } from "@/lib/utils";
 export async function getFeaturedProducts() {
   try {
     const featured = await prisma.product.findMany({
-      // where: { isFeatured: true },
+      where: { isFeatured: true },
       orderBy: { createdAt: "desc" },
       take: FEATURED_LIMIT,
     });
@@ -30,6 +30,25 @@ export async function getProductBySlug(slug: string) {
   try {
     const product = await prisma.product.findUnique({
       where: { slug },
+    });
+
+    if (!product) return null;
+
+    return {
+      ...product,
+      rating: decimalToNumber(product.rating),
+      price: decimalToNumber(product.price),
+    };
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+export async function getProductById(id: string) {
+  try {
+    const product = await prisma.product.findUnique({
+      where: { id },
     });
 
     if (!product) return null;

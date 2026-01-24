@@ -58,7 +58,7 @@ export default async function AdminProductsPage({
               <TableCell>{rating}/5</TableCell>
               <TableCell className="flex w-15 items-center text-center">
                 <Button size="icon-sm" variant={"ghost"} asChild>
-                  <Link href={"/"}>
+                  <Link href={`/admin/products/${id}`}>
                     <IconEdit className="size-5.5" />
                   </Link>
                 </Button>

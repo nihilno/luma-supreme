@@ -32,25 +32,32 @@ import { Checkbox } from "../ui/checkbox";
 function AdminProductForm({
   type = "Create",
   productId,
+  product,
 }: AdminProductFormProps) {
   const form = useForm({
-    defaultValues: {
-      id: productId,
-      name: "",
-      slug: "",
-      category: "",
-      brand: "",
-      description: "",
-      stock: 0,
-      images: [],
-      isFeatured: false,
-      banner: null,
-      price: 0,
-    },
+    defaultValues:
+      type === "Create"
+        ? {
+            id: productId,
+            name: "",
+            slug: "",
+            category: "",
+            brand: "",
+            description: "",
+            stock: 0,
+            images: [],
+            isFeatured: false,
+            banner: null,
+            price: 0,
+          }
+        : {
+            ...product,
+          },
     resolver: zodResolver(upsertProductSchema),
     mode: "onBlur",
   });
 
+  console.log(product);
   const { push } = useRouter();
 
   async function handleSubmit(formData: UpsertProductType) {
@@ -248,7 +255,9 @@ function AdminProductForm({
                         className="bg-distinct/50 rounded-t-xl pb-2 text-white"
                         endpoint="imageUploader"
                         onClientUploadComplete={(res: { url: string }[]) => {
-                          form.setValue("images", [...images, res[0].url]);
+                          if (res.length > 0) {
+                            form.setValue("images", [...images, res[0].url]);
+                          }
                         }}
                         onUploadError={(error: Error) => {
                           toast.error(error.message);
@@ -302,7 +311,9 @@ function AdminProductForm({
                           className="bg-distinct/50 rounded-t-xl pb-2 text-white"
                           endpoint="imageUploader"
                           onClientUploadComplete={(res: { url: string }[]) => {
-                            form.setValue("banner", res[0].url);
+                            if (res.length > 0) {
+                              form.setValue("banner", res[0].url);
+                            }
                           }}
                           onUploadError={(error: Error) => {
                             toast.error(error.message);
@@ -353,7 +364,7 @@ function AdminProductForm({
               ) : (
                 <IconChecks className="size-6" />
               )}
-              Create product!
+              {type === "Create" ? "Create Product" : "Update Product"}
             </Button>
           </form>
         </Form>

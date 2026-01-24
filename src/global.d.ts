@@ -120,5 +120,6 @@ declare global {
   type AdminProductFormProps = {
     type: "Create" | "Update";
     productId?: string;
+    product?: Product;
   };
 }
