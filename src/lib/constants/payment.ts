@@ -1,6 +1,2 @@
 export const defaultPaymentMethod = "PayPal";
-export const paymentMethods = [
-  "PayPal",
-  "Credit Card",
-  "CashOnDelivery",
-] as const;
+export const paymentMethods = ["PayPal", "Stripe", "CashOnDelivery"] as const;

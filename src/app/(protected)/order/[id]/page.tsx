@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import AdminOrderActions from "@/components/admin/admin-order-action";
 import CartSummary from "@/components/cart/cart-summary";
 import Paypal from "@/components/orders/payment/paypal";
+import StripePayment from "@/components/orders/payment/stripe";
 import AddressEdit from "@/components/orders/place-order/address-edit";
 import OrderItems from "@/components/orders/place-order/order-items";
 import PaymentEdit from "@/components/orders/place-order/payment-edit";
@@ -12,6 +13,7 @@ import { decimalToNumber, formatId } from "@/lib/utils";
 import { IconCashEdit, IconGridScan } from "@tabler/icons-react";
 import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
+import Stripe from "stripe";
 
 export const metadata: Metadata = {
   title: "Order Details",
@@ -47,6 +49,8 @@ export default async function OrderPage({
     id: orderId,
   } = order;
 
+  console.log(paymentMethod);
+
   const address = shippingAddress as shippingType;
   const prices = {
     itemsPrice: decimalToNumber(itemsPrice),
@@ -56,6 +60,20 @@ export default async function OrderPage({
   };
 
   const isAdmin = session?.user?.role === "ADMIN";
+  const priceInCents = Math.round(Number(totalPrice) * 100);
+
+  // Stripe
+
+  let clientSecret: string | null = null;
+  if (order.paymentMethod === "Stripe" && !order.isPaid) {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: priceInCents,
+      currency: "gbp",
+      metadata: { order_id: orderId },
+    });
+    clientSecret = paymentIntent.client_secret;
+  }
 
   return (
     <section className="mt-16 pb-32">
@@ -105,10 +123,18 @@ export default async function OrderPage({
             <Card className="relative h-full overflow-hidden">
               <CardContent>
                 <CartSummary prices={prices} compact={true} />
+                {!order.isPaid && order.paymentMethod === "Stripe" && (
+                  <StripePayment
+                    priceInCents={priceInCents}
+                    orderId={orderId}
+                    clientSecret={clientSecret!}
+                  />
+                )}
               </CardContent>
               <IconCashEdit className="absolute right-0 bottom-0 size-72 overflow-hidden opacity-4 lg:size-32" />
             </Card>
-            {!order.isPaid && order.paymentMethod === "PayPal" && !isAdmin && (
+
+            {!order.isPaid && order.paymentMethod === "PayPal" && (
               <div className="flex-1">
                 <Paypal totalPrice={totalPrice} orderId={orderId} />
               </div>

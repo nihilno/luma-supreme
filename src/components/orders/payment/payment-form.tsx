@@ -17,10 +17,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { IconArrowBarLeft, IconArrowBarRight } from "@tabler/icons-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 function PaymentForm() {
+  const [isPending, startTransition] = useTransition();
   const { replace } = useRouter();
   const form = useForm<paymentType>({
     defaultValues: {
@@ -37,14 +39,16 @@ function PaymentForm() {
         return;
       }
 
-      replace("/place-order");
+      startTransition(() => {
+        replace("/place-order");
+      });
     } catch (error) {
       console.error(error);
       toast.error("An internal error has occurred. Try again later.");
     }
   }
 
-  const disabled = form.formState.isSubmitting;
+  const disabled = form.formState.isSubmitting || isPending;
 
   return (
     <div className="relative">

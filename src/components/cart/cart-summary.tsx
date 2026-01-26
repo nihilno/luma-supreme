@@ -5,7 +5,7 @@ function CartSummary({ prices, compact = false }: CartSummaryProps) {
   const { taxPrice, shippingPrice, totalPrice, itemsPrice } = prices;
 
   return (
-    <>
+    <div className="mb-6 border-b border-dashed">
       <div className="flex items-center justify-between py-3">
         <h3
           className={cn(
@@ -81,7 +81,7 @@ function CartSummary({ prices, compact = false }: CartSummaryProps) {
           {toGBP(totalPrice)}
         </span>
       </div>
-    </>
+    </div>
   );
 }
 

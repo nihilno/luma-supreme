@@ -29,11 +29,13 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 function ShippingForm({ address }: { address: JsonValue }) {
   const { replace } = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   const form = useForm<shippingType>({
     defaultValues: {
@@ -56,14 +58,16 @@ function ShippingForm({ address }: { address: JsonValue }) {
         return;
       }
 
-      replace("/payment-method");
+      startTransition(() => {
+        replace("/payment-method");
+      });
     } catch (error) {
       console.error(error);
       toast.error("An internal error has occurred. Try again later.");
     }
   }
 
-  const disabled = form.formState.isSubmitting;
+  const disabled = form.formState.isSubmitting || isPending;
 
   return (
     <div className="relative">

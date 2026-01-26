@@ -54,7 +54,6 @@ export function ReviewFormDialog({ productId }: { productId: string }) {
   const [open, setOpen] = useState(false);
 
   async function handleSubmit(formData: insertReviewsType) {
-    form.setValue("productId", productId);
     try {
       const result = await UpsertReview(formData);
       if (!result.success) {

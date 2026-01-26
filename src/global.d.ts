@@ -1,5 +1,6 @@
 import { Session } from "next-auth";
 import { cartItemType } from "./lib/schemas/cart";
+import { Review } from "./lib/schemas/review";
 import { shippingType } from "./lib/schemas/shipping-address";
 
 export {};
@@ -142,5 +143,16 @@ declare global {
     slug: string;
     productId: string;
     reviews: Review[];
+  };
+
+  type StripePaymentProps = {
+    priceInCents: number;
+    orderId: string;
+    clientSecret: string;
+  };
+
+  type StripeFormProps = {
+    priceInCents: number;
+    orderId: string;
   };
 }
