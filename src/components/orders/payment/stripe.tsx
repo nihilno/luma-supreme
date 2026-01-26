@@ -5,14 +5,15 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useTheme } from "next-themes";
 import StripeForm from "./stripe-form";
 
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+);
+
 function StripePayment({
   priceInCents,
   orderId,
   clientSecret,
 }: StripePaymentProps) {
-  const stripePromise = loadStripe(
-    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
-  );
   const { theme, systemTheme } = useTheme();
 
   return (

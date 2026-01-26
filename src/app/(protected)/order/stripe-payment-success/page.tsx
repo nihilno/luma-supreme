@@ -14,11 +14,17 @@ export default async function StripeSuccessPage({
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
   const { id } = await params;
   const { payment_intent } = await searchParams;
+  if (!payment_intent) notFound();
 
   const order = await getOrderById(id);
   if (!order) notFound();
 
-  const paymentIntent = await stripe.paymentIntents.retrieve(payment_intent);
+  let paymentIntent: Stripe.PaymentIntent;
+  try {
+    paymentIntent = await stripe.paymentIntents.retrieve(payment_intent);
+  } catch {
+    notFound();
+  }
 
   if (paymentIntent.metadata.order_id !== order.id) notFound();
   const isSuccess = paymentIntent.status === "succeeded";

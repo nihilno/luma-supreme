@@ -51,7 +51,7 @@ function StripeForm({ priceInCents, orderId }: StripeFormProps) {
       <LinkAuthenticationElement onChange={(e) => setEmail(e.value.email)} />
       <Button
         className="bg-distinct hover:bg-distinct/75 h-12 w-full text-lg text-white transition"
-        disabled={isLoading || !stripe || !elements}
+        disabled={isLoading || !stripe || !elements || !email}
         type="submit"
       >
         {isLoading ? (

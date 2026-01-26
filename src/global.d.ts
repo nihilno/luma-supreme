@@ -142,7 +142,11 @@ declare global {
     userId?: string;
     slug: string;
     productId: string;
-    reviews: Review[];
+    reviews: (Review & {
+      user: { name: string };
+      userId: string;
+      isVerifiedPurchase: boolean;
+    })[];
   };
 
   type StripePaymentProps = {

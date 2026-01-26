@@ -15,8 +15,8 @@ function Stars({
       </div>
       {numReviews != null && numReviews > 0 && (
         <h5 className="font-semibold">
-          There {numReviews === 1 ? "is" : "are"} {numReviews}
-          {numReviews === 1 ? "review" : "reviews"} for this product,
+          There {numReviews === 1 ? "is" : "are"} {numReviews}{" "}
+          {numReviews === 1 ? "review" : "reviews"} for this product,{" "}
           <span className="distinct cursor-pointer"> check them out.</span>
         </h5>
       )}{" "}

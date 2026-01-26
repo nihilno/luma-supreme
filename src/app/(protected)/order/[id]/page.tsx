@@ -49,8 +49,6 @@ export default async function OrderPage({
     id: orderId,
   } = order;
 
-  console.log(paymentMethod);
-
   const address = shippingAddress as shippingType;
   const prices = {
     itemsPrice: decimalToNumber(itemsPrice),
