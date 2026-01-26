@@ -13,6 +13,7 @@ export default async function StripeSuccessPage({
 }) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
   const { id } = await params;
+
   const { payment_intent } = await searchParams;
   if (!payment_intent) notFound();
 

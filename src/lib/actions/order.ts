@@ -199,23 +199,50 @@ export async function markAsPaid(id: string) {
         success: false,
         message: "Only Administrators can perform this action.",
       };
-
-    await prisma.order.update({
-      where: { id },
-      data: { isPaid: true, paidAt: new Date() },
-    });
-    revalidatePath(`/order/${id}`);
-
-    return {
-      success: true,
-      message: `Order was marked as Paid.`,
-    };
+    const result = await markOrderPaidInternal(id);
+    return result;
   } catch (error) {
     console.error(error);
     return {
       success: false,
       message: "Cannot perform this action right now. Try again later.",
     };
+  }
+}
+
+export async function markOrderPaidInternal(
+  id: string,
+  paymentInfo?: { [key: string]: any } | null,
+) {
+  try {
+    const order = await prisma.order.findUnique({ where: { id } });
+    if (!order) {
+      return { success: false, message: "Order not found." };
+    }
+
+    if (order.isPaid) {
+      return {
+        success: true,
+        message: "Order already paid.",
+        alreadyPaid: true,
+      };
+    }
+
+    const paymentResult = paymentInfo
+      ? { ...(order.paymentResult as any), ...paymentInfo }
+      : order.paymentResult || {};
+
+    await prisma.order.update({
+      where: { id },
+      data: { isPaid: true, paidAt: new Date(), paymentResult },
+    });
+
+    revalidatePath(`/order/${id}`);
+
+    return { success: true, message: `Order ${id} marked as paid.` };
+  } catch (error) {
+    console.error("markOrderPaidInternal error:", error);
+    return { success: false, message: "Internal error." };
   }
 }
 

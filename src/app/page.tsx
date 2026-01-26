@@ -17,8 +17,8 @@ export default async function HomePage() {
       )}
       <Suspense fallback={<Spinner />}>
         <ProductsContainer title="Featured Products" featured={featured} />
+        <ViewAll />
       </Suspense>
-      <ViewAll />
     </section>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import ItemEmpty from "@/components/global/empty";
+import EmptyImage from "@/components/global/empty-image";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -9,7 +10,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { cn, toGBP } from "@/lib/utils";
-import { IconFileUnknown, IconTagStarred } from "@tabler/icons-react";
+import { IconTagStarred } from "@tabler/icons-react";
 import Image from "next/image";
 import { useState } from "react";
 import Images from "./images";
@@ -42,12 +43,7 @@ function ProductCard({ product }: { product: Product | null }) {
         <CardHeader>
           <div className="relative aspect-square overflow-hidden rounded-xl">
             {!images || images.length === 0 ? (
-              <div className="bg-muted/50 flex aspect-square flex-col items-center justify-center gap-4">
-                <IconFileUnknown className="size-12 opacity-50 sm:size-16" />
-                <h4 className="text-center opacity-50 sm:text-xl">
-                  There is no image present <br /> for this product.
-                </h4>
-              </div>
+              <EmptyImage />
             ) : (
               <Image
                 src={currentImage}

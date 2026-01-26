@@ -15,7 +15,7 @@ function Search() {
           type="text"
           name="q"
           aria-label="Search"
-          className="w-full rounded-xl"
+          className="bg-background w-full rounded-xl"
         />
         <Button
           size="icon-sm"

@@ -260,7 +260,7 @@ function AdminProductForm({
                   <div className="flex min-h-48 flex-col rounded-xl border">
                     <FormControl>
                       <UploadButton
-                        className="bg-distinct/50 rounded-t-xl pb-2 text-white"
+                        className="bg-distinct rounded-t-xl pb-2 text-white"
                         endpoint="imageUploader"
                         onClientUploadComplete={(res: { url: string }[]) => {
                           if (res.length > 0) {
@@ -316,7 +316,7 @@ function AdminProductForm({
                     <div className="flex min-h-48 flex-col rounded-xl border">
                       <FormControl>
                         <UploadButton
-                          className="bg-distinct/50 rounded-t-xl pb-2 text-white"
+                          className="bg-distinct rounded-t-xl pb-2 text-white"
                           endpoint="imageUploader"
                           onClientUploadComplete={(res: { url: string }[]) => {
                             if (res.length > 0) {

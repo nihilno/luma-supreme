@@ -6,9 +6,10 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { cn, toGBP } from "@/lib/utils";
-import { IconFileUnknown, IconTagStarred } from "@tabler/icons-react";
+import { IconTagStarred } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
+import EmptyImage from "../global/empty-image";
 import Stars from "./single-product/reviews/stars";
 
 function ProductCard({ product }: { product: Product }) {
@@ -25,12 +26,7 @@ function ProductCard({ product }: { product: Product }) {
         <CardHeader>
           <div className="relative aspect-square overflow-hidden rounded-xl">
             {!images || images.length === 0 ? (
-              <div className="bg-muted/90 flex aspect-square flex-col items-center justify-center gap-4">
-                <IconFileUnknown className="size-12 opacity-50" />
-                <h4 className="text-center opacity-50">
-                  There is no image present <br /> for this product.
-                </h4>
-              </div>
+              <EmptyImage />
             ) : (
               <Image
                 src={images[0]}

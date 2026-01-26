@@ -61,7 +61,7 @@ export default async function SearchPage({
 
   return (
     <section className="mt-16 grid min-h-170 grid-cols-1 gap-2 sm:grid-cols-5 sm:gap-5">
-      <div className="mb-16 hidden space-y-6 sm:mb-0 sm:block">
+      <div className="border-muted-foreground/75 mb-16 hidden space-y-6 border-r border-dashed sm:mb-0 sm:block">
         <div>
           <h2 className="text-lg">Category</h2>
           <div>
@@ -159,7 +159,7 @@ export default async function SearchPage({
       <div className="mx-auto flex flex-col space-y-4 sm:col-span-4 sm:mx-0">
         <div className="mx-auto flex items-center gap-2 lg:mx-0 lg:ml-auto">
           Sort by{" "}
-          <div className="space-x-2">
+          <div className="border-muted-foreground/50 space-x-3 border-l pl-2">
             {sorting.map((s) => (
               <Link
                 key={s}
