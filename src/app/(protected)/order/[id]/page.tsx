@@ -13,7 +13,7 @@ import { decimalToNumber, formatId } from "@/lib/utils";
 import { IconCashEdit, IconGridScan } from "@tabler/icons-react";
 import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import Stripe from "stripe";
+import { serverStripe } from "@/lib/stripe";
 
 export const metadata: Metadata = {
   title: "Order Details",
@@ -64,8 +64,7 @@ export default async function OrderPage({
 
   let clientSecret: string | null = null;
   if (order.paymentMethod === "Stripe" && !order.isPaid) {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-    const paymentIntent = await stripe.paymentIntents.create({
+    const paymentIntent = await serverStripe.paymentIntents.create({
       amount: priceInCents,
       currency: "gbp",
       metadata: { order_id: orderId },

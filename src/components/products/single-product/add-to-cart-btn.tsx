@@ -81,13 +81,13 @@ function AddToCartButton({ cart, price, stock, cartItem }: AddToCartProps) {
           <div className="w-full space-y-4">
             <div className="flex w-full items-center justify-between gap-4">
               <Button
-                className="hover:bg-distinct h-12 w-30"
+                className="hover:bg-distinct h-12 w-20"
                 disabled={isPending}
                 onClick={handleRemoveFromCart}
               >
                 <IconCircleMinus className="size-7 translate-y-px" />
               </Button>
-              <div className="border-muted-foreground grid h-12 w-full place-items-center rounded-xl border border-dashed">
+              <div className="border-muted-foreground grid h-12 w-full min-w-20 place-items-center rounded-xl border border-dashed">
                 {isPending ? (
                   <IconLoader2 className="distinct size-6 animate-spin" />
                 ) : (
@@ -97,7 +97,7 @@ function AddToCartButton({ cart, price, stock, cartItem }: AddToCartProps) {
                 )}
               </div>
               <Button
-                className="hover:bg-distinct h-12 w-30"
+                className="hover:bg-distinct h-12 w-20"
                 disabled={stock === 0 || isPending || existsItem.qty >= stock}
                 onClick={handleAddToCart}
               >

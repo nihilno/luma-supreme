@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { getOrderById } from "@/lib/data/orders";
+import { serverStripe } from "@/lib/stripe";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import Stripe from "stripe";
@@ -11,7 +12,7 @@ export default async function StripeSuccessPage({
   params: Promise<{ id: string }>;
   searchParams: Promise<{ payment_intent: string }>;
 }) {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+  const stripe = serverStripe;
   const { id } = await params;
 
   const { payment_intent } = await searchParams;

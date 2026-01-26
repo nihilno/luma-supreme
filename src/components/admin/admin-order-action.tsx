@@ -13,12 +13,9 @@ function AdminOrderActions({
   id,
 }: AdminActionsProps) {
   return (
-    <div className="border-muted-foreground/40 space-y-2 rounded-xl border p-2 text-center">
-      <h2>Admin Actions</h2>
-      <div className="flex items-center gap-2">
-        {isAdmin && !isPaid && <MarkAsPaidBtn id={id} />}
-        {isAdmin && isPaid && !isDelivered && <MarkAsDeliveredBtn id={id} />}
-      </div>
+    <div className="flex items-center gap-2">
+      {isAdmin && !isPaid && <MarkAsPaidBtn id={id} />}
+      {isAdmin && isPaid && !isDelivered && <MarkAsDeliveredBtn id={id} />}
     </div>
   );
 }
