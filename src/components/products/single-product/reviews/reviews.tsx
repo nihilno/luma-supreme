@@ -6,7 +6,14 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { IconStarFilled } from "@tabler/icons-react";
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
+import { IconStarFilled, IconZoomOutArea } from "@tabler/icons-react";
 import Link from "next/link";
 import { ReviewFormDialog } from "./review-form";
 
@@ -14,8 +21,8 @@ function Reviews({ userId, slug, productId, reviews }: ReviewsProps) {
   return (
     <div className="space-y-6">
       <div className="space-y-1">
-        <div className="flex items-center justify-between gap-2">
-          <h5 className="mb-2 text-lg font-semibold lg:text-xl">
+        <div className="flex items-center justify-between gap-2 border-b border-dashed pb-2">
+          <h5 className="mb-2 text-lg font-semibold lg:text-2xl">
             Customer Reviews
           </h5>
           {userId ? (
@@ -36,7 +43,17 @@ function Reviews({ userId, slug, productId, reviews }: ReviewsProps) {
         </div>
       </div>
       {reviews.length === 0 ? (
-        <div className="italic">No reviews yet.</div>
+        <Empty className="bg-card">
+          <EmptyHeader>
+            <EmptyMedia variant="icon" className="size-14">
+              <IconZoomOutArea className="size-12 opacity-75" />
+            </EmptyMedia>
+            <EmptyTitle className="mb-2 text-2xl">No reviews</EmptyTitle>
+            <EmptyDescription className="text-base">
+              Be the first to write a review for this product.
+            </EmptyDescription>
+          </EmptyHeader>
+        </Empty>
       ) : (
         reviews.map(({ id, title, description, user, createdAt, rating }) => (
           <Card key={id}>

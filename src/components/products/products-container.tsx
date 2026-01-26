@@ -1,11 +1,12 @@
 import ItemEmpty from "@/components/global/empty";
 import { IconNorthStar } from "@tabler/icons-react";
+import ViewAll from "../buttons/view-all";
 import ProductCard from "./product-card";
 
 async function ProductsContainer({ title, featured }: ProductsContainerProps) {
   if (!featured || featured.length === 0)
     return (
-      <section className="-mt-32 grid h-screen place-items-center">
+      <section className="grid place-items-center">
         <ItemEmpty
           title="Product/s not found"
           subtitle="We couldn't find any products. You may want to update your
@@ -26,6 +27,10 @@ async function ProductsContainer({ title, featured }: ProductsContainerProps) {
         {featured.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
+      </div>
+
+      <div className="mt-16">
+        <ViewAll />
       </div>
     </div>
   );

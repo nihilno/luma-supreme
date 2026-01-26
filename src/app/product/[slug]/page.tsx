@@ -23,7 +23,7 @@ export default async function ProductPage({
 
   if (!product)
     return (
-      <section className="-mt-32 grid h-screen place-items-center">
+      <section className="grid place-items-center">
         <ItemEmpty
           title="Product/s not found"
           subtitle="We couldn't find any products. You may want to update your
@@ -40,7 +40,7 @@ export default async function ProductPage({
     createdAt: review.createdAt,
   }));
   return (
-    <section className="mx-auto mt-16 grid min-h-screen grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2">
+    <section className="mx-auto mt-16 grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2">
       <IconBrandLinktree className="distinct mx-auto size-12 animate-pulse md:col-span-2" />
       <ProductCard product={product} />
 

@@ -21,7 +21,7 @@ function ProductCard({ product }: { product: Product | null }) {
 
   if (!product)
     return (
-      <section className="-mt-32 grid h-screen place-items-center">
+      <section className="grid place-items-center">
         <ItemEmpty
           title="Product/s not found"
           subtitle="  We couldn't find any products. You may want to update your

@@ -17,7 +17,7 @@ export default async function CartPage() {
 
   if (cartNotExists)
     return (
-      <section className="-mt-32 grid h-screen place-items-center">
+      <section className="grid place-items-center">
         <ItemEmpty
           title="Your cart is empty"
           subtitle="Looks like you haven't added anything to your cart yet."

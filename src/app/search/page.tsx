@@ -60,8 +60,8 @@ export default async function SearchPage({
   const categories = await getAllCategories();
 
   return (
-    <section className="mt-16 grid min-h-170 grid-cols-1 gap-2 sm:grid-cols-5 sm:gap-5">
-      <div className="border-muted-foreground/75 mb-16 hidden space-y-6 border-r border-dashed sm:mb-0 sm:block">
+    <section className="mt-16 grid grid-cols-1 gap-2 sm:grid-cols-5 sm:gap-5">
+      <div className="border-muted-foreground/75 mb-16 hidden h-screen space-y-12 border-r border-dashed sm:mb-0 sm:block">
         <div>
           <h2 className="text-lg">Category</h2>
           <div>
@@ -70,7 +70,7 @@ export default async function SearchPage({
                 <Link
                   className={cn(
                     (category === "all" || category === "") && "text-distinct",
-                    "text-sm hover:underline",
+                    "hover:underline",
                   )}
                   href={getFilterUrl({ c: "all" })}
                 >
@@ -82,7 +82,7 @@ export default async function SearchPage({
                   key={c.category}
                   className={cn(
                     category === c.category && "text-distinct",
-                    "text-sm hover:underline",
+                    "hover:underline",
                   )}
                 >
                   <Link href={getFilterUrl({ c: c.category })}>
@@ -101,7 +101,7 @@ export default async function SearchPage({
                 <Link
                   className={cn(
                     price === "all" && "text-distinct",
-                    "text-sm hover:underline",
+                    "hover:underline",
                   )}
                   href={getFilterUrl({ p: "all" })}
                 >
@@ -113,7 +113,7 @@ export default async function SearchPage({
                   key={name}
                   className={cn(
                     price === value && "text-distinct",
-                    "text-sm hover:underline",
+                    "hover:underline",
                   )}
                 >
                   <Link href={getFilterUrl({ p: value })}>{name}</Link>
@@ -131,7 +131,7 @@ export default async function SearchPage({
                 <Link
                   className={cn(
                     rating === "all" && "text-distinct",
-                    "text-sm hover:underline",
+                    "hover:underline",
                   )}
                   href={getFilterUrl({ r: "all" })}
                 >
@@ -143,7 +143,7 @@ export default async function SearchPage({
                   key={r}
                   className={cn(
                     rating === r.toString() && "text-distinct",
-                    "text-sm hover:underline",
+                    "hover:underline",
                   )}
                 >
                   <Link

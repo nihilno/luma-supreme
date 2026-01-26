@@ -33,8 +33,8 @@ export default async function StripeSuccessPage({
   if (!isSuccess) redirect(`/order/${order.id}`);
 
   return (
-    <section className="grid min-h-dvh place-items-center text-center">
-      <div className="-mt-32 max-w-sm space-y-4">
+    <section className="grid place-items-center text-center">
+      <div className="max-w-sm space-y-4">
         <h1 className="text-lg font-bold">Thanks for your order!</h1>
         <p>
           Your payment was successful. <br /> Your order ID is {order.id}.

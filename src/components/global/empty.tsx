@@ -33,7 +33,7 @@ function ItemEmpty({ title, subtitle }: { title: string; subtitle: string }) {
       <EmptyContent>
         <div className="flex items-center gap-3">
           <Button asChild>
-            <Link href="/" className="flex items-center">
+            <Link href="/search" className="flex items-center">
               <IconListSearch className="size-6 translate-y-px" />
               Start browsing
             </Link>

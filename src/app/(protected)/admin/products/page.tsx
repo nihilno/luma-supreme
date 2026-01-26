@@ -28,7 +28,7 @@ export default async function AdminProductsPage({
   });
 
   return (
-    <section className="flex min-h-170 flex-col space-y-16 pb-8">
+    <section className="flex flex-col space-y-16 pb-8">
       <Table>
         <TableHeader>
           <TableRow>

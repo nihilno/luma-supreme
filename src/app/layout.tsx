@@ -22,12 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn("flex min-h-dvh flex-col antialiased", manrope.className)}
-      >
+      <body className={cn("flex flex-col antialiased", manrope.className)}>
         <Providers>
           <Header />
-          <main className="wrapper flex-1 pb-8">{children}</main>
+          <main className="wrapper min-h-dvh flex-1 pb-32">{children}</main>
           <Footer />
         </Providers>
       </body>

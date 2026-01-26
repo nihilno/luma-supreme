@@ -3,7 +3,10 @@ import Link from "next/link";
 
 function ViewAll() {
   return (
-    <Button asChild size={"lg"} className="text-base">
+    <Button
+      asChild
+      className="hover:bg-distinct h-12 w-50 rounded-none text-base transition hover:text-white"
+    >
       <Link href={"/search"}>View all products</Link>
     </Button>
   );

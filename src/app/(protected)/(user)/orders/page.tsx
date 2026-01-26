@@ -22,7 +22,7 @@ export default async function OrdersPage({
 
   if (!orders || orders.length === 0)
     return (
-      <section className="mt-16 flex min-h-150">
+      <section className="mt-16 flex">
         <ItemEmpty
           title="No orders yet"
           subtitle="You don't have any orders at the moment."
@@ -31,7 +31,7 @@ export default async function OrdersPage({
     );
 
   return (
-    <section className="mt-16 flex min-h-150 flex-col space-y-16 pb-8">
+    <section className="mt-16 flex flex-col space-y-16 pb-8">
       <div className="flex items-center gap-3">
         <IconGridScan className="text-distinct size-12" />
         <div>
