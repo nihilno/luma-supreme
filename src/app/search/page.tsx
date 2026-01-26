@@ -61,7 +61,7 @@ export default async function SearchPage({
 
   return (
     <section className="mt-16 grid grid-cols-1 gap-2 sm:grid-cols-5 sm:gap-5">
-      <div className="border-muted-foreground/75 mb-16 hidden h-screen space-y-12 border-r border-dashed sm:mb-0 sm:block">
+      <div className="border-muted-foreground/75 mb-16 hidden max-h-screen space-y-12 border-r border-dashed sm:mb-0 sm:block">
         <div>
           <h2 className="text-lg">Category</h2>
           <div>

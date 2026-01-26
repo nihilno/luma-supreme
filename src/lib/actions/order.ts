@@ -1,11 +1,14 @@
 "use server";
 
 import { auth } from "@/auth";
+import { sendPurchaseReceiptEmail } from "@/email";
 import { getOrderById } from "@/lib/data/orders";
 import { getUserById } from "@/lib/data/user";
 import { prisma } from "@/lib/prisma";
 import { orderSchema } from "@/lib/schemas/order";
 import { revalidatePath } from "next/cache";
+import { shippingType } from "../schemas/shipping-address";
+import { decimalToNumber } from "../utils";
 import { getMyCart } from "./cart";
 
 function isRedirectErrorSafe(err: unknown) {
@@ -215,7 +218,9 @@ export async function markOrderPaidInternal(
   paymentInfo?: { [key: string]: any } | null,
 ) {
   try {
-    const order = await prisma.order.findUnique({ where: { id } });
+    const order = await prisma.order.findUnique({
+      where: { id },
+    });
     if (!order) {
       return { success: false, message: "Order not found." };
     }
@@ -228,6 +233,14 @@ export async function markOrderPaidInternal(
       };
     }
 
+    const orderItems = await prisma.orderItem.findMany({
+      where: { orderId: id },
+    });
+    const orderUser = await prisma.user.findUnique({
+      where: { id: order.userId },
+      select: { name: true, email: true },
+    });
+
     const paymentResult = paymentInfo
       ? { ...(order.paymentResult as any), ...paymentInfo }
       : order.paymentResult || {};
@@ -237,6 +250,25 @@ export async function markOrderPaidInternal(
       data: { isPaid: true, paidAt: new Date(), paymentResult },
     });
 
+    const updatedOrder = {
+      ...order,
+      itemsPrice: decimalToNumber(order.itemsPrice),
+      totalPrice: decimalToNumber(order.totalPrice),
+      shippingPrice: decimalToNumber(order.shippingPrice),
+      taxPrice: decimalToNumber(order.taxPrice),
+      shippingAddress: order.shippingAddress as shippingType,
+      orderItems: orderItems.map((it) => ({
+        productId: it.productId,
+        slug: it.slug,
+        image: it.image ?? undefined,
+        name: it.name,
+        price: decimalToNumber(it.price),
+        qty: it.qty,
+      })),
+      user: { name: orderUser?.name ?? "", email: orderUser?.email ?? "" },
+    };
+
+    await sendPurchaseReceiptEmail({ order: updatedOrder });
     revalidatePath(`/order/${id}`);
 
     return { success: true, message: `Order ${id} marked as paid.` };

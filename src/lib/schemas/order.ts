@@ -1,4 +1,3 @@
-import { paymentMethods } from "@/lib/constants/payment";
 import z from "zod";
 import { shippingSchema } from "./shipping-address";
 
@@ -8,7 +7,7 @@ const orderSchema = z.object({
   totalPrice: z.number().positive("Total price must be positive number."),
   shippingPrice: z.number().nonnegative("Shipping price must be non-negative."),
   taxPrice: z.number().nonnegative("Tax price must be non-negative."),
-  paymentMethod: z.enum(paymentMethods, { message: "Invalid payment method." }),
+  paymentMethod: z.string("Payment method is required."),
   shippingAddress: shippingSchema,
 });
 
