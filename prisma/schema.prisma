@@ -173,5 +173,6 @@ model Review {
 
   createdAt DateTime @default(now())
 
+  @@unique([userId, productId])
   @@map("reviews")
 }

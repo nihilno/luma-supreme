@@ -1,18 +1,24 @@
-import { IconStarFilled, IconStarHalfFilled } from "@tabler/icons-react";
+import { IconStarFilled } from "@tabler/icons-react";
 
-function Stars({ numReviews }: { numReviews: number }) {
+function Stars({
+  numReviews,
+  rating,
+}: {
+  numReviews?: number;
+  rating: number;
+}) {
   return (
     <div className="space-y-2">
       <div className="flex items-center gap-1">
-        {Array.from({ length: 4 }).map((_, index) => (
-          <IconStarFilled key={index} className="size-5 lg:size-6" />
-        ))}
-        <IconStarHalfFilled className="size-5 lg:size-6" />
+        <IconStarFilled className="group-hover:text-distinct size-5 transition" />{" "}
+        {rating} / 5
       </div>
-      <h5 className="font-semibold">
-        There are {numReviews} reviews for this product,{" "}
-        <span className="distinct cursor-pointer">check them out.</span>
-      </h5>
+      {numReviews && (
+        <h5 className="font-semibold">
+          There are {numReviews} reviews for this product,{" "}
+          <span className="distinct cursor-pointer">check them out.</span>
+        </h5>
+      )}
     </div>
   );
 }

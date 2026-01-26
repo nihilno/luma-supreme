@@ -3,6 +3,7 @@ import Logout from "@/components/buttons/logout";
 import { ModeToggle } from "@/components/buttons/mode-toggle";
 import SignIn from "@/components/buttons/signin";
 import Logo from "@/components/global/logo";
+import { Suspense } from "react";
 import Buttons from "./buttons";
 import CategoriesDrawer from "./categories-drawer";
 import { Mobile } from "./mobile";
@@ -19,7 +20,9 @@ async function Header() {
       <div className="bg-background/30 flex w-full items-center justify-between rounded-full border p-4 backdrop-blur-sm lg:px-24">
         <div className="flex items-center gap-2">
           <Logo />
-          <CategoriesDrawer />
+          <Suspense>
+            <CategoriesDrawer />
+          </Suspense>
         </div>
         <Search />
         <div className="flex items-center gap-2.5">

@@ -32,8 +32,8 @@ export async function UpsertReview(formData: unknown) {
       };
     }
 
-    const reviewExists = await prisma.review.findFirst({
-      where: { userId, productId },
+    const reviewExists = await prisma.review.findUnique({
+      where: { userId_productId: { userId, productId } },
     });
 
     await prisma.$transaction(async (tx) => {

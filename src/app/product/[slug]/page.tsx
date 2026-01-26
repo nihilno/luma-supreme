@@ -6,6 +6,7 @@ import Reviews from "@/components/products/single-product/reviews/reviews";
 import Stars from "@/components/products/single-product/reviews/stars";
 import { getMyCart } from "@/lib/actions/cart";
 import { getProductBySlug } from "@/lib/data/products";
+import { getReviews } from "@/lib/data/reviews";
 import { IconBrandLinktree } from "@tabler/icons-react";
 
 export default async function ProductPage({
@@ -30,7 +31,14 @@ export default async function ProductPage({
         />
       </section>
     );
-  const { stock, price, description, numReviews, id, name, images } = product;
+  const { stock, price, description, numReviews, id, name, images, rating } =
+    product;
+
+  const reviewsRaw = await getReviews(product.id);
+  const reviews = reviewsRaw.map((review) => ({
+    ...review,
+    createdAt: new Date(review.createdAt).toLocaleString(),
+  }));
 
   return (
     <section className="mx-auto mt-16 grid min-h-screen grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2">
@@ -38,7 +46,7 @@ export default async function ProductPage({
       <ProductCard product={product} />
 
       <div className="mt-24 space-y-12 md:mt-12">
-        <Stars numReviews={numReviews} />
+        <Stars numReviews={numReviews} rating={rating} />
         <div className="space-y-1">
           <h5 className="text-lg font-semibold lg:text-xl">Description</h5>
           <p>{description}.</p>
@@ -59,7 +67,12 @@ export default async function ProductPage({
       </div>
 
       <div className="md:col-span-2 md:mt-16">
-        <Reviews userId={userId} slug={slug} productId={product.id} />
+        <Reviews
+          userId={userId}
+          slug={slug}
+          productId={product.id}
+          reviews={reviews}
+        />
       </div>
     </section>
   );

@@ -136,4 +136,11 @@ declare global {
     sort?: string;
     page?: string;
   };
+
+  type ReviewsProps = {
+    userId?: string;
+    slug: string;
+    productId: string;
+    reviews: Review[];
+  };
 }

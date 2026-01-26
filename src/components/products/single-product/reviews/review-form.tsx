@@ -54,6 +54,7 @@ export function ReviewFormDialog({ productId }: { productId: string }) {
   const [open, setOpen] = useState(false);
 
   async function handleSubmit(formData: insertReviewsType) {
+    form.setValue("productId", productId);
     try {
       const result = await UpsertReview(formData);
       if (!result.success) {
@@ -63,29 +64,25 @@ export function ReviewFormDialog({ productId }: { productId: string }) {
         return;
       }
 
-      toast.success(result.message || "Review submitted successfully!");
       form.reset();
+      toast.success("Review submitted successfully!");
       setOpen(false);
     } catch (error) {
       console.error(error);
       toast.error("Failed to submit review. Please try again.");
     }
-    console.log(formData);
-    form.reset();
-    toast.success("Review submitted successfully!");
-    setOpen(false);
   }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">
-          <IconPlus /> Write a review
+          <IconPlus /> Write / Update your review
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Write a review</DialogTitle>
+          <DialogTitle>Write / Update your review</DialogTitle>
           <DialogDescription>
             Share your thoughts about the product with others.
           </DialogDescription>
@@ -96,6 +93,7 @@ export function ReviewFormDialog({ productId }: { productId: string }) {
             onSubmit={form.handleSubmit(handleSubmit)}
             className="space-y-6"
           >
+            <input type="hidden" name="productId" value={productId} />
             <FormField
               name="title"
               control={form.control}

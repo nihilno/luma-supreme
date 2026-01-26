@@ -6,13 +6,10 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { cn, toGBP } from "@/lib/utils";
-import {
-  IconFileUnknown,
-  IconStarFilled,
-  IconTagStarred,
-} from "@tabler/icons-react";
+import { IconFileUnknown, IconTagStarred } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
+import Stars from "./single-product/reviews/stars";
 
 function ProductCard({ product }: { product: Product }) {
   const { id, slug, stock, images, brand, name, rating, price } = product;
@@ -52,10 +49,7 @@ function ProductCard({ product }: { product: Product }) {
           <h3 className="line-clamp-1">{name}</h3>
         </CardContent>
         <CardFooter className="flex items-center justify-between">
-          <div className="flex items-center gap-1 rounded-full border px-2 py-1">
-            <IconStarFilled className="group-hover:text-distinct size-5 transition" />
-            <h4>{rating}</h4>
-          </div>
+          <Stars rating={rating} />
           <h4
             className={cn(
               "text-2xl font-semibold",
