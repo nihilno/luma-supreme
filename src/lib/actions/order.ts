@@ -6,8 +6,18 @@ import { getUserById } from "@/lib/data/user";
 import { prisma } from "@/lib/prisma";
 import { orderSchema } from "@/lib/schemas/order";
 import { revalidatePath } from "next/cache";
-import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { getMyCart } from "./cart";
+
+function isRedirectErrorSafe(err: unknown) {
+  const e = err as any;
+  if (!e) return false;
+  if (typeof e.status === "number" && e.status >= 300 && e.status < 400)
+    return true;
+  const name = e?.name || e?.constructor?.name;
+  if (name === "Redirect" || name === "RedirectError") return true;
+  if (typeof e.url === "string" && typeof e.status === "number") return true;
+  return false;
+}
 
 export async function createOrder() {
   const session = await auth();
@@ -91,7 +101,7 @@ export async function createOrder() {
   } catch (error) {
     console.error(error);
 
-    if (isRedirectError(error)) {
+    if (isRedirectErrorSafe(error)) {
       throw error;
     }
 
@@ -197,13 +207,13 @@ export async function markAsPaid(id: string) {
     revalidatePath(`/order/${id}`);
 
     return {
-      susccess: true,
+      success: true,
       message: `Order was marked as Paid.`,
     };
   } catch (error) {
     console.error(error);
     return {
-      susccess: false,
+      success: false,
       message: "Cannot perform this action right now. Try again later.",
     };
   }
@@ -231,13 +241,13 @@ export async function markAsDelivered(id: string) {
     revalidatePath(`/order/${id}`);
 
     return {
-      susccess: true,
+      success: true,
       message: `Order was marked as Delivered.`,
     };
   } catch (error) {
     console.error(error);
     return {
-      susccess: false,
+      success: false,
       message: "Cannot perform this action right now. Try again later.",
     };
   }

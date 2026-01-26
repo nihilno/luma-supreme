@@ -1,8 +1,9 @@
+import { auth } from "@/auth";
 import ItemEmpty from "@/components/global/empty";
 import AddToCartButton from "@/components/products/single-product/add-to-cart-btn";
 import ProductCard from "@/components/products/single-product/product-card";
-import Reviews from "@/components/products/single-product/reviews";
-import Stars from "@/components/products/single-product/stars";
+import Reviews from "@/components/products/single-product/reviews/reviews";
+import Stars from "@/components/products/single-product/reviews/stars";
 import { getMyCart } from "@/lib/actions/cart";
 import { getProductBySlug } from "@/lib/data/products";
 import { IconBrandLinktree } from "@tabler/icons-react";
@@ -12,6 +13,9 @@ export default async function ProductPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  const session = await auth();
+  const userId = session?.user?.id;
+
   const { slug } = await params;
   const product = await getProductBySlug(slug);
   const cart = await getMyCart();
@@ -55,7 +59,7 @@ export default async function ProductPage({
       </div>
 
       <div className="md:col-span-2 md:mt-16">
-        <Reviews />
+        <Reviews userId={userId} slug={slug} productId={product.id} />
       </div>
     </section>
   );

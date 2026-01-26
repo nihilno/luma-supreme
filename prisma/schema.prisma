@@ -23,10 +23,13 @@ model Product {
   banner String?
 
   orderItems OrderItem[] 
+  reviews Review[]
+
   createdAt DateTime @default(now()) 
 
   @@map("products")
   @@index([isFeatured, createdAt])
+  @@index([category])
 }
  
 model User {
@@ -39,10 +42,12 @@ model User {
   role          Role            @default(USER)
   address       Json?           
   paymentMethod String?
+
   accounts      Account[]
   sessions      Session[]
   carts         Cart[]
   orders        Order[]
+  reviews      Review[]
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -152,4 +157,21 @@ model OrderItem {
 
   @@id([orderId, productId], map: "orderId_productId")
   @@map("order_items")
+}
+
+model Review {
+  id String @id @default(uuid()) @db.Uuid
+  productId String @db.Uuid
+  userId String @db.Uuid
+  rating Int
+  title String
+  description String
+  isVerifiedPurchase Boolean @default(true)
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@map("reviews")
 }

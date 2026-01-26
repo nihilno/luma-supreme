@@ -4,7 +4,7 @@ import Link from "next/link";
 
 function SignIn() {
   return (
-    <Button variant={"outline"} size={"icon"} title="Sign In" asChild>
+    <Button variant={"outline"} size={"icon-sm"} title="Sign In" asChild>
       <Link href={"/sign-in"}>
         <IconKey className="size-5" />
       </Link>

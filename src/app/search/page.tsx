@@ -148,7 +148,7 @@ export default async function SearchPage({
                 >
                   <Link
                     href={getFilterUrl({ r: r.toString() })}
-                  >{`${r} starts & up`}</Link>
+                  >{`${r} stars & up`}</Link>
                 </li>
               ))}
             </ul>

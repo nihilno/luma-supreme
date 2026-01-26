@@ -27,7 +27,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-function SignInForm() {
+function SignInForm({ callbackUrl }: { callbackUrl?: string }) {
   const [showPassword, setShowPassword] = useState(false);
   const { replace } = useRouter();
 
@@ -49,7 +49,7 @@ function SignInForm() {
         return;
       }
       toast.success(result.message);
-      replace("/");
+      replace(callbackUrl ? callbackUrl : "/");
     } catch (error) {
       console.error(error);
       toast.error("An unexpected error occurred. Please try again.");
