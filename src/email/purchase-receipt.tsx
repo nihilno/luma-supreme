@@ -15,10 +15,9 @@ import {
   Text,
 } from "@react-email/components";
 
-const formatDate = new Intl.DateTimeFormat("en-US", {
+const formatDate = new Intl.DateTimeFormat("en-GB", {
   dateStyle: "medium",
 });
-
 function PurchaseReceipt({ order }: { order: orderType }) {
   return (
     <Html>
@@ -42,10 +41,11 @@ function PurchaseReceipt({ order }: { order: orderType }) {
                     Purchase Date
                   </Text>
                   <Text className="mr-4 mb-0">
-                    {formatDate.format(new Date(order.paidAt!))}
+                    {order.paidAt
+                      ? formatDate.format(new Date(order.paidAt))
+                      : "N/A"}
                   </Text>
                 </Column>
-
                 <Column>
                   <Text className="text-muted-foreground mr-4 mb-0 text-nowrap whitespace-nowrap">
                     Price Paid

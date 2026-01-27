@@ -268,7 +268,12 @@ export async function markOrderPaidInternal(
       user: { name: orderUser?.name ?? "", email: orderUser?.email ?? "" },
     };
 
-    await sendPurchaseReceiptEmail({ order: updatedOrder });
+    if (!orderUser?.email) {
+      console.warn(`Cannot send receipt for order ${id}: user email not found`);
+    } else {
+      await sendPurchaseReceiptEmail({ order: updatedOrder });
+    }
+
     revalidatePath(`/order/${id}`);
 
     return { success: true, message: `Order ${id} marked as paid.` };
