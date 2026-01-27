@@ -57,7 +57,9 @@ export async function SignInUser(formData: unknown) {
 export async function SignOutUser() {
   try {
     const currentCart = await getMyCart();
-    await prisma.cart.delete({ where: { id: currentCart?.id } });
+    if (currentCart?.id) {
+      await prisma.cart.delete({ where: { id: currentCart.id } });
+    }
     const result = await signOut({ redirect: false });
 
     if (result?.error) {
