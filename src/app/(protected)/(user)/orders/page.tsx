@@ -22,7 +22,7 @@ export default async function OrdersPage({
 
   if (!orders || orders.length === 0)
     return (
-      <section className="mt-16 flex">
+      <section className="grid place-items-center">
         <ItemEmpty
           title="No orders yet"
           subtitle="You don't have any orders at the moment."

@@ -1,4 +1,6 @@
+import DealCountdown from "@/components/deal-countdown";
 import Spinner from "@/components/global/spinner";
+import IconBoxes from "@/components/icon-boxes";
 import ProductCarousel from "@/components/products/product-carousel";
 import ProductsContainer from "@/components/products/products-container";
 import { getFeaturedProducts } from "@/lib/data/products";
@@ -17,6 +19,8 @@ export default async function HomePage() {
       <Suspense fallback={<Spinner />}>
         <ProductsContainer title="Featured Products" featured={featured} />
       </Suspense>
+      <DealCountdown />
+      <IconBoxes />
     </section>
   );
 }

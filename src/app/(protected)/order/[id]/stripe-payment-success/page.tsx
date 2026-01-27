@@ -33,7 +33,7 @@ export default async function StripeSuccessPage({
   if (!isSuccess) redirect(`/order/${order.id}`);
 
   return (
-    <section className="grid place-items-center text-center">
+    <section className="-mt-16 grid min-h-dvh place-items-center text-center">
       <div className="max-w-sm space-y-4">
         <h1 className="text-lg font-bold">Thanks for your order!</h1>
         <p>

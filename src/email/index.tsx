@@ -10,10 +10,17 @@ export async function sendPurchaseReceiptEmail({
 }: {
   order: orderType;
 }) {
-  await resend.emails.send({
-    from: `${APP_NAME} <${process.env.SENDER_EMAIL}>`,
-    to: order.user.email,
+  const result = await resend.emails.send({
+    from: "Luma <onboarding@resend.dev>",
+    to: "maciej.polowy1@gmail.com",
     subject: `Your receipt from ${APP_NAME}`,
     react: <PurchaseReceipt order={order} />,
   });
+
+  if (result.error) {
+    console.error("Resend:", result.error.message);
+    throw new Error(`Resend: ${result.error.message}`);
+  }
+
+  console.log("Resend email send.");
 }

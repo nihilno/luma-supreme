@@ -56,3 +56,17 @@ export function calcCartPrices(items: cartItemType[]) {
 export function formatId(id: string) {
   return `..${id.substring(id.length - 6)}`;
 }
+
+export function calculateTimeLeft(targetDate: Date) {
+  const currentTime = new Date();
+  const timeDifference = Math.max(Number(targetDate) - Number(currentTime), 0);
+
+  return {
+    days: Math.floor(timeDifference / (1000 * 60 * 60 * 24)),
+    hours: Math.floor(
+      (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+    ),
+    minutes: Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60)),
+    seconds: Math.floor((timeDifference % (1000 * 60)) / 1000),
+  };
+}
