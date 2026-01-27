@@ -24,9 +24,8 @@ function DealCountdown() {
       ) {
         clearInterval(timerInterval);
       }
-
-      return () => clearInterval(timerInterval);
     }, 1000);
+    return () => clearInterval(timerInterval);
   }, []);
 
   if (!time) {
@@ -47,37 +46,39 @@ function DealCountdown() {
     time.minutes === 0 &&
     time.seconds === 0
   ) {
-    <section className="grid grid-cols-1 gap-8 py-32 sm:grid-cols-2">
-      <div className="flex flex-col justify-center gap-3">
-        <h3 className="text-2xl font-semibold sm:text-3xl">Deal has ended</h3>
-        <p>
-          This deal is no longer available. Check out our latest promotions.
-        </p>
+    return (
+      <section className="grid grid-cols-1 gap-8 py-32 sm:grid-cols-2">
+        <div className="flex flex-col justify-center gap-3">
+          <h3 className="text-2xl font-semibold sm:text-3xl">Deal has ended</h3>
+          <p>
+            This deal is no longer available. Check out our latest promotions.
+          </p>
 
-        <div className="my-8 text-center">
-          <ViewAll />
+          <div className="my-8 text-center">
+            <ViewAll />
+          </div>
         </div>
-      </div>
 
-      <div className="flex justify-center">
-        <Image
-          src="/images/promo.jpg"
-          alt="Promotional Image"
-          width={300}
-          height={200}
-          className="overflow-hidden rounded-xl"
-        />
-      </div>
-    </section>;
+        <div className="flex justify-center">
+          <Image
+            src="/images/promo.jpg"
+            alt="Promotional Image"
+            width={300}
+            height={200}
+            className="overflow-hidden rounded-xl"
+          />
+        </div>
+      </section>
+    );
   }
 
   return (
-    <section className="grid grid-cols-1 gap-8 py-32 sm:grid-cols-2">
-      <div className="flex flex-col justify-center gap-3">
-        <h3 className="text-2xl font-semibold sm:text-3xl">
+    <section className="grid grid-cols-1 gap-8 py-32">
+      <div className="flex flex-col justify-center gap-5">
+        <h3 className="text-2xl font-semibold sm:text-3xl md:text-5xl">
           Deal of the month
         </h3>
-        <p>
+        <p className="max-w-[60ch]">
           Get ready for shopping like never before! Every purchase comes with
           exclusive perks and offers, making this month a memorable one.
           Don&apos;t miss out.
@@ -91,16 +92,6 @@ function DealCountdown() {
         <div className="my-8 text-center">
           <ViewAll />
         </div>
-      </div>
-
-      <div className="flex justify-center">
-        <Image
-          src="/images/promo.jpg"
-          alt="Promotional Image"
-          width={300}
-          height={200}
-          className="overflow-hidden rounded-xl"
-        />
       </div>
     </section>
   );

@@ -1,6 +1,5 @@
 import ItemEmpty from "@/components/global/empty";
 import { IconNorthStar } from "@tabler/icons-react";
-import ViewAll from "../buttons/view-all";
 import ProductCard from "./product-card";
 
 async function ProductsContainer({ title, featured }: ProductsContainerProps) {
@@ -27,10 +26,6 @@ async function ProductsContainer({ title, featured }: ProductsContainerProps) {
         {featured.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
-      </div>
-
-      <div className="mt-16">
-        <ViewAll />
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ export async function sendPurchaseReceiptEmail({
 }) {
   const result = await resend.emails.send({
     from: "Luma <onboarding@resend.dev>",
-    to: "maciej.polowy1@gmail.com",
+    to: order.user.email,
     subject: `Your receipt from ${APP_NAME}`,
     react: <PurchaseReceipt order={order} />,
   });
@@ -22,5 +22,5 @@ export async function sendPurchaseReceiptEmail({
     throw new Error(`Resend: ${result.error.message}`);
   }
 
-  console.log("Resend email send.");
+  console.log("Resend email sent.");
 }

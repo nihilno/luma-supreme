@@ -5,7 +5,7 @@ import { sendPurchaseReceiptEmail } from "@/email";
 import { getOrderById } from "@/lib/data/orders";
 import { getUserById } from "@/lib/data/user";
 import { prisma } from "@/lib/prisma";
-import { orderSchema, orderType } from "@/lib/schemas/order";
+import { orderSchema } from "@/lib/schemas/order";
 import { revalidatePath } from "next/cache";
 import { shippingType } from "../schemas/shipping-address";
 import { decimalToNumber } from "../utils";
@@ -315,54 +315,4 @@ export async function markAsDelivered(id: string) {
       message: "Cannot perform this action right now. Try again later.",
     };
   }
-}
-
-export async function testResendEmail() {
-  const mockOrder: orderType = {
-    id: "test_order_123",
-    userId: "user_123",
-
-    createdAt: new Date(),
-
-    isPaid: true,
-    paidAt: new Date(),
-
-    isDelivered: false,
-    deliveredAt: null,
-
-    paymentMethod: "card",
-
-    itemsPrice: 100,
-    taxPrice: 20,
-    shippingPrice: 0,
-    totalPrice: 120,
-
-    shippingAddress: {
-      fullName: "Test User",
-      streetAddress: "123 Test Street",
-      city: "London",
-      postalCode: "SW1A 1AA",
-      country: "UK",
-    },
-
-    orderItems: [
-      {
-        productId: "prod_123",
-        slug: "test-product",
-        name: "Test Product",
-        price: 100,
-        qty: 1,
-        image: undefined,
-      },
-    ],
-
-    user: {
-      name: "Test User",
-      email: "your@email.com",
-    },
-  };
-
-  await sendPurchaseReceiptEmail({ order: mockOrder });
-
-  return { success: true };
 }

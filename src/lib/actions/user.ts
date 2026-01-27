@@ -4,11 +4,12 @@ import { auth, signIn, signOut } from "@/auth";
 import { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { signInSchema, signUpSchema } from "@/lib/schemas/auth";
+import { shippingSchema } from "@/lib/schemas/shipping-address";
+import { userProfileSchema } from "@/lib/schemas/user";
 import { hashSync } from "bcrypt-ts-edge";
 import { revalidatePath } from "next/cache";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
-import { shippingSchema } from "../schemas/shipping-address";
-import { userProfileSchema } from "../schemas/user";
+import { getMyCart } from "./cart";
 
 export async function SignInUser(formData: unknown) {
   const validated = signInSchema.safeParse(formData);
@@ -55,6 +56,8 @@ export async function SignInUser(formData: unknown) {
 
 export async function SignOutUser() {
   try {
+    const currentCart = await getMyCart();
+    await prisma.cart.delete({ where: { id: currentCart?.id } });
     const result = await signOut({ redirect: false });
 
     if (result?.error) {

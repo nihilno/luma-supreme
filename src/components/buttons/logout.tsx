@@ -9,7 +9,7 @@ import { toast } from "sonner";
 
 function Logout() {
   const [isLoading, setIsLoading] = useState(false);
-  const { refresh } = useRouter();
+  const { replace } = useRouter();
 
   async function onLogout() {
     if (isLoading) return;
@@ -21,7 +21,7 @@ function Logout() {
         toast.warning(result.message);
         return;
       }
-      refresh();
+      replace("/sign-in");
       toast.success(result.message);
     } catch (error) {
       console.error(error);
